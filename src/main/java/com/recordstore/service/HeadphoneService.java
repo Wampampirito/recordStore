@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 
 /**
  * Service that handles the business logic related to Headphones.
- * This service provides methods to perform CRUD operations and other specific logic for Headphones.
+ * This service provides methods to perform CRUD operations and other specific
+ * logic for Headphones.
  */
 @Service
 public class HeadphoneService {
@@ -31,7 +32,8 @@ public class HeadphoneService {
     private WishlistRepository wishlistRepository;
 
     @Autowired
-    public HeadphoneService(HeadphoneRepository headphoneRepository, HeadphoneMapper headphoneMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public HeadphoneService(HeadphoneRepository headphoneRepository, HeadphoneMapper headphoneMapper,
+            OrderRepository orderRepository, WishlistRepository wishlistRepository) {
         this.headphoneRepository = headphoneRepository;
         this.headphoneMapper = headphoneMapper;
         this.orderRepository = orderRepository;
@@ -46,8 +48,8 @@ public class HeadphoneService {
     public List<HeadphonesDTO> getAllHeadphones() {
         List<Headphone> headphones = headphoneRepository.findAll();
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -78,9 +80,10 @@ public class HeadphoneService {
     }
 
     /**
-     * Update an existing headphone record. If any field is not provided, the previous value will be retained.
+     * Update an existing headphone record. If any field is not provided, the
+     * previous value will be retained.
      * 
-     * @param id The id of the headphone to update.
+     * @param id            The id of the headphone to update.
      * @param headphonesDTO The new details of the headphone.
      * @return The updated headphone DTO.
      */
@@ -99,7 +102,7 @@ public class HeadphoneService {
             if (headphonesDTO.getPrice() > 0) {
                 headphone.setPrice(headphonesDTO.getPrice());
             }
-            if (headphonesDTO.getWireless()!=null) {
+            if (headphonesDTO.getWireless() != null) {
                 headphone.setWireless(headphonesDTO.getWireless());
             }
             if (headphonesDTO.getBatteryLife() > 0) {
@@ -111,13 +114,13 @@ public class HeadphoneService {
             if (headphonesDTO.getMicrophoneBuiltIn() != headphone.getMicrophoneBuiltIn()) {
                 headphone.setMicrophoneBuiltIn(headphonesDTO.getMicrophoneBuiltIn());
             }
-            if (headphonesDTO.getBluetooth()!=null) {
+            if (headphonesDTO.getBluetooth() != null) {
                 headphone.setBluetooth(headphonesDTO.getBluetooth());
             }
-            if (headphonesDTO.getUsb()!=null) {
+            if (headphonesDTO.getUsb() != null) {
                 headphone.setUsb(headphonesDTO.getUsb());
             }
-            if (headphonesDTO.getAux()!=null) {
+            if (headphonesDTO.getAux() != null) {
                 headphone.setAux(headphonesDTO.getAux());
             }
 
@@ -166,8 +169,8 @@ public class HeadphoneService {
     public List<HeadphonesDTO> getHeadphonesWithANC(NOISE_CANCELING anc) {
         List<Headphone> headphones = headphoneRepository.findByAnc(anc);
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -179,8 +182,8 @@ public class HeadphoneService {
     public List<HeadphonesDTO> getHeadphonesWithBluetooth(Boolean bluetooth) {
         List<Headphone> headphones = headphoneRepository.findByBluetooth(bluetooth);
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -192,35 +195,39 @@ public class HeadphoneService {
     public List<HeadphonesDTO> getHeadphonesWireless(Boolean wireless) {
         List<Headphone> headphones = headphoneRepository.findByWireless(wireless);
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
-     * Get headphones that have a specific warranty periodgreater than or equal to the provided value.
+     * Get headphones that have a specific warranty periodgreater than or equal to
+     * the provided value.
      * 
      * @param warranty The mimimun warranty period to filter by.
-     * @return A list of headphones with the specified warranty period greater than or equal to the specified value..
+     * @return A list of headphones with the specified warranty period greater than
+     *         or equal to the specified value..
      */
     public List<HeadphonesDTO> getHeadphonesByWarranty(Integer warranty) {
         List<Headphone> headphones = headphoneRepository.findByWarrantyGreaterThanEqual(warranty);
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-/**
- * Get headphones that have a battery life greater than or equal to the provided value.
- * 
- * @param batteryLife The minimum battery life to filter by.
- * @return A list of headphones with a battery life greater than or equal to the specified value.
- */
-public List<HeadphonesDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
-    List<Headphone> headphones = headphoneRepository.findByBatteryLifeGreaterThanEqual(batteryLife);
-    return headphones.stream()
-                     .map(headphoneMapper::toDTO)
-                     .collect(Collectors.toList());
-}
+    /**
+     * Get headphones that have a battery life greater than or equal to the provided
+     * value.
+     * 
+     * @param batteryLife The minimum battery life to filter by.
+     * @return A list of headphones with a battery life greater than or equal to the
+     *         specified value.
+     */
+    public List<HeadphonesDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
+        List<Headphone> headphones = headphoneRepository.findByBatteryLifeGreaterThanEqual(batteryLife);
+        return headphones.stream()
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
     /**
      * Get headphones of a specific type.
@@ -231,7 +238,7 @@ public List<HeadphonesDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
     public List<HeadphonesDTO> getHeadphonesByType(HEADPHONES_TYPE headphoneType) {
         List<Headphone> headphones = headphoneRepository.findByHeadphoneType(headphoneType);
         return headphones.stream()
-                         .map(headphoneMapper::toDTO)
-                         .collect(Collectors.toList());
+                .map(headphoneMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

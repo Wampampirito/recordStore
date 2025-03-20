@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.recordstore.enums.ORDER_STATUS;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,10 +23,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents an order in the record store.
- * This class contains information about the user, products, order status, and total amount.
+ * This class contains information about the user, products, order status, and
+ * total amount.
  * The order is tied to a specific user and can contain multiple products.
  * 
  * Example usage:
+ * 
  * <pre>
  * Order order = new Order();
  * order.setUser(user);
@@ -63,7 +64,8 @@ public class Order {
 
     /**
      * The user who placed the order.
-     * This is a many-to-one relationship with the {@link com.recordstore.model.User} class,
+     * This is a many-to-one relationship with the
+     * {@link com.recordstore.model.User} class,
      * where an order belongs to a single user.
      * 
      * @see com.recordstore.model.User
@@ -75,9 +77,11 @@ public class Order {
 
     /**
      * The products in the order.
-     * This is a one-to-many relationship with the {@link com.recordstore.model.OrderProduct} class,
+     * This is a one-to-many relationship with the
+     * {@link com.recordstore.model.OrderProduct} class,
      * where an order can contain multiple products.
-     * It is a bidirectional relationship: {@link com.recordstore.model.OrderProduct} references this order.
+     * It is a bidirectional relationship:
+     * {@link com.recordstore.model.OrderProduct} references this order.
      * 
      * @see com.recordstore.model.OrderProduct
      */
@@ -86,7 +90,7 @@ public class Order {
 
     /**
      * The status of the order.
-     * This indicates the current status of the order and is represented by the 
+     * This indicates the current status of the order and is represented by the
      * {@link com.recordstore.enums.Order_STATUS} enumeration.
      * 
      * @see com.recordstore.enums.Order_STATUS
@@ -97,8 +101,10 @@ public class Order {
 
     /**
      * The total amount of the order.
-     * This is the sum of the prices of the products in the order, each multiplied by its quantity.
-     * The total is calculated automatically by {@link com.recordstore.service.OrderService} when saving the order.
+     * This is the sum of the prices of the products in the order, each multiplied
+     * by its quantity.
+     * The total is calculated automatically by
+     * {@link com.recordstore.service.OrderService} when saving the order.
      * 
      * @see com.recordstore.service.OrderService
      */

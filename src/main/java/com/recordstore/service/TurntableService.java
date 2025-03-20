@@ -11,8 +11,10 @@ import java.util.Optional;
 /**
  * Service class that handles operations related to the Turntable entity.
  * <p>
- * This service provides methods to perform CRUD operations on Turntable objects, including
- * managing the attributes such as built-in preamp, allowed RPM, traction type, and mechanism.
+ * This service provides methods to perform CRUD operations on Turntable
+ * objects, including
+ * managing the attributes such as built-in preamp, allowed RPM, traction type,
+ * and mechanism.
  * </p>
  * 
  * @see Turntable
@@ -25,11 +27,13 @@ public class TurntableService {
 
     /**
      * Updates an existing Turntable in the database with the given fields.
-     * Only the fields provided in the input will be updated, and the rest will remain unchanged.
+     * Only the fields provided in the input will be updated, and the rest will
+     * remain unchanged.
      *
-     * @param id The ID of the Turntable to be updated.
+     * @param id        The ID of the Turntable to be updated.
      * @param turntable The Turntable object with updated fields.
-     * @return The updated Turntable, or an empty Optional if the Turntable is not found.
+     * @return The updated Turntable, or an empty Optional if the Turntable is not
+     *         found.
      */
     public Optional<Turntable> updateTurntable(Double id, Turntable turntable) {
         Optional<Turntable> existingTurntable = turntableRepository.findById(id);
@@ -59,7 +63,8 @@ public class TurntableService {
                 updatedTurntable.setWarranty(turntable.getWarranty());
             }
 
-            // Update boolean fields only if they are explicitly provided (using Boolean instead of boolean)
+            // Update boolean fields only if they are explicitly provided (using Boolean
+            // instead of boolean)
             if (turntable.getBluetooth() != null) {
                 updatedTurntable.setBluetooth(turntable.getBluetooth());
             }

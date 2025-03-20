@@ -18,6 +18,7 @@ import com.recordstore.model.OrderProduct;
 import com.recordstore.model.Product;
 import com.recordstore.model.User;
 import com.recordstore.repository.OrderRepository;
+import com.recordstore.repository.UserRepository;
 import com.recordstore.mapper.UserMapper;
 
 /**
@@ -27,20 +28,23 @@ import com.recordstore.mapper.UserMapper;
  */
 @Service
 public class OrderService {
-    
+
     private final OrderRepository orderRepository;
     private final UserMapper userMapper;
+    private UserRepository userRepository;
 
     /**
-     * Constructor with dependency injection for the order repository and user mapper.
+     * Constructor with dependency injection for the order repository and user
+     * mapper.
      *
      * @param orderRepository Order repository.
-     * @param userMapper User mapper for converting User entities to DTOs.
+     * @param userMapper      User mapper for converting User entities to DTOs.
      */
     @Autowired
-    public OrderService(OrderRepository orderRepository, UserMapper userMapper) {
+    public OrderService(OrderRepository orderRepository, UserMapper userMapper, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.userMapper = userMapper;
+        this.userRepository = userRepository;
     }
 
     // Creation methods
@@ -48,7 +52,7 @@ public class OrderService {
     /**
      * Creates a new order for a user with a list of products.
      *
-     * @param user User placing the order.
+     * @param user          User placing the order.
      * @param orderProducts List of products in the order.
      * @return The created order saved in the database.
      */
@@ -57,7 +61,7 @@ public class OrderService {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null.");
         }
-    
+
         if (orderProducts == null || orderProducts.isEmpty()) {
             throw new IllegalArgumentException("The product list cannot be empty.");
         }
@@ -66,15 +70,15 @@ public class OrderService {
         order.setUser(user); // Assign user
         order.setStatus(ORDER_STATUS.PENDING); // Initial status
         order.setTrackingNumber(generateTrackingNumber(user)); // Generate tracking number
-        
+
         orderRepository.save(order); // Save order before adding products
-    
+
         // Associate products with the order
         for (OrderProduct orderProduct : orderProducts) {
             orderProduct.setOrder(order); // Assign order to each OrderProduct
             order.getListOrderProducts().add(orderProduct); // Add product to the order's product list
         }
-    
+
         calculateTotal(order); // Recalculate the order total
         return orderRepository.save(order); // Save the order with the updated total
     }
@@ -82,8 +86,8 @@ public class OrderService {
     /**
      * Adds a product to an existing order.
      *
-     * @param order Order to which the product will be added.
-     * @param product Product to add.
+     * @param order    Order to which the product will be added.
+     * @param product  Product to add.
      * @param quantity Quantity of the product.
      */
     @Transactional
@@ -104,7 +108,7 @@ public class OrderService {
     /**
      * Adds multiple products to an existing order.
      *
-     * @param order Order to which the products will be added.
+     * @param order         Order to which the products will be added.
      * @param orderProducts List of products to add.
      */
     @Transactional
@@ -168,12 +172,16 @@ public class OrderService {
 
     /**
      * Retrieves the latest order for a given user.
-     * This method fetches the most recent order placed by the user based on the order date.
+     * This method fetches the most recent order placed by the user based on the
+     * order ID in descending order.
      *
-     * @param user The user whose latest order is to be retrieved.
-     * @return An {@link Optional} containing the latest order if found, otherwise empty.
+     * @param id The ID of the user whose latest order is to be retrieved.
+     * @return An {@link Optional} containing the latest order if found, otherwise
+     *         empty.
      */
-    public Optional<Order> getLatestOrder(User user) {
+    public Optional<Order> getLatestOrder(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
         return orderRepository.findTopByUserOrderByOrderIdDesc(user);
     }
 
@@ -207,29 +215,31 @@ public class OrderService {
      *
      * Tracking number format: RCD-{userId}-{userPrefix}-{datePart}-{orderNumber}
      * <ul>
-     *   <li>RCD = Record Store Delivery</li>
-     *   <li>userId = User ID with 3 digits</li>
-     *   <li>userPrefix = First 3 letters of the user's name in uppercase</li>
-     *   <li>datePart = Date in ddMMyy format</li>
-     *   <li>orderNumber = Incremental order number for the user</li>
+     * <li>RCD = Record Store Delivery</li>
+     * <li>userId = User ID with 3 digits</li>
+     * <li>userPrefix = First 3 letters of the user's name in uppercase</li>
+     * <li>datePart = Date in ddMMyy format</li>
+     * <li>orderNumber = Incremental order number for the user</li>
      * </ul>
      *
      * @param user User for whom the tracking number is generated.
      * @return Generated tracking number.
      */
     public String generateTrackingNumber(User user) {
-        // Usar el ID directamente como Integer y formatearlo como un número de 3 dígitos
+        // Usar el ID directamente como Integer y formatearlo como un número de 3
+        // dígitos
         String userId = String.format("%03d", user.getId()); // ID con 3 dígitos
         String userPrefix = user.getName().substring(0, 3).toUpperCase(); // Primeras 3 letras del nombre
         String datePart = LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyy")); // Fecha en formato ddMMyy
         int orderCount = orderRepository.countByUser(user) + 1; // Número incremental
         String orderNumber = String.format("%03d", orderCount); // Formato de 3 dígitos
-        
+
         return String.format("RCD-%s-%s-%s-%s", userId, userPrefix, datePart, orderNumber);
     }
 
     /**
-     * Calculates the total amount of an order based on the products and their quantities.
+     * Calculates the total amount of an order based on the products and their
+     * quantities.
      *
      * @param order Order whose total amount will be calculated.
      */
@@ -239,9 +249,9 @@ public class OrderService {
         List<OrderProduct> fetchedOrderProducts = orderRepository.findByListOrderProducts(order);
 
         // Update the product list
-        order.getListOrderProducts().clear(); 
-        order.getListOrderProducts().addAll(fetchedOrderProducts); 
-      
+        order.getListOrderProducts().clear();
+        order.getListOrderProducts().addAll(fetchedOrderProducts);
+
         // Calculate the total
         Double total = 0.0;
         for (OrderProduct op : order.getListOrderProducts()) {
@@ -264,15 +274,4 @@ public class OrderService {
         return userMapper.toDTO(order.getUser());
     }
 
-    /**
-     * Retrieves the latest order for a given user.
-     * 
-     * @param userId
-     * @return
-     */
-
-    public Optional<Order> getLatestOrder(Integer userId) {
-        return orderRepository.findTopByUserIdOrderByCreatedAtDesc(userId);
-    }
-    
 }

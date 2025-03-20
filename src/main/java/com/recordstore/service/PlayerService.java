@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,11 @@ import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.PlayerRepository;
 import com.recordstore.repository.WishlistRepository;
 
-
-
 /**
- * Service class responsible for managing operations related to the Player entity.
+ * Service class responsible for managing operations related to the Player
+ * entity.
  * Provides methods to create, update, delete, and retrieve players.
  */
-
 
 @Service
 public class PlayerService {
@@ -35,7 +32,8 @@ public class PlayerService {
     private final WishlistRepository wishlistRepository;
 
     @Autowired
-    public PlayerService(PlayerRepository playerRepository, PlayerMapper playerMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public PlayerService(PlayerRepository playerRepository, PlayerMapper playerMapper, OrderRepository orderRepository,
+            WishlistRepository wishlistRepository) {
         this.playerRepository = playerRepository;
         this.playerMapper = playerMapper;
         this.orderRepository = orderRepository;
@@ -62,7 +60,7 @@ public class PlayerService {
      * Updates an existing Player based on the provided PlayerDTO.
      * Only non-null fields from the DTO will be updated.
      *
-     * @param id       The id of the player to be updated.
+     * @param id        The id of the player to be updated.
      * @param playerDTO The PlayerDTO containing the updated details.
      * @return The updated PlayerDTO, or null if the Player was not found.
      */
@@ -133,9 +131,8 @@ public class PlayerService {
             throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
         }
 
-        
-                // Check if the product is associated with any wishlist
-                List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
+        // Check if the product is associated with any wishlist
+        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
         if (!wishlistsWithProduct.isEmpty()) {
             throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
         }
@@ -167,138 +164,137 @@ public class PlayerService {
                 .toList();
     }
 
-/**
- * Retrieves a list of players that have an aux port.
- * 
- * @param aux whether the player has an aux port.
- * @return a list of players with an aux port.
- */
-public List<PlayerDTO> findByAux(Boolean aux) {
-    return playerRepository.findByAux(aux)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players that have an aux port.
+     * 
+     * @param aux whether the player has an aux port.
+     * @return a list of players with an aux port.
+     */
+    public List<PlayerDTO> findByAux(Boolean aux) {
+        return playerRepository.findByAux(aux)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players that have a USB port.
- * 
- * @param usb whether the player has a USB port.
- * @return a list of players with a USB port.
- */
-public List<PlayerDTO> findByUsb(Boolean usb) {
-    return playerRepository.findByUsb(usb)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players that have a USB port.
+     * 
+     * @param usb whether the player has a USB port.
+     * @return a list of players with a USB port.
+     */
+    public List<PlayerDTO> findByUsb(Boolean usb) {
+        return playerRepository.findByUsb(usb)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players that have Bluetooth connectivity.
- * 
- * @param bluetooth whether the player has Bluetooth.
- * @return a list of players with Bluetooth connectivity.
- */
-public List<PlayerDTO> findByBluetooth(Boolean bluetooth) {
-    return playerRepository.findByBluetooth(bluetooth)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players that have Bluetooth connectivity.
+     * 
+     * @param bluetooth whether the player has Bluetooth.
+     * @return a list of players with Bluetooth connectivity.
+     */
+    public List<PlayerDTO> findByBluetooth(Boolean bluetooth) {
+        return playerRepository.findByBluetooth(bluetooth)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players within a specified warranty period.
- * 
- * @param warranty the warranty period in months.
- * @return a list of players with the specified warranty period.
- */
-public List<PlayerDTO> findByWarranty(Integer warranty) {
+    /**
+     * Retrieves a list of players within a specified warranty period.
+     * 
+     * @param warranty the warranty period in months.
+     * @return a list of players with the specified warranty period.
+     */
+    public List<PlayerDTO> findByWarranty(Integer warranty) {
 
-    return playerRepository.findByWarranty(warranty)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+        return playerRepository.findByWarranty(warranty)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players by brand.
- * 
- * @param brand the brand of the player.
- * @return a list of players with the specified brand.
- */
-public List<PlayerDTO> findByBrand(String brand) {
- 
-    return playerRepository.findByBrand(brand)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players by brand.
+     * 
+     * @param brand the brand of the player.
+     * @return a list of players with the specified brand.
+     */
+    public List<PlayerDTO> findByBrand(String brand) {
 
-/**
- * Retrieves a list of players by color.
- * 
- * @param color the color of the player.
- * @return a list of players with the specified color.
- */
-public List<PlayerDTO> findByColor(String color) {
+        return playerRepository.findByBrand(brand)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-    return playerRepository.findByColor(color)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players by color.
+     * 
+     * @param color the color of the player.
+     * @return a list of players with the specified color.
+     */
+    public List<PlayerDTO> findByColor(String color) {
 
-/**
- * Retrieves a list of players by available stock.
- * 
- * @param stock the available stock of the player.
- * @return a list of players with the specified stock.
- */
-public List<PlayerDTO> findByStock(Integer stock) {
-    return playerRepository.findByStock(stock)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+        return playerRepository.findByColor(color)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players within a specified price range.
- * 
- * @param minPrice the minimum price.
- * @param maxPrice the maximum price.
- * @return a list of players within the price range.
- */
-public List<PlayerDTO> findByPriceRange(Double minPrice, Double maxPrice) {
-    return playerRepository.findByPriceBetween(minPrice, maxPrice)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players by available stock.
+     * 
+     * @param stock the available stock of the player.
+     * @return a list of players with the specified stock.
+     */
+    public List<PlayerDTO> findByStock(Integer stock) {
+        return playerRepository.findByStock(stock)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players by model name.
- * 
- * @param name the model name of the player.
- * @return a list of players with the specified model name.
- */
-public List<PlayerDTO> findByName(String name) {
-    return playerRepository.findByNameContaining(name)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players within a specified price range.
+     * 
+     * @param minPrice the minimum price.
+     * @param maxPrice the maximum price.
+     * @return a list of players within the price range.
+     */
+    public List<PlayerDTO> findByPriceRange(Double minPrice, Double maxPrice) {
+        return playerRepository.findByPriceBetween(minPrice, maxPrice)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
+    /**
+     * Retrieves a list of players by model name.
+     * 
+     * @param name the model name of the player.
+     * @return a list of players with the specified model name.
+     */
+    public List<PlayerDTO> findByName(String name) {
+        return playerRepository.findByNameContaining(name)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 
-/**
- * Retrieves a list of players that have a radio.
- * 
- * @param radio whether the player has a radio.
- * @return a list of players with a radio.
- */
-public List<PlayerDTO> findByRadio(Boolean radio) {
-    return playerRepository.findByRadio(radio)
-                           .stream()
-                           .map(player -> playerMapper.toDTO(player))
-                           .collect(Collectors.toList());
-}
+    /**
+     * Retrieves a list of players that have a radio.
+     * 
+     * @param radio whether the player has a radio.
+     * @return a list of players with a radio.
+     */
+    public List<PlayerDTO> findByRadio(Boolean radio) {
+        return playerRepository.findByRadio(radio)
+                .stream()
+                .map(player -> playerMapper.toDTO(player))
+                .collect(Collectors.toList());
+    }
 }

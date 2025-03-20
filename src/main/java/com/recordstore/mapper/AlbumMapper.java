@@ -1,5 +1,7 @@
 package com.recordstore.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.recordstore.dto.AlbumDTO;
 import com.recordstore.model.Album;
 import com.recordstore.enums.PRODUCT_CATEGORY;
@@ -9,6 +11,7 @@ import com.recordstore.enums.PRODUCT_CATEGORY;
  * This class is responsible for mapping the properties from the entity to the DTO and
  * from the DTO back to the entity.
  */
+@Component
 public class AlbumMapper {
 
     /**

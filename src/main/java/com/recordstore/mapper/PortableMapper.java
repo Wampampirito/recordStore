@@ -1,9 +1,11 @@
 package com.recordstore.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.recordstore.dto.PortableDTO;
 import com.recordstore.model.Portable;
 
-
+@Component
 public class PortableMapper {
     public  PortableDTO toDTO(Portable portable) {
         PortableDTO portableDTO = new PortableDTO();

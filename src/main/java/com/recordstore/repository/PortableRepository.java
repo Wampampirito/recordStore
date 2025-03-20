@@ -153,5 +153,5 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
 
     Optional<Portable> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
 
-    Optional<Portable> findByWarrantyLifeGreaterThanEqual(Integer warranty);
+    Optional<Portable> findByWarrantyGreaterThanEqual(Integer warranty);
 }

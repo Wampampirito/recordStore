@@ -33,21 +33,21 @@ public class VinylService {
     private final VinylMapper vinylMapper;
     private final OrderRepository orderRepository;
     private final WishlistRepository wishlistRepository;
-    
 
     /**
      * Constructor for the service that injects the repositorys.
      * 
-     * @param vinylRepository The vinyl repository to inject.
-     * @param orderRepository The order repository to inject.
+     * @param vinylRepository    The vinyl repository to inject.
+     * @param orderRepository    The order repository to inject.
      * @param wishlistRepository The wishlist repository to inject.
      */
     @Autowired
-    public VinylService(VinylRepository vinylRepository,VinylMapper vinylMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
-            this.vinylRepository = vinylRepository;
-            this.orderRepository = orderRepository;
-            this.wishlistRepository = wishlistRepository;
-            this.vinylMapper = vinylMapper;
+    public VinylService(VinylRepository vinylRepository, VinylMapper vinylMapper, OrderRepository orderRepository,
+            WishlistRepository wishlistRepository) {
+        this.vinylRepository = vinylRepository;
+        this.orderRepository = orderRepository;
+        this.wishlistRepository = wishlistRepository;
+        this.vinylMapper = vinylMapper;
     }
 
     /**
@@ -56,7 +56,7 @@ public class VinylService {
      * @return List of all vinyls available in the system.
      */
     public List<VinylDTO> getAllVinyls() {
-                return vinylRepository.findAll()
+        return vinylRepository.findAll()
                 .stream()
                 .map(vinylMapper::toDTO)
                 .collect(Collectors.toList());
@@ -81,9 +81,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByArtist(String artist) {
         return vinylRepository.findByArtist(artist)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -95,9 +95,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByYearRange(int startYear, int endYear) {
         return vinylRepository.findByYearBetween(startYear, endYear)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -108,9 +108,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByGenre(ALBUM_GENRE genre) {
         return vinylRepository.findByGenre(genre)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -121,9 +121,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByFormat(ALBUM_FORMAT format) {
         return vinylRepository.findByFormat(format)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -135,9 +135,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByPriceRange(Double minPrice, Double maxPrice) {
         return vinylRepository.findByPriceBetween(minPrice, maxPrice)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -149,9 +149,9 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByDuration(String minDuration, String maxDuration) {
         return vinylRepository.findByDurationBetween(minDuration, maxDuration)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -257,7 +257,11 @@ public class VinylService {
      */
     public void validateYear(int year) throws IllegalArgumentException {
         if (year < 1860 || year > java.time.Year.now().getValue()) {
-            throw new IllegalArgumentException("The year must be between 1860 and the current year.");// Its 1860 because the first sound recording was made in 1860
+            throw new IllegalArgumentException("The year must be between 1860 and the current year.");// Its 1860
+                                                                                                      // because the
+                                                                                                      // first sound
+                                                                                                      // recording was
+                                                                                                      // made in 1860
         }
     }
 
@@ -281,10 +285,10 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsByCategory(PRODUCT_CATEGORY category) {
         return vinylRepository.findByProductCategory(category)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
-        
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
+
     }
 
     /**
@@ -294,10 +298,10 @@ public class VinylService {
      */
     public List<VinylDTO> getVinylsInStock() {
         return vinylRepository.findByStockGreaterThan(0)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
-        
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
+
     }
 
     /**
@@ -338,10 +342,10 @@ public class VinylService {
      */
     public List<VinylDTO> findVinylsByName(String name) {
         return vinylRepository.findByNameContainingIgnoreCase(name)
-        .stream()
-        .map(vinylMapper::toDTO)
-        .collect(Collectors.toList());
-        
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
+
     }
 
     /**

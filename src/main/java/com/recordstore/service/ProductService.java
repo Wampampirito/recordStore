@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio para gestionar productos en el sistema.
+ * Service for managing products within the system.
  * 
- * Este servicio proporciona metodos para obtener, guardar y eliminar productos.
- * Tambien permite obtener productos filtrados por categoria.
+ * This service provides methods to retrieve, save, and delete products.
+ * It also allows for retrieving products filtered by category.
  */
 @Service
 public class ProductService {
@@ -22,9 +22,9 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     /**
-     * Constructor del servicio que inyecta el repositorio de productos.
+     * Constructor for the service that injects the product repository.
      * 
-     * @param productRepository El repositorio de productos a inyectar.
+     * @param productRepository The product repository to inject.
      */
     @Autowired
     public ProductService(ProductRepository productRepository) {
@@ -32,93 +32,95 @@ public class ProductService {
     }
 
     /**
-     * Obtiene todos los productos, incluyendo las subclases de {@link com.recordstore.model.Product}.
+     * Retrieves all products, including subclasses of
+     * {@link com.recordstore.model.Product}.
      * 
-     * @return Lista de todos los productos disponibles en el sistema.
+     * @return A list of all products available in the system.
      */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
     /**
-     * Obtiene un producto por su id (clave primaria).
+     * Retrieves a product by its ID (primary key).
      * 
-     * @param id El id del producto a buscar.
-     * @return Un {@link java.util.Optional Optional}con el producto encontrado, o vacio si no se encuentra.
+     * @param id The ID of the product to retrieve.
+     * @return An {@link java.util.Optional Optional} containing the found product,
+     *         or empty if not found.
      */
     public Optional<Product> getProductById(Double id) {
         return productRepository.findById(id);
     }
 
     /**
-     * Guarda un producto en el repositorio. Si el producto no existe, se crea uno nuevo.
+     * Saves a product to the repository. If the product does not exist, a new one
+     * is created.
      * 
-     * @param product El producto a guardar.
-     * @return El producto guardado, con su id asignado.
+     * @param product The product to save.
+     * @return The saved product, with its assigned ID.
      */
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
     /**
-     * Elimina un producto por su id.
+     * Deletes a product by its ID.
      * 
-     * @param id El id del producto a eliminar.
+     * @param id The ID of the product to delete.
      */
     public void deleteProduct(Double id) {
         productRepository.deleteById(id);
     }
 
     /**
-     * Obtiene productos filtrados por categoria.
+     * Retrieves products filtered by category.
      * 
-     * @param productCategory La categoria de los productos a filtrar.
-     * @return Lista de productos que coinciden con la categoria proporcionada.
+     * @param productCategory The category of products to filter by.
+     * @return A list of products matching the provided category.
      */
     public List<Product> getProductsByCategory(PRODUCT_CATEGORY productCategory) {
         return productRepository.findByProductCategory(productCategory);
     }
 
     /**
-     * Obtiene productos filtrados por nombre (de forma parcial).
+     * Retrieves products filtered by name (partial match).
      * 
-     * @param name El nombre del producto (puede ser parcial).
-     * @return Lista de productos cuyo nombre contenga la cadena proporcionada.
+     * @param name The product name (can be partial).
+     * @return A list of products whose name contains the provided string.
      */
     public List<Product> getProductsByName(String name) {
         return productRepository.findByNameContainingIgnoreCase(name);
     }
 
     /**
-     * Obtiene productos filtrados por categoria y nombre (de forma parcial).
+     * Retrieves products filtered by both name and category (partial match for
+     * name).
      * 
-     * @param name El nombre del producto (puede ser parcial).
-     * @param productCategory La categoria del producto.
-     * @return Lista de productos que coinciden con ambos criterios.
+     * @param name            The product name (can be partial).
+     * @param productCategory The category of the product.
+     * @return A list of products matching both criteria.
      */
     public List<Product> getProductsByNameAndCategory(String name, PRODUCT_CATEGORY productCategory) {
         return productRepository.findByNameContainingIgnoreCaseAndProductCategory(name, productCategory);
     }
 
     /**
-     * Obtiene productos filtrados por precio dentro de un rango.
+     * Retrieves products filtered by price range.
      * 
-     * @param minPrice El precio minimo.
-     * @param maxPrice El precio.maxcdn.
-     * @return Lista de productos cuyo precio este dentro del rango especificado.
+     * @param minPrice The minimum price.
+     * @param maxPrice The maximum price.
+     * @return A list of products whose price is within the specified range.
      */
     public List<Product> getProductsByPriceRange(Double minPrice, Double maxPrice) {
         return productRepository.findByPriceBetween(minPrice, maxPrice);
     }
 
     /**
-     * Obtiene productos dsiponibles, es decir filtrados por stock mayor o igual a 1.
+     * Retrieves available products, i.e., those with a stock of 1 or more.
      * 
-     * @return Lista de productos que tienen al menos 1 unidad en stock.
+     * @return A list of products that have at least one unit in stock.
      */
-    public List<Product> getAvailibleProducts() {
+    public List<Product> getAvailableProducts() {
         return productRepository.findByStockGreaterThanEqual(1);
     }
-
-
 }

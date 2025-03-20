@@ -14,8 +14,10 @@ import java.util.Optional;
 
 /**
  * Service class to manage {@link User} operations.
- * It provides methods for CRUD operations on the {@link User} entity, including user creation, updating, deletion, and password management.
- * Each method works with {@link UserDTO} for the data transfer object (DTO) representation of the {@link User}.
+ * It provides methods for CRUD operations on the {@link User} entity, including
+ * user creation, updating, deletion, and password management.
+ * Each method works with {@link UserDTO} for the data transfer object (DTO)
+ * representation of the {@link User}.
  */
 @Service
 public class UserService {
@@ -27,8 +29,9 @@ public class UserService {
     /**
      * Constructs a {@link UserService} with the specified dependencies.
      * 
-     * @param userRepository the {@link UserRepository} to access the data
-     * @param userMapper the {@link UserMapper} to map between {@link User} and {@link UserDTO}
+     * @param userRepository  the {@link UserRepository} to access the data
+     * @param userMapper      the {@link UserMapper} to map between {@link User} and
+     *                        {@link UserDTO}
      * @param passwordEncoder the {@link PasswordEncoder} to encode passwords
      */
     @Autowired
@@ -85,7 +88,7 @@ public class UserService {
     /**
      * Updates an existing user and returns the updated {@link UserDTO}.
      *
-     * @param id the ID of the user to update
+     * @param id   the ID of the user to update
      * @param user the updated {@link User} data
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
@@ -103,7 +106,7 @@ public class UserService {
     /**
      * Updates a user's password.
      *
-     * @param id the ID of the user to update
+     * @param id          the ID of the user to update
      * @param oldPassword the current password to verify
      * @param newPassword the new password to set
      * @throws RuntimeException if the current password is incorrect
@@ -112,7 +115,7 @@ public class UserService {
     public void updatePassword(Integer id, String oldPassword, String newPassword) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        
+
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
             throw new RuntimeException("Incorrect current password");
         }
@@ -124,7 +127,7 @@ public class UserService {
     /**
      * Updates a user's address and returns the updated {@link UserDTO}.
      *
-     * @param id the ID of the user to update
+     * @param id         the ID of the user to update
      * @param newAddress the new address to set
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
@@ -139,7 +142,7 @@ public class UserService {
     /**
      * Verifies if the current password matches the stored password.
      *
-     * @param id the ID of the user to verify
+     * @param id              the ID of the user to verify
      * @param currentPassword the current password to check
      * @throws RuntimeException if the password does not match
      * @throws RuntimeException if the user is not found
@@ -147,7 +150,7 @@ public class UserService {
     public void verifyPassword(Integer id, String currentPassword) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        
+
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new RuntimeException("Incorrect password");
         }
@@ -156,7 +159,7 @@ public class UserService {
     /**
      * Resets a user's password and saves it.
      *
-     * @param id the ID of the user to reset the password for
+     * @param id          the ID of the user to reset the password for
      * @param newPassword the new password to set
      * @throws RuntimeException if the user is not found
      */
@@ -170,7 +173,7 @@ public class UserService {
     /**
      * Updates a user's phone number and returns the updated {@link UserDTO}.
      *
-     * @param id the ID of the user to update
+     * @param id       the ID of the user to update
      * @param newPhone the new phone number to set
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
@@ -185,7 +188,8 @@ public class UserService {
     /**
      * Retrieves a {@link UserDTO} based on the user's email.
      * 
-     * This method fetches a {@link User} from the database using the provided email.
+     * This method fetches a {@link User} from the database using the provided
+     * email.
      * If the user with the specified email is not found, it throws an exception.
      * 
      * @param email the email of the user to retrieve

@@ -236,7 +236,7 @@ public class PortableService {
      *         period equal to or greater than the specified value.
      */
     public List<PortableDTO> findByWarranty(Integer warranty) {
-        return portableRepository.findByWarrantyLifeGreaterThanEqual(warranty)
+        return portableRepository.findByWarrantyGreaterThanEqual(warranty)
                 .stream()
                 .map(portableMapper::toDTO)
                 .collect(Collectors.toList());

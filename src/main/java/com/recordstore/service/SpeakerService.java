@@ -16,7 +16,8 @@ import java.util.Optional;
 
 /**
  * Service class that handles operations related to the Speaker entity.
- * Provides methods for adding, updating, deleting, and retrieving speakers from the database.
+ * Provides methods for adding, updating, deleting, and retrieving speakers from
+ * the database.
  */
 @Service
 public class SpeakerService {
@@ -24,10 +25,11 @@ public class SpeakerService {
     private final SpeakerRepository speakerRepository;
     private final SpeakerMapper speakerMapper;
     private OrderRepository orderRepository;
-    private WishlistRepository wishlistRepository;  
+    private WishlistRepository wishlistRepository;
 
     @Autowired
-    public SpeakerService(SpeakerRepository speakerRepository, SpeakerMapper speakerMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public SpeakerService(SpeakerRepository speakerRepository, SpeakerMapper speakerMapper,
+            OrderRepository orderRepository, WishlistRepository wishlistRepository) {
         this.speakerRepository = speakerRepository;
         this.speakerMapper = speakerMapper;
         this.orderRepository = orderRepository;
@@ -42,15 +44,16 @@ public class SpeakerService {
     public List<SpeakerDTO> getAllSpeakers() {
         List<Speaker> speakers = speakerRepository.findAll();
         return speakers.stream()
-                       .map(speakerMapper::toDTO)
-                       .toList();
+                .map(speakerMapper::toDTO)
+                .toList();
     }
 
     /**
      * Fetch a speaker by its unique id.
      *
      * @param id the unique identifier (id) of the speaker.
-     * @return an Optional containing the speaker in DTO format if found, or empty if not.
+     * @return an Optional containing the speaker in DTO format if found, or empty
+     *         if not.
      */
     public Optional<SpeakerDTO> getSpeakerById(Integer id) {
         Optional<Speaker> speaker = speakerRepository.findById(id);
@@ -72,7 +75,7 @@ public class SpeakerService {
     /**
      * Update an existing speaker's information.
      *
-     * @param id the id of the speaker to be updated.
+     * @param id         the id of the speaker to be updated.
      * @param speakerDTO the new speaker data to update in DTO format.
      * @return the updated speaker in DTO format.
      * @throws Exception if the speaker with the given id does not exist.
@@ -82,7 +85,7 @@ public class SpeakerService {
             throw new Exception("Speaker not found for id: " + id);
         }
         Speaker speaker = speakerMapper.toEntity(speakerDTO);
-        speaker.setId(id);  // Ensure the id is preserved
+        speaker.setId(id); // Ensure the id is preserved
         Speaker updatedSpeaker = speakerRepository.save(speaker);
         return speakerMapper.toDTO(updatedSpeaker);
     }
@@ -93,7 +96,7 @@ public class SpeakerService {
      * @param id the id of the speaker to delete.
      */
     public void deleteSpeaker(Integer id) {
-                // Check if the product is associated with any order
+        // Check if the product is associated with any order
         Optional<Order> ordersWithProduct = orderRepository.findById(id);
         if (!ordersWithProduct.isEmpty()) {
             throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");

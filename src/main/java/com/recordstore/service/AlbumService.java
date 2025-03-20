@@ -39,7 +39,8 @@ public class AlbumService {
      * @param albumRepository The album repository to inject.
      */
     @Autowired
-    public AlbumService(AlbumRepository albumRepository, AlbumMapper albumMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public AlbumService(AlbumRepository albumRepository, AlbumMapper albumMapper, OrderRepository orderRepository,
+            WishlistRepository wishlistRepository) {
         this.albumRepository = albumRepository;
         this.albumMapper = albumMapper;
         this.orderRepository = orderRepository;
@@ -53,9 +54,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAllAlbums() {
         return albumRepository.findAll()
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -77,9 +78,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByArtist(String artist) {
         return albumRepository.findByArtist(artist)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -91,9 +92,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByYearRange(int startYear, int endYear) {
         return albumRepository.findByYearBetween(startYear, endYear)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -104,9 +105,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByGenre(ALBUM_GENRE genre) {
         return albumRepository.findByGenre(genre)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -117,9 +118,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByFormat(ALBUM_FORMAT format) {
         return albumRepository.findByFormat(format)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -131,9 +132,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByPriceRange(Double minPrice, Double maxPrice) {
         return albumRepository.findByPriceBetween(minPrice, maxPrice)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -145,9 +146,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByDuration(String minDuration, String maxDuration) {
         return albumRepository.findByDurationBetween(minDuration, maxDuration)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -169,7 +170,7 @@ public class AlbumService {
     @Transactional
     public void deleteAlbum(Integer id) {
 
-                // Check if the product is associated with any order
+        // Check if the product is associated with any order
         Optional<Order> ordersWithProduct = orderRepository.findById(id);
         if (!ordersWithProduct.isEmpty()) {
             throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
@@ -201,17 +202,17 @@ public class AlbumService {
             // Validate and update the release year if it's provided
             if (updatedAlbum.getYear() != 0) { // Assuming year = 0 means it's not provided
                 updateAlbumReleaseYear(existingAlbum, updatedAlbum.getYear());
-    
+
             }
 
             // Update other fields only if they are provided (non-null or non-empty)
             if (updatedAlbum.getName() != null && !updatedAlbum.getName().isEmpty()) {
                 existingAlbum.setName(updatedAlbum.getName());
             }
-            if (updatedAlbum.getPrice() != null) { 
+            if (updatedAlbum.getPrice() != null) {
                 existingAlbum.setPrice(updatedAlbum.getPrice());
             }
-            if (updatedAlbum.getStock() != null) { 
+            if (updatedAlbum.getStock() != null) {
                 existingAlbum.setStock(updatedAlbum.getStock());
             }
             if (updatedAlbum.getArtist() != null && !updatedAlbum.getArtist().isEmpty()) {
@@ -242,7 +243,11 @@ public class AlbumService {
      */
     public void validateYear(int year) throws IllegalArgumentException {
         if (year < 1860 || year > java.time.Year.now().getValue()) {
-            throw new IllegalArgumentException("The year must be between 1860 and the current year.");//Its 1860 because the first sound recording was in 1860
+            throw new IllegalArgumentException("The year must be between 1860 and the current year.");// Its 1860
+                                                                                                      // because the
+                                                                                                      // first sound
+                                                                                                      // recording was
+                                                                                                      // in 1860
         }
 
     }
@@ -267,9 +272,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsByCategory(PRODUCT_CATEGORY category) {
         return albumRepository.findByProductCategory(category)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -279,9 +284,9 @@ public class AlbumService {
      */
     public List<AlbumDTO> getAlbumsInStock() {
         return albumRepository.findByStockGreaterThan(0)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -322,8 +327,8 @@ public class AlbumService {
      */
     public List<AlbumDTO> findAlbumsByName(String name) {
         return albumRepository.findByNameContainingIgnoreCase(name)
-        .stream()
-        .map(albumMapper::toDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(albumMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
