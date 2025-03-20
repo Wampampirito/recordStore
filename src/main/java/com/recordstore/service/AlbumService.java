@@ -3,9 +3,11 @@ package com.recordstore.service;
 import com.recordstore.model.Album;
 import com.recordstore.model.Order;
 import com.recordstore.model.Wishlist;
+import com.recordstore.dto.AlbumDTO;
 import com.recordstore.enums.ALBUM_FORMAT;
 import com.recordstore.enums.ALBUM_GENRE;
 import com.recordstore.enums.PRODUCT_CATEGORY;
+import com.recordstore.mapper.AlbumMapper;
 import com.recordstore.repository.AlbumRepository;
 import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.WishlistRepository;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service for managing albums in the system.
@@ -26,8 +29,9 @@ import java.util.Optional;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
-    private OrderRepository orderRepository;
-    private WishlistRepository wishlistRepository;
+    private final AlbumMapper albumMapper;
+    private final OrderRepository orderRepository;
+    private final WishlistRepository wishlistRepository;
 
     /**
      * Constructor for the service that injects the album repository.
@@ -35,8 +39,9 @@ public class AlbumService {
      * @param albumRepository The album repository to inject.
      */
     @Autowired
-    public AlbumService(AlbumRepository albumRepository, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public AlbumService(AlbumRepository albumRepository, AlbumMapper albumMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
         this.albumRepository = albumRepository;
+        this.albumMapper = albumMapper;
         this.orderRepository = orderRepository;
         this.wishlistRepository = wishlistRepository;
     }
@@ -46,8 +51,11 @@ public class AlbumService {
      * 
      * @return List of all albums available in the system.
      */
-    public List<Album> getAllAlbums() {
-        return albumRepository.findAll();
+    public List<AlbumDTO> getAllAlbums() {
+        return albumRepository.findAll()
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -57,7 +65,7 @@ public class AlbumService {
      * @return An {@link java.util.Optional Optional} with the album found, or empty
      *         if not found.
      */
-    public Optional<Album> getAlbumById(Double id) {
+    public Optional<Album> getAlbumById(Integer id) {
         return albumRepository.findById(id);
     }
 
@@ -67,8 +75,11 @@ public class AlbumService {
      * @param artist The name of the artist.
      * @return List of albums by the artist.
      */
-    public List<Album> getAlbumsByArtist(String artist) {
-        return albumRepository.findByArtist(artist);
+    public List<AlbumDTO> getAlbumsByArtist(String artist) {
+        return albumRepository.findByArtist(artist)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -78,8 +89,11 @@ public class AlbumService {
      * @param endYear   The end year.
      * @return List of albums released between the specified years.
      */
-    public List<Album> getAlbumsByYearRange(int startYear, int endYear) {
-        return albumRepository.findByYearBetween(startYear, endYear);
+    public List<AlbumDTO> getAlbumsByYearRange(int startYear, int endYear) {
+        return albumRepository.findByYearBetween(startYear, endYear)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -88,8 +102,11 @@ public class AlbumService {
      * @param genre The genre of the albums to search for.
      * @return List of albums of the specified genre.
      */
-    public List<Album> getAlbumsByGenre(ALBUM_GENRE genre) {
-        return albumRepository.findByGenre(genre);
+    public List<AlbumDTO> getAlbumsByGenre(ALBUM_GENRE genre) {
+        return albumRepository.findByGenre(genre)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -98,8 +115,11 @@ public class AlbumService {
      * @param format The format of the albums to search for (LP, EP, etc.).
      * @return List of albums of the specified format.
      */
-    public List<Album> getAlbumsByFormat(ALBUM_FORMAT format) {
-        return albumRepository.findByFormat(format);
+    public List<AlbumDTO> getAlbumsByFormat(ALBUM_FORMAT format) {
+        return albumRepository.findByFormat(format)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -109,8 +129,11 @@ public class AlbumService {
      * @param maxPrice The maximum price.
      * @return List of albums within the specified price range.
      */
-    public List<Album> getAlbumsByPriceRange(Double minPrice, Double maxPrice) {
-        return albumRepository.findByPriceBetween(minPrice, maxPrice);
+    public List<AlbumDTO> getAlbumsByPriceRange(Double minPrice, Double maxPrice) {
+        return albumRepository.findByPriceBetween(minPrice, maxPrice)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -120,8 +143,11 @@ public class AlbumService {
      * @param maxDuration The maximum duration (in "mm:ss" format).
      * @return List of albums whose duration is within the specified range.
      */
-    public List<Album> getAlbumsByDuration(String minDuration, String maxDuration) {
-        return albumRepository.findByDurationBetween(minDuration, maxDuration);
+    public List<AlbumDTO> getAlbumsByDuration(String minDuration, String maxDuration) {
+        return albumRepository.findByDurationBetween(minDuration, maxDuration)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -130,9 +156,9 @@ public class AlbumService {
      * @param album The album to save.
      * @return The saved album with its assigned id.
      */
-    public Album saveAlbum(Album album) {
+    public AlbumDTO saveAlbum(Album album) {
         validateYear(album.getYear()); // Validate the album before saving
-        return albumRepository.save(album);
+        return albumMapper.toDTO(albumRepository.save(album));
     }
 
     /**
@@ -166,7 +192,7 @@ public class AlbumService {
      * @param updatedAlbum The album with the updated details.
      * @return The updated album.
      */
-    public Album updateAlbum(Double id, Album updatedAlbum) {
+    public AlbumDTO updateAlbum(Integer id, Album updatedAlbum) {
         // Check if the album exists
         Optional<Album> existingAlbumOpt = albumRepository.findById(id);
         if (existingAlbumOpt.isPresent()) {
@@ -202,7 +228,7 @@ public class AlbumService {
             }
 
             // Save the updated album
-            return albumRepository.save(existingAlbum);
+            return albumMapper.toDTO(albumRepository.save(existingAlbum));
         } else {
             throw new IllegalArgumentException("Album with id " + id + " not found.");
         }
@@ -239,8 +265,11 @@ public class AlbumService {
      * @param category The product category to filter albums by.
      * @return List of albums of the specified category.
      */
-    public List<Album> getAlbumsByCategory(PRODUCT_CATEGORY category) {
-        return albumRepository.findByProductCategory(category);
+    public List<AlbumDTO> getAlbumsByCategory(PRODUCT_CATEGORY category) {
+        return albumRepository.findByProductCategory(category)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -248,8 +277,11 @@ public class AlbumService {
      * 
      * @return List of albums that are in stock.
      */
-    public List<Album> getAlbumsInStock() {
-        return albumRepository.findByStockGreaterThan(0);
+    public List<AlbumDTO> getAlbumsInStock() {
+        return albumRepository.findByStockGreaterThan(0)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -288,7 +320,10 @@ public class AlbumService {
      * @param name The name of the album (can be partial).
      * @return List of albums whose name contains the provided string.
      */
-    public List<Album> findAlbumsByName(String name) {
-        return albumRepository.findByNameContainingIgnoreCase(name);
+    public List<AlbumDTO> findAlbumsByName(String name) {
+        return albumRepository.findByNameContainingIgnoreCase(name)
+        .stream()
+        .map(albumMapper::toDTO)
+        .collect(Collectors.toList());
     }
 }

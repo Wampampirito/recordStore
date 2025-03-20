@@ -17,7 +17,7 @@ public class AlbumMapper {
      * @param album The {@link Album} entity to be converted.
      * @return The {@link AlbumDTO} representation of the provided entity, or {@code null} if the input is {@code null}.
      */
-    public static AlbumDTO toDTO(Album album) {
+    public AlbumDTO toDTO(Album album) {
         if (album == null) {
             return null;
         }

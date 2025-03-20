@@ -9,12 +9,14 @@ import com.recordstore.enums.ALBUM_GENRE;
 import com.recordstore.enums.PRODUCT_CATEGORY;
 import com.recordstore.model.Album;
 
+
+
 /**
  * Repository interface for {@link Album} entity.
  * This interface extends {@link JpaRepository} to provide basic CRUD operations 
  * and custom queries for albums in the record store.
  */
-public interface AlbumRepository extends JpaRepository<Album, Double> {
+public interface AlbumRepository extends JpaRepository<Album, Integer> {
 
     /**
      * Finds all albums by artist, ignoring case.
@@ -131,5 +133,6 @@ public interface AlbumRepository extends JpaRepository<Album, Double> {
      */
     List<Album> findByArtist(String artist);
 
-    void deleteById(Integer id);
+    
+
 }
