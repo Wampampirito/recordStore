@@ -92,4 +92,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
      * @return a list of orders for the specified user
      */
     List<Order> findByUser(User user);
+
+    Optional<Order> findTopByUserIdOrderByCreatedAtDesc(Integer userId);
 }

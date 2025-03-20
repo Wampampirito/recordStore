@@ -263,4 +263,16 @@ public class OrderService {
     public UserDTO getUserDTOFromOrder(Order order) {
         return userMapper.toDTO(order.getUser());
     }
+
+    /**
+     * Retrieves the latest order for a given user.
+     * 
+     * @param userId
+     * @return
+     */
+
+    public Optional<Order> getLatestOrder(Integer userId) {
+        return orderRepository.findTopByUserIdOrderByCreatedAtDesc(userId);
+    }
+    
 }

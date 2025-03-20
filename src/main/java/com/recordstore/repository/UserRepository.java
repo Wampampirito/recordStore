@@ -22,7 +22,7 @@ import com.recordstore.model.User;
  * Boolean exists = userRepository.existsByEmail("correo@ejemplo.com");
  * </pre>
  */
-public interface UserRepository extends JpaRepository<User, Double> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
      * Verifica si existe un usuario con el correo electrónico proporcionado.

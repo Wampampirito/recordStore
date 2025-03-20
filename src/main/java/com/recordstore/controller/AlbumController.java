@@ -6,9 +6,10 @@ import com.recordstore.service.AlbumService;
 import com.recordstore.mapper.AlbumMapper;
 import com.recordstore.enums.ALBUM_FORMAT;
 import com.recordstore.enums.ALBUM_GENRE;
-import com.recordstore.enums.PRODUCT_CATEGORY;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,138 +19,199 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * REST controller for managing albums in the record store.
+ * Provides endpoints to retrieve, create, update, and delete albums.
+ * 
+ * <p>This controller interacts with the {@link AlbumService} and {@link AlbumMapper}
+ * to manage the business logic and data transformation.</p>
+ * 
+ * <p><b>Available endpoints:</b></p>
+ * <ul>
+ *   <li><b>GET /albums</b>: Retrieves all albums.</li>
+ *   <li><b>GET /albums/{id}</b>: Retrieves an album by its ID.</li>
+ *   <li><b>GET /albums/artist/{artist}</b>: Retrieves albums by a specific artist.</li>
+ *   <li><b>GET /albums/genre/{genre}</b>: Retrieves albums by a specific genre.</li>
+ *   <li><b>GET /albums/format/{format}</b>: Retrieves albums by a specific format.</li>
+ *   <li><b>GET /albums/year-range</b>: Retrieves albums within a specified year range.</li>
+ *   <li><b>POST /albums/new</b>: Creates a new album.</li>
+ *   <li><b>PUT /albums/update/{id}</b>: Updates an existing album.</li>
+ *   <li><b>DELETE /albums/delete/{id}</b>: Deletes an album by its ID.</li>
+ * </ul>
+ */
 @RestController
 @RequestMapping("/albums")
-@Tag(name = "Album Controller", description = "Manage album records")
+@Tag(name = "Albums", description = "Endpoints for managing album records")
 public class AlbumController {
 
     private final AlbumService albumService;
-        private final AlbumMapper albumMapper;
-    
-        @Autowired
-        public AlbumController(AlbumService albumService, AlbumMapper albumMapper) {
-            this.albumService = albumService;
-            this.albumMapper = albumMapper;
-        }
-    
-        @Operation(summary = "Get all albums", description = "Retrieve a list of all albums available in the system")
-        @GetMapping
-        public ResponseEntity<List<AlbumDTO>> getAllAlbums() {
-            List<AlbumDTO> albums = albumService.getAllAlbums();
-            return ResponseEntity.ok(albums);
-        }
-    
-        @Operation(summary = "Get album by ID", description = "Retrieve a specific album by its unique ID")
-        @GetMapping("/{id}")
-        public ResponseEntity<AlbumDTO> getAlbumById(@PathVariable Integer id) {
-            Optional<Album> album = albumService.getAlbumById(id);
-            return album.map(value -> ResponseEntity.ok(albumMapper.toDTO(value)))
+    private final AlbumMapper albumMapper;
+
+    /**
+     * Constructor to initialize AlbumController with dependencies.
+     *
+     * @param albumService the service handling album operations
+     * @param albumMapper  the mapper for converting between Album and AlbumDTO
+     */
+    @Autowired
+    public AlbumController(AlbumService albumService, AlbumMapper albumMapper) {
+        this.albumService = albumService;
+        this.albumMapper = albumMapper;
+    }
+
+    /**
+     * Retrieves a list of all albums.
+     *
+     * @return a list of {@link AlbumDTO} objects
+     */
+    @Operation(summary = "Retrieve all albums", description = "Returns a list of all albums.")
+    @ApiResponse(responseCode = "200", description = "List of albums retrieved successfully")
+    @GetMapping
+    public ResponseEntity<List<AlbumDTO>> getAllAlbums() {
+        List<AlbumDTO> albums = albumService.getAllAlbums();
+        return ResponseEntity.ok(albums);
+    }
+
+    /**
+     * Retrieves an album by its unique ID.
+     *
+     * @param id the unique identifier of the album
+     * @return the requested {@link AlbumDTO} or 404 if not found
+     */
+    @Operation(summary = "Retrieve an album by ID", description = "Returns an album based on its ID.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Album found"),
+        @ApiResponse(responseCode = "404", description = "Album not found")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<AlbumDTO> getAlbumById(@PathVariable Integer id) {
+        Optional<Album> album = albumService.getAlbumById(id);
+        return album.map(value -> ResponseEntity.ok(albumMapper.toDTO(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Get albums by artist", description = "Retrieve a list of albums by a specific artist")
+    /**
+     * Retrieves albums by a specific artist.
+     *
+     * @param artist the name of the artist
+     * @return a list of albums by the given artist
+     */
+    @Operation(summary = "Retrieve albums by artist", description = "Returns albums filtered by artist name.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
     @GetMapping("/artist/{artist}")
     public ResponseEntity<List<AlbumDTO>> getAlbumsByArtist(@PathVariable String artist) {
         List<AlbumDTO> albums = albumService.getAlbumsByArtist(artist);
         return ResponseEntity.ok(albums);
     }
 
-    @Operation(summary = "Get albums by genre", description = "Retrieve a list of albums by a specific genre")
+    /**
+     * Retrieves albums by a specific genre.
+     *
+     * @param genre the genre of the albums
+     * @return a list of albums within the given genre
+     */
+    @Operation(summary = "Retrieve albums by genre", description = "Returns albums filtered by genre.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
     @GetMapping("/genre/{genre}")
     public ResponseEntity<List<AlbumDTO>> getAlbumsByGenre(@PathVariable ALBUM_GENRE genre) {
         List<AlbumDTO> albums = albumService.getAlbumsByGenre(genre);
         return ResponseEntity.ok(albums);
     }
 
-    @Operation(summary = "Get albums by format", description = "Retrieve a list of albums by a specific format")
+    /**
+     * Retrieves albums by a specific format.
+     *
+     * @param format the format of the albums (e.g., CD, Vinyl)
+     * @return a list of albums within the given format
+     */
+    @Operation(summary = "Retrieve albums by format", description = "Returns albums filtered by format (CD, Vinyl, etc.).")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
     @GetMapping("/format/{format}")
     public ResponseEntity<List<AlbumDTO>> getAlbumsByFormat(@PathVariable ALBUM_FORMAT format) {
         List<AlbumDTO> albums = albumService.getAlbumsByFormat(format);
         return ResponseEntity.ok(albums);
     }
 
-    @Operation(summary = "Get albums by year range", description = "Retrieve a list of albums released within a specific year range")
+    /**
+     * Retrieves albums released within a specific year range.
+     *
+     * @param startYear the start of the year range
+     * @param endYear   the end of the year range
+     * @return a list of albums released within the given range
+     */
+    @Operation(summary = "Retrieve albums by year range", description = "Returns albums released within the specified year range.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
     @GetMapping("/year-range")
-    public ResponseEntity<List<AlbumDTO>> getAlbumsByYearRange(@RequestParam int startYear, @RequestParam int endYear) {
+    public ResponseEntity<List<AlbumDTO>> getAlbumsByYearRange(
+            @RequestParam int startYear,
+            @RequestParam int endYear) {
         List<AlbumDTO> albums = albumService.getAlbumsByYearRange(startYear, endYear);
         return ResponseEntity.ok(albums);
     }
 
-    @Operation(summary = "Create a new album", description = "Add a new album to the system")
-    @PostMapping ("/new")
+    /**
+     * Creates a new album.
+     *
+     * @param albumDTO the album data to be created
+     * @return the created {@link AlbumDTO}
+     */
+    @Operation(summary = "Create a new album", description = "Creates and returns a new album.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Album created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid album data")
+    })
+    @PostMapping("/new")
     public ResponseEntity<AlbumDTO> createAlbum(@RequestBody AlbumDTO albumDTO) {
-        Album album = AlbumMapper.toEntity(albumDTO);
+        Album album = albumMapper.toEntity(albumDTO);
         AlbumDTO savedAlbum = albumService.saveAlbum(album);
         return ResponseEntity.ok(savedAlbum);
     }
 
-    @Operation(summary = "Update an existing album", description = "Modify an album's details using its ID")
+    /**
+     * Updates an existing album.
+     *
+     * @param id       the ID of the album to update
+     * @param albumDTO the new album data
+     * @return the updated {@link AlbumDTO}
+     */
+    @Operation(summary = "Update an album", description = "Updates an existing album based on its ID.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Album updated successfully"),
+        @ApiResponse(responseCode = "404", description = "Album not found")
+    })
     @PutMapping("/update/{id}")
     public ResponseEntity<AlbumDTO> updateAlbum(@PathVariable Integer id, @RequestBody AlbumDTO albumDTO) {
-        AlbumDTO updatedAlbum = albumService.updateAlbum(id, AlbumMapper.toEntity(albumDTO));
+        AlbumDTO updatedAlbum = albumService.updateAlbum(id, albumMapper.toEntity(albumDTO));
         return ResponseEntity.ok(updatedAlbum);
     }
 
-    @Operation(summary = "Delete an album", description = "Remove an album from the system by its ID")
-    @DeleteMapping("delete/{id}")
+    /**
+     * Deletes an album by its ID.
+     *
+     * @param id the ID of the album to delete
+     * @return a response entity with no content
+     */
+    @Operation(summary = "Delete an album", description = "Deletes an album based on its ID.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "Album deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Album not found")
+    })
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteAlbum(@PathVariable Integer id) {
         albumService.deleteAlbum(id);
         return ResponseEntity.noContent().build();
     }
-
-    @Operation(summary = "Get albums by price range", description = "Retrieve albums within a specified price range")
-@GetMapping("/price-range/{minPrice}/{maxPrice}")
-public ResponseEntity<List<AlbumDTO>> getAlbumsByPriceRange(@PathVariable Double minPrice, @PathVariable Double maxPrice) {
-    List<AlbumDTO> albums = albumService.getAlbumsByPriceRange(minPrice, maxPrice);
-    return ResponseEntity.ok(albums);
 }
 
-@Operation(summary = "Get albums by duration range", description = "Retrieve albums within a specified duration range")
-@GetMapping("/duration-range/{minDuration}/{maxDuration}")
-public ResponseEntity<List<AlbumDTO>> getAlbumsByDuration(@PathVariable String minDuration, @PathVariable String maxDuration) {
-    List<AlbumDTO> albums = albumService.getAlbumsByDuration(minDuration, maxDuration);
-    return ResponseEntity.ok(albums);
-}
-
-@Operation(summary = "Get albums in stock", description = "Retrieve albums that have stock available")
-@GetMapping("/in-stock")
-public ResponseEntity<List<AlbumDTO>> getAlbumsInStock() {
-    List<AlbumDTO> albums = albumService.getAlbumsInStock();
-    return ResponseEntity.ok(albums);
-}
-@Operation(summary = "Get albums by category", description = "Retrieve a list of albums by a specific product category")
-@GetMapping("/category/{category}")
-public ResponseEntity<List<AlbumDTO>> getAlbumsByCategory(@PathVariable PRODUCT_CATEGORY category) {
-    List<AlbumDTO> albums = albumService.getAlbumsByCategory(category);
-    return ResponseEntity.ok(albums);
-}
-
-@Operation(summary = "Count albums by artist", description = "Retrieve the number of albums by a specific artist")
-@GetMapping("/count-by-artist/{artist}")
-public ResponseEntity<Integer> countAlbumsByArtist(@PathVariable String artist) {
-    Integer count = albumService.countAlbumsByArtist(artist);
-    return ResponseEntity.ok(count);
-}
-
-@Operation(summary = "Count albums by genre", description = "Retrieve the number of albums by a specific genre")
-@GetMapping("/count-by-genre/{genre}")
-public ResponseEntity<Integer> countAlbumsByGenre(@PathVariable ALBUM_GENRE genre) {
-    Integer count = albumService.countAlbumsByGenre(genre);
-    return ResponseEntity.ok(count);
-}
-
-@Operation(summary = "Count albums by format", description = "Retrieve the number of albums by a specific format")
-@GetMapping("/count-by-format/{format}")
-public ResponseEntity<Integer> countAlbumsByFormat(@PathVariable ALBUM_FORMAT format) {
-    Integer count = albumService.countAlbumsByFormat(format);
-    return ResponseEntity.ok(count);
-}
-
-@Operation(summary = "Find albums by name", description = "Retrieve a list of albums by a partial name search")
-@GetMapping("/search-by-name/{name}")
-public ResponseEntity<List<AlbumDTO>> findAlbumsByName(@PathVariable String name) {
-    List<AlbumDTO> albums = albumService.findAlbumsByName(name);
-    return ResponseEntity.ok(albums);
-}
-
-}

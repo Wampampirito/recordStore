@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recordstore.dto.WishlistDTO;
 import com.recordstore.service.WishlistService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 /**
  * Controlador que gestiona las operaciones relacionadas con la lista de deseos de un usuario.
  * 
@@ -49,6 +53,11 @@ public class WishlistController {
      * @return La lista de deseos del usuario en formato {@link WishlistDTO}.
      */
     @GetMapping("/{userId}")
+    @Operation(summary = "Get wishlist by user ID", description = "Retrieve the wishlist associated with a user")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Wishlist retrieved successfully"),
+        @ApiResponse(responseCode = "404", description = "Wishlist not found")
+    })
     public ResponseEntity<WishlistDTO> getWishlistByUserId(@PathVariable Integer userId) {
         WishlistDTO wishlistDTO = wishlistService.getWishlistByUserId(userId);
         return ResponseEntity.ok(wishlistDTO);
@@ -65,6 +74,10 @@ public class WishlistController {
      * @return Una respuesta con el código de estado 201 para indicar que el producto fue creado exitosamente en la lista.
      */
     @PostMapping("/{userId}/product/{productId}")
+    @Operation(summary = "Add product to wishlist", description = "Add a product to the user's wishlist")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Product added to wishlist successfully")
+    })
     public ResponseEntity<Void> addProductToWishlist(@PathVariable Integer userId, @PathVariable Integer productId) {
         wishlistService.addProductToWishlist(userId, productId);
         return ResponseEntity.status(HttpStatus.CREATED).build(); // Codigo 201 para indicar que se creo el recurso
@@ -81,6 +94,10 @@ public class WishlistController {
      * @return Una respuesta con el código de estado 204 para indicar que la eliminación fue exitosa.
      */
     @DeleteMapping("/{userId}/product/{productId}")
+    @Operation(summary = "Remove product from wishlist", description = "Remove a product from the user's wishlist")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Product removed from wishlist successfully")
+    })
     public ResponseEntity<Void> removeProductFromWishlist(@PathVariable Double userId, @PathVariable Double productId) {
         wishlistService.removeProductFromWishlist(userId, productId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Codigo 204 para indicar que la eliminacion fue exitosa

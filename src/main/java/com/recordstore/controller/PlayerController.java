@@ -1,6 +1,8 @@
 package com.recordstore.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,7 @@ public class PlayerController {
      */
     @GetMapping ("/all")
     @Operation(summary = "Get all players", description = "Retrieves a list of all players")
+    @ApiResponse(responseCode = "200", description = "List of players retrieved successfully")
     public List<PlayerDTO> getAllPlayers() {
         return playerService.getAllPlayers();
     }
@@ -40,6 +43,10 @@ public class PlayerController {
      */
     @GetMapping("/{id}")
     @Operation(summary = "Get player by id", description = "Retrieves a player by its unique id")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player found"),
+        @ApiResponse(responseCode = "404", description = "Player not found")
+    })
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Integer id) {
         return playerService.getPlayerById(id)
                 .map(ResponseEntity::ok)
@@ -53,7 +60,11 @@ public class PlayerController {
      * @return List of matching players.
      */
     @GetMapping("/model/{model}")
-    @Operation(summary = "Get players by name", description = "Finds players based on their model name")
+    @Operation(summary = "Get players by model", description = "Finds players based on their model name")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player(s) found"),
+        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+    })
     public List<PlayerDTO> getPlayersByName(@PathVariable String model) {
         return playerService.findByName(model);
     }
@@ -66,6 +77,10 @@ public class PlayerController {
      */
     @GetMapping("/bluetooth")
     @Operation(summary = "Get players by Bluetooth capability", description = "Finds players that support Bluetooth connectivity")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player(s) found"),
+        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+    })
     public List<PlayerDTO> getPlayersByBluetooth(@RequestParam Boolean bluetooth) {
         return playerService.findByBluetooth(bluetooth);
     }
@@ -78,6 +93,10 @@ public class PlayerController {
      */
     @GetMapping("/usb")
     @Operation(summary = "Get players by USB support", description = "Finds players that have USB functionality")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player(s) found"),
+        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+    })
     public List<PlayerDTO> getPlayersByUsb(@RequestParam Boolean usb) {
         return playerService.findByUsb(usb);
     }
@@ -90,6 +109,10 @@ public class PlayerController {
      */
     @GetMapping("/radio")
     @Operation(summary = "Get players by radio functionality", description = "Finds players that include a radio feature")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player(s) found"),
+        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+    })
     public List<PlayerDTO> getPlayersByRadio(@RequestParam Boolean radio) {
         return playerService.findByRadio(radio);
     }
@@ -102,6 +125,10 @@ public class PlayerController {
      */
     @GetMapping("/aux")
     @Operation(summary = "Get players by AUX input", description = "Finds players that support AUX input")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Player(s) found"),
+        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+    })
     public List<PlayerDTO> getPlayersByAux(@RequestParam Boolean aux) {
         return playerService.findByAux(aux);
     }
@@ -114,6 +141,10 @@ public class PlayerController {
      */
     @DeleteMapping("delete/{id}")
     @Operation(summary = "Delete player by id", description = "Removes a player from the system using its id")
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "Player deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Player not found")
+    })
     public ResponseEntity<Void> deletePlayer(@PathVariable Integer id) {
         if (playerService.getPlayerById(id).isEmpty()) {
             return ResponseEntity.notFound().build();

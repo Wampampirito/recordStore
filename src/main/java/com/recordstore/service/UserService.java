@@ -44,7 +44,7 @@ public class UserService {
      * @param userId the ID of the user to retrieve
      * @return the {@link UserDTO} of the user
      */
-    public Optional<User> getUserById(Double userId) {
+    public Optional<User> getUserById(Integer userId) {
         return userRepository.findById(userId); // Devuelve un Optional<User>
     }
 
@@ -78,7 +78,7 @@ public class UserService {
      *
      * @param id the ID of the user to delete
      */
-    public void deleteUser(Double id) {
+    public void deleteUser(Integer id) {
         userRepository.deleteById(id);
     }
 
@@ -90,7 +90,7 @@ public class UserService {
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
      */
-    public UserDTO updateUser(Double id, User user) {
+    public UserDTO updateUser(Integer id, User user) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         existingUser.setName(user.getName());
@@ -109,7 +109,7 @@ public class UserService {
      * @throws RuntimeException if the current password is incorrect
      * @throws RuntimeException if the user is not found
      */
-    public void updatePassword(Double id, String oldPassword, String newPassword) {
+    public void updatePassword(Integer id, String oldPassword, String newPassword) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         
@@ -129,7 +129,7 @@ public class UserService {
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
      */
-    public UserDTO updateUserAddress(Double id, String newAddress) {
+    public UserDTO updateUserAddress(Integer id, String newAddress) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setAddress(newAddress);
@@ -144,7 +144,7 @@ public class UserService {
      * @throws RuntimeException if the password does not match
      * @throws RuntimeException if the user is not found
      */
-    public void verifyPassword(Double id, String currentPassword) {
+    public void verifyPassword(Integer id, String currentPassword) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         
@@ -160,7 +160,7 @@ public class UserService {
      * @param newPassword the new password to set
      * @throws RuntimeException if the user is not found
      */
-    public void resetPassword(Double id, String newPassword) {
+    public void resetPassword(Integer id, String newPassword) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setPassword(passwordEncoder.encode(newPassword)); // Encrypt new password
@@ -175,7 +175,7 @@ public class UserService {
      * @return the {@link UserDTO} of the updated user
      * @throws RuntimeException if the user is not found
      */
-    public UserDTO updateUserPhone(Double id, String newPhone) {
+    public UserDTO updateUserPhone(Integer id, String newPhone) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setPhone(newPhone);
