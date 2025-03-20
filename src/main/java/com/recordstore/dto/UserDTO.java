@@ -27,11 +27,9 @@ import lombok.NoArgsConstructor;
  * userDTO.setAddress("123 Main St");
  * userDTO.setPassword("mySecurePassword123");
  * </pre>
- * </p>
  * 
- * <p>
  * The {@link UserDTO} also allows creating a user from an existing {@link User} entity.
- * </p>
+ * 
  * 
  * @see User
  */

@@ -225,7 +225,7 @@ public List<HeadphonesDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
     /**
      * Get headphones of a specific type.
      * 
-     * @param type The type of headphones (e.g., over-ear, in-ear).
+     * @param headphoneType The type of headphones (e.g., over-ear, in-ear).
      * @return A list of headphones of the specified type.
      */
     public List<HeadphonesDTO> getHeadphonesByType(HEADPHONES_TYPE headphoneType) {

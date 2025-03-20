@@ -223,16 +223,15 @@ public class VinylService {
     }
 
     /**
-     * Validates vinyl data before saving or updating.
+     * Validates vinyl release year before saving or updating.
      * 
-     * @param vinyl The vinyl to validate.
+     * @param year The year to validate.
      * @throws IllegalArgumentException If the data is not valid.
      */
     public void validateYear(int year) throws IllegalArgumentException {
         if (year < 1860 || year > java.time.Year.now().getValue()) {
-            throw new IllegalArgumentException("The year must be between 1860 and the current year.");
+            throw new IllegalArgumentException("The year must be between 1860 and the current year.");// Its 1860 because the first sound recording was made in 1860
         }
-        // Additional validation logic can go here (e.g., for price, duration, etc.)
     }
 
     /**

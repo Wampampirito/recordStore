@@ -159,7 +159,7 @@ public class OrderService {
     /**
      * Retrieves an order by its ID.
      *
-     * @param id Order ID.
+     * @param orderId Order ID.
      * @return Order corresponding to the ID, if it exists.
      */
     public Optional<Order> getOrderById(Integer orderId) {

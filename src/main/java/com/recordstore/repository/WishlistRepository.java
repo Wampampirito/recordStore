@@ -32,7 +32,7 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Double> {
     /**
      * Finds a wishlist by its ID.
      *
-     * @param wishlistId the ID of the wishlist to find
+     * @param id the ID of the wishlist to find
      * @return an Optional containing the wishlist if found
      */
     Optional<Wishlist> findById(Integer id);

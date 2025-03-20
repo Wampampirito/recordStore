@@ -41,7 +41,7 @@ public class UserService {
     /**
      * Retrieves a {@link UserDTO} by its ID.
      *
-     * @param id the ID of the user to retrieve
+     * @param userId the ID of the user to retrieve
      * @return the {@link UserDTO} of the user
      */
     public Optional<User> getUserById(Double userId) {
