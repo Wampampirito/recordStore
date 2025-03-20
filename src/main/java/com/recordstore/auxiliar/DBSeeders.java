@@ -129,7 +129,7 @@ import jakarta.annotation.PostConstruct;
  * the repositories have been injected.
  */
 @Component
-public class dbSeeder {
+public class DBSeeders {
     /**
      * Repositories for managing the data of various entities in the system.
      * <p>
@@ -210,7 +210,7 @@ public class dbSeeder {
     private final WishlistService wishlistService;
 
     /**
-     * Constructor for the {@link dbSeeder} class that initializes the various
+     * Constructor for the {@link DBSeeders} class that initializes the various
      * repositories and services required
      * to seed the database with sample data.
      * <p>
@@ -239,7 +239,7 @@ public class dbSeeder {
      * @param orderService         The service for managing orders.
      */
     @Autowired
-    public dbSeeder(
+    public DBSeeders(
             UserRepository userRepository, OrderRepository orderRepository, WishlistService wishlistService,
             WishlistRepository wishlistRepository, AlbumRepository albumRepository,
             VinylRepository vinylRepository, HeadphoneRepository headphonesRepository,

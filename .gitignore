@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+data/recordstoreDB.mv.db
+data/recordstoreDB.trace.db
