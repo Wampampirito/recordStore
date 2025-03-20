@@ -20,7 +20,7 @@ public class VinylMapper {
      * @param vinyl The {@link Vinyl} entity to be converted.
      * @return The {@link VinylDTO} representation of the provided entity.
      */
-    public VinylDTO toVinylDTO(Vinyl vinyl) {
+    public VinylDTO toDTO(Vinyl vinyl) {
         VinylDTO vinylDTO = new VinylDTO();
 
         // Mapping properties from Vinyl entity to VinylDTO

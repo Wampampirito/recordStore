@@ -71,7 +71,7 @@ public class HeadphoneService {
      * @param headphonesDTO The headphone DTO to be created.
      * @return The created headphone DTO.
      */
-    public HeadphonesDTO createHeadphone(HeadphonesDTO headphonesDTO) {
+    public HeadphonesDTO saveHeadphone(HeadphonesDTO headphonesDTO) {
         Headphone headphone = headphoneMapper.toEntity(headphonesDTO);
         Headphone createdHeadphone = headphoneRepository.save(headphone);
         return headphoneMapper.toDTO(createdHeadphone);

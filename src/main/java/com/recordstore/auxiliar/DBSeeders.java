@@ -499,7 +499,7 @@ private void orderSeeder() {
             }
 
             // Create an order with the complete product list
-            orderService.createOrder(user, orderProducts);
+            orderService.saveOrder(user, orderProducts);
         }
     }
 }

@@ -78,7 +78,7 @@ public class HeadphoneController {
     })
     @PostMapping ("/new")
     public ResponseEntity<HeadphonesDTO> createHeadphone(@RequestBody HeadphonesDTO headphonesDTO) {
-        HeadphonesDTO createdHeadphone = headphoneService.createHeadphone(headphonesDTO);
+        HeadphonesDTO createdHeadphone = headphoneService.saveHeadphone(headphonesDTO);
         return new ResponseEntity<>(createdHeadphone, HttpStatus.CREATED);
     }
 
@@ -96,7 +96,7 @@ public class HeadphoneController {
             @ApiResponse(responseCode = "400", description = "Invalid input provided."),
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<HeadphonesDTO> updateHeadphone(@PathVariable Integer id, @RequestBody HeadphonesDTO headphonesDTO) {
         try {
             HeadphonesDTO updatedHeadphone = headphoneService.updateHeadphone(id, headphonesDTO);
@@ -118,7 +118,7 @@ public class HeadphoneController {
             @ApiResponse(responseCode = "404", description = "Headphone not found."),
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteHeadphone(@PathVariable Integer id) {
         try {
             headphoneService.deleteHeadphone(id);

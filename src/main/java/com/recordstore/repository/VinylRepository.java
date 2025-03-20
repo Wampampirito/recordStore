@@ -27,11 +27,11 @@ public interface VinylRepository extends JpaRepository<Vinyl, Double> {
 
     List<Vinyl> findByStockGreaterThan(Integer i);
 
-    Double countByArtist(String artist);
+    Integer countByArtist(String artist);
 
-    Double countByGenre(ALBUM_GENRE genre);
+    Integer countByGenre(ALBUM_GENRE genre);
 
-    Double countByFormat(ALBUM_FORMAT format);
+    Integer countByFormat(ALBUM_FORMAT format);
 
     List<Vinyl> findByNameContainingIgnoreCase(String name);
 

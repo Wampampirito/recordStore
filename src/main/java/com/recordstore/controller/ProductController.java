@@ -71,7 +71,7 @@ public class ProductController {
      *
      * @param id el ID del producto a eliminar.
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteProduct(@PathVariable Double id) {
         productService.deleteProduct(id);
     }

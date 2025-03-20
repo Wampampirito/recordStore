@@ -52,7 +52,7 @@ public class PlayerController {
      * @param model The model name of the player.
      * @return List of matching players.
      */
-    @GetMapping("/name/{model}")
+    @GetMapping("/model/{model}")
     @Operation(summary = "Get players by name", description = "Finds players based on their model name")
     public List<PlayerDTO> getPlayersByName(@PathVariable String model) {
         return playerService.findByName(model);
@@ -112,7 +112,7 @@ public class PlayerController {
      * @param id The id of the player to be deleted.
      * @return 204 No Content if deleted successfully, 404 Not Found if the player does not exist.
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     @Operation(summary = "Delete player by id", description = "Removes a player from the system using its id")
     public ResponseEntity<Void> deletePlayer(@PathVariable Integer id) {
         if (playerService.getPlayerById(id).isEmpty()) {

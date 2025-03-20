@@ -67,7 +67,7 @@ public class SpeakerController {
      */
     @Operation(summary = "Add a new speaker", description = "Create a new speaker in the store.")
     @ApiResponse(responseCode = "201", description = "Speaker created successfully")
-    @PostMapping
+    @PostMapping ("/new")
     public ResponseEntity<SpeakerDTO> addSpeaker(@RequestBody SpeakerDTO speakerDTO) {
         SpeakerDTO addedSpeaker = speakerService.addSpeaker(speakerDTO);
         return new ResponseEntity<>(addedSpeaker, HttpStatus.CREATED);
@@ -85,7 +85,7 @@ public class SpeakerController {
         @ApiResponse(responseCode = "200", description = "Speaker updated successfully"),
         @ApiResponse(responseCode = "404", description = "Speaker not found")
     })
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<SpeakerDTO> updateSpeaker(@PathVariable Integer id, @RequestBody SpeakerDTO speakerDTO) {
         try {
             SpeakerDTO updatedSpeaker = speakerService.updateSpeaker(id, speakerDTO);
@@ -106,7 +106,7 @@ public class SpeakerController {
         @ApiResponse(responseCode = "200", description = "Speaker deleted successfully"),
         @ApiResponse(responseCode = "404", description = "Speaker not found")
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteSpeaker(@PathVariable Integer id) {
         try {
             speakerService.deleteSpeaker(id);

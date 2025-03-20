@@ -49,7 +49,7 @@ public class PlayerService {
      * @param playerDTO The PlayerDTO with the details of the player to be created.
      * @return The created PlayerDTO.
      */
-    public PlayerDTO addPlayer(PlayerDTO playerDTO) {
+    public PlayerDTO savePlayer(PlayerDTO playerDTO) {
         // Convert PlayerDTO to Player entity
         Player player = playerMapper.toEntity(playerDTO);
         // Save the Player entity to the database

@@ -53,7 +53,7 @@ public class OrderService {
      * @return The created order saved in the database.
      */
     @Transactional
-    public Order createOrder(User user, List<OrderProduct> orderProducts) {
+    public Order saveOrder(User user, List<OrderProduct> orderProducts) {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null.");
         }

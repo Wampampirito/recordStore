@@ -65,7 +65,7 @@ public class UserService {
      * @return the {@link UserDTO} of the created user
      * @throws RuntimeException if the email is already registered
      */
-    public UserDTO createUser(User user) {
+    public UserDTO saveUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already registered");
         }

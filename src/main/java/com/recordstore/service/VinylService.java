@@ -3,10 +3,12 @@ package com.recordstore.service;
 import com.recordstore.model.Order;
 import com.recordstore.model.Vinyl;
 import com.recordstore.model.Wishlist;
+import com.recordstore.dto.VinylDTO;
 import com.recordstore.enums.ALBUM_FORMAT;
 import com.recordstore.enums.ALBUM_GENRE;
 import com.recordstore.enums.PRODUCT_CATEGORY;
 import com.recordstore.enums.VINYL_RPM;
+import com.recordstore.mapper.VinylMapper;
 import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.VinylRepository;
 import com.recordstore.repository.WishlistRepository;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service for managing vinyls in the system.
@@ -27,8 +30,10 @@ import java.util.Optional;
 public class VinylService {
 
     private final VinylRepository vinylRepository;
+    private final VinylMapper vinylMapper;
     private final OrderRepository orderRepository;
     private final WishlistRepository wishlistRepository;
+    
 
     /**
      * Constructor for the service that injects the repositorys.
@@ -38,10 +43,11 @@ public class VinylService {
      * @param wishlistRepository The wishlist repository to inject.
      */
     @Autowired
-    public VinylService(VinylRepository vinylRepository, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
+    public VinylService(VinylRepository vinylRepository,VinylMapper vinylMapper, OrderRepository orderRepository, WishlistRepository wishlistRepository) {
             this.vinylRepository = vinylRepository;
             this.orderRepository = orderRepository;
             this.wishlistRepository = wishlistRepository;
+            this.vinylMapper = vinylMapper;
     }
 
     /**
@@ -49,8 +55,11 @@ public class VinylService {
      * 
      * @return List of all vinyls available in the system.
      */
-    public List<Vinyl> getAllVinyls() {
-        return vinylRepository.findAll();
+    public List<VinylDTO> getAllVinyls() {
+                return vinylRepository.findAll()
+                .stream()
+                .map(vinylMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -60,8 +69,8 @@ public class VinylService {
      * @return An {@link java.util.Optional Optional} with the vinyl found, or empty
      *         if not found.
      */
-    public Optional<Vinyl> getVinylById(Double id) {
-        return vinylRepository.findById(id);
+    public Optional<VinylDTO> getVinylById(Double id) {
+        return vinylRepository.findById(id).map(vinylMapper::toDTO);
     }
 
     /**
@@ -70,8 +79,11 @@ public class VinylService {
      * @param artist The name of the artist.
      * @return List of vinyls by the artist.
      */
-    public List<Vinyl> getVinylsByArtist(String artist) {
-        return vinylRepository.findByArtist(artist);
+    public List<VinylDTO> getVinylsByArtist(String artist) {
+        return vinylRepository.findByArtist(artist)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -81,8 +93,11 @@ public class VinylService {
      * @param endYear   The end year.
      * @return List of vinyls released between the specified years.
      */
-    public List<Vinyl> getVinylsByYearRange(int startYear, int endYear) {
-        return vinylRepository.findByYearBetween(startYear, endYear);
+    public List<VinylDTO> getVinylsByYearRange(int startYear, int endYear) {
+        return vinylRepository.findByYearBetween(startYear, endYear)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -91,8 +106,11 @@ public class VinylService {
      * @param genre The genre of the vinyls to search for.
      * @return List of vinyls of the specified genre.
      */
-    public List<Vinyl> getVinylsByGenre(ALBUM_GENRE genre) {
-        return vinylRepository.findByGenre(genre);
+    public List<VinylDTO> getVinylsByGenre(ALBUM_GENRE genre) {
+        return vinylRepository.findByGenre(genre)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -101,8 +119,11 @@ public class VinylService {
      * @param format The format of the vinyls to search for (LP, EP, etc.).
      * @return List of vinyls of the specified format.
      */
-    public List<Vinyl> getVinylsByFormat(ALBUM_FORMAT format) {
-        return vinylRepository.findByFormat(format);
+    public List<VinylDTO> getVinylsByFormat(ALBUM_FORMAT format) {
+        return vinylRepository.findByFormat(format)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -112,8 +133,11 @@ public class VinylService {
      * @param maxPrice The maximum price.
      * @return List of vinyls within the specified price range.
      */
-    public List<Vinyl> getVinylsByPriceRange(Double minPrice, Double maxPrice) {
-        return vinylRepository.findByPriceBetween(minPrice, maxPrice);
+    public List<VinylDTO> getVinylsByPriceRange(Double minPrice, Double maxPrice) {
+        return vinylRepository.findByPriceBetween(minPrice, maxPrice)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -123,8 +147,11 @@ public class VinylService {
      * @param maxDuration The maximum duration (in "mm:ss" format).
      * @return List of vinyls whose duration is within the specified range.
      */
-    public List<Vinyl> getVinylsByDuration(String minDuration, String maxDuration) {
-        return vinylRepository.findByDurationBetween(minDuration, maxDuration);
+    public List<VinylDTO> getVinylsByDuration(String minDuration, String maxDuration) {
+        return vinylRepository.findByDurationBetween(minDuration, maxDuration)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -134,10 +161,10 @@ public class VinylService {
      * @return The saved vinyl with its assigned id.
      * @throws IllegalArgumentException If the vinyl's year or RPM is invalid.
      */
-    public Vinyl saveVinyl(Vinyl vinyl) {
+    public VinylDTO saveVinyl(Vinyl vinyl) {
         validateYear(vinyl.getYear()); // Validate the vinyl's year before saving
         validateRpm(vinyl.getRpm()); // Validate the RPM before saving
-        return vinylRepository.save(vinyl);
+        return vinylMapper.toDTO(vinylRepository.save(vinyl));
     }
 
     /**
@@ -173,7 +200,7 @@ public class VinylService {
      * @throws IllegalArgumentException If the vinyl with the given id is not
      *                                  found.
      */
-    public Vinyl updateVinyl(Double id, Vinyl updatedVinyl) {
+    public VinylDTO updateVinyl(Double id, Vinyl updatedVinyl) {
         Optional<Vinyl> existingVinylOpt = vinylRepository.findById(id);
         if (existingVinylOpt.isPresent()) {
             Vinyl existingVinyl = existingVinylOpt.get();
@@ -216,7 +243,7 @@ public class VinylService {
                 existingVinyl.setRpm(updatedVinyl.getRpm());
             }
 
-            return vinylRepository.save(existingVinyl);
+            return vinylMapper.toDTO(vinylRepository.save(existingVinyl));
         } else {
             throw new IllegalArgumentException("Vinyl with id " + id + " not found.");
         }
@@ -252,8 +279,12 @@ public class VinylService {
      * @param category The product category to filter vinyls by.
      * @return List of vinyls of the specified category.
      */
-    public List<Vinyl> getVinylsByCategory(PRODUCT_CATEGORY category) {
-        return vinylRepository.findByProductCategory(category);
+    public List<VinylDTO> getVinylsByCategory(PRODUCT_CATEGORY category) {
+        return vinylRepository.findByProductCategory(category)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
+        
     }
 
     /**
@@ -261,8 +292,12 @@ public class VinylService {
      * 
      * @return List of vinyls that are in stock.
      */
-    public List<Vinyl> getVinylsInStock() {
-        return vinylRepository.findByStockGreaterThan(0);
+    public List<VinylDTO> getVinylsInStock() {
+        return vinylRepository.findByStockGreaterThan(0)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
+        
     }
 
     /**
@@ -271,7 +306,7 @@ public class VinylService {
      * @param artist The name of the artist.
      * @return The number of vinyls by the artist.
      */
-    public Double countVinylsByArtist(String artist) {
+    public Integer countVinylsByArtist(String artist) {
         return vinylRepository.countByArtist(artist);
     }
 
@@ -281,7 +316,7 @@ public class VinylService {
      * @param genre The genre of the vinyls.
      * @return The number of vinyls of that genre.
      */
-    public Double countVinylsByGenre(ALBUM_GENRE genre) {
+    public Integer countVinylsByGenre(ALBUM_GENRE genre) {
         return vinylRepository.countByGenre(genre);
     }
 
@@ -291,7 +326,7 @@ public class VinylService {
      * @param format The format of the vinyls.
      * @return The number of vinyls of that format.
      */
-    public Double countVinylsByFormat(ALBUM_FORMAT format) {
+    public Integer countVinylsByFormat(ALBUM_FORMAT format) {
         return vinylRepository.countByFormat(format);
     }
 
@@ -301,8 +336,12 @@ public class VinylService {
      * @param name The name of the vinyl (can be partial).
      * @return List of vinyls whose name contains the provided string.
      */
-    public List<Vinyl> findVinylsByName(String name) {
-        return vinylRepository.findByNameContainingIgnoreCase(name);
+    public List<VinylDTO> findVinylsByName(String name) {
+        return vinylRepository.findByNameContainingIgnoreCase(name)
+        .stream()
+        .map(vinylMapper::toDTO)
+        .collect(Collectors.toList());
+        
     }
 
     /**

@@ -64,17 +64,17 @@ public class UserController {
     }
 
     @Operation(summary = "Create a new user", description = "Create a new user in the system.")
-    @PostMapping ("/create")
+    @PostMapping ("/new")
     public ResponseEntity<UserDTO> createUser(
         @Parameter(description = "User data", required = true) @RequestBody UserDTO userDTO) {
         
         User user = userMapper.toEntity(userDTO);
-        User savedUser = userMapper.toEntity(userService.createUser(user));
+        User savedUser = userMapper.toEntity(userService.saveUser(user));
         return ResponseEntity.ok(userMapper.toDTO(savedUser));
     }
 
     @Operation(summary = "Update user details", description = "Update the details of an existing user.")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UserDTO> updateUser(
         @Parameter(description = "User ID", required = true) @PathVariable Double id,
         @Parameter(description = "Updated user data", required = true) @RequestBody UserDTO userDTO) {
@@ -96,7 +96,7 @@ public class UserController {
     }
 
     @Operation(summary = "Delete a user", description = "Delete an existing user from the system.")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteUser(
         @Parameter(description = "User ID", required = true) @PathVariable Double id) {
         

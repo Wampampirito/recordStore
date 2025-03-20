@@ -84,7 +84,7 @@ public class AlbumController {
     }
 
     @Operation(summary = "Create a new album", description = "Add a new album to the system")
-    @PostMapping
+    @PostMapping ("/new")
     public ResponseEntity<AlbumDTO> createAlbum(@RequestBody AlbumDTO albumDTO) {
         Album album = AlbumMapper.toEntity(albumDTO);
         Album savedAlbum = albumService.saveAlbum(album);
@@ -92,14 +92,14 @@ public class AlbumController {
     }
 
     @Operation(summary = "Update an existing album", description = "Modify an album's details using its ID")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<AlbumDTO> updateAlbum(@PathVariable Double id, @RequestBody AlbumDTO albumDTO) {
         Album updatedAlbum = albumService.updateAlbum(id, AlbumMapper.toEntity(albumDTO));
         return ResponseEntity.ok(AlbumMapper.toDTO(updatedAlbum));
     }
 
     @Operation(summary = "Delete an album", description = "Remove an album from the system by its ID")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteAlbum(@PathVariable Integer id) {
         albumService.deleteAlbum(id);
         return ResponseEntity.noContent().build();
@@ -142,22 +142,22 @@ public ResponseEntity<List<AlbumDTO>> getAlbumsByCategory(@PathVariable PRODUCT_
 
 @Operation(summary = "Count albums by artist", description = "Retrieve the number of albums by a specific artist")
 @GetMapping("/count-by-artist/{artist}")
-public ResponseEntity<Double> countAlbumsByArtist(@PathVariable String artist) {
-    Double count = albumService.countAlbumsByArtist(artist);
+public ResponseEntity<Integer> countAlbumsByArtist(@PathVariable String artist) {
+    Integer count = albumService.countAlbumsByArtist(artist);
     return ResponseEntity.ok(count);
 }
 
 @Operation(summary = "Count albums by genre", description = "Retrieve the number of albums by a specific genre")
 @GetMapping("/count-by-genre/{genre}")
-public ResponseEntity<Double> countAlbumsByGenre(@PathVariable ALBUM_GENRE genre) {
-    Double count = albumService.countAlbumsByGenre(genre);
+public ResponseEntity<Integer> countAlbumsByGenre(@PathVariable ALBUM_GENRE genre) {
+    Integer count = albumService.countAlbumsByGenre(genre);
     return ResponseEntity.ok(count);
 }
 
 @Operation(summary = "Count albums by format", description = "Retrieve the number of albums by a specific format")
 @GetMapping("/count-by-format/{format}")
-public ResponseEntity<Double> countAlbumsByFormat(@PathVariable ALBUM_FORMAT format) {
-    Double count = albumService.countAlbumsByFormat(format);
+public ResponseEntity<Integer> countAlbumsByFormat(@PathVariable ALBUM_FORMAT format) {
+    Integer count = albumService.countAlbumsByFormat(format);
     return ResponseEntity.ok(count);
 }
 

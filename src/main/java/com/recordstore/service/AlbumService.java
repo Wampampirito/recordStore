@@ -182,10 +182,10 @@ public class AlbumService {
             if (updatedAlbum.getName() != null && !updatedAlbum.getName().isEmpty()) {
                 existingAlbum.setName(updatedAlbum.getName());
             }
-            if (updatedAlbum.getPrice() > 0) { // Assuming price > 0 means it's provided
+            if (updatedAlbum.getPrice() != null) { 
                 existingAlbum.setPrice(updatedAlbum.getPrice());
             }
-            if (updatedAlbum.getStock() >= 0) { // Assuming stock >= 0 means it's provided
+            if (updatedAlbum.getStock() != null) { 
                 existingAlbum.setStock(updatedAlbum.getStock());
             }
             if (updatedAlbum.getArtist() != null && !updatedAlbum.getArtist().isEmpty()) {
@@ -258,7 +258,7 @@ public class AlbumService {
      * @param artist The name of the artist.
      * @return The number of albums by the artist.
      */
-    public Double countAlbumsByArtist(String artist) {
+    public Integer countAlbumsByArtist(String artist) {
         return albumRepository.countByArtist(artist);
     }
 
@@ -268,7 +268,7 @@ public class AlbumService {
      * @param genre The genre of the albums.
      * @return The number of albums of that genre.
      */
-    public Double countAlbumsByGenre(ALBUM_GENRE genre) {
+    public Integer countAlbumsByGenre(ALBUM_GENRE genre) {
         return albumRepository.countByGenre(genre);
     }
 
@@ -278,7 +278,7 @@ public class AlbumService {
      * @param format The format of the albums.
      * @return The number of albums of that format.
      */
-    public Double countAlbumsByFormat(ALBUM_FORMAT format) {
+    public Integer countAlbumsByFormat(ALBUM_FORMAT format) {
         return albumRepository.countByFormat(format);
     }
 

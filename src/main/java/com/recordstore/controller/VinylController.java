@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/vinyl")
@@ -35,9 +35,7 @@ public class VinylController {
      */
     @GetMapping("/all")
     public ResponseEntity<List<VinylDTO>> getAllVinyls() {
-        List<VinylDTO> vinyls = vinylService.getAllVinyls().stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getAllVinyls();
         return ResponseEntity.ok(vinyls);
     }
 
@@ -49,7 +47,7 @@ public class VinylController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<VinylDTO> getVinylById(@PathVariable Double id) {
-        Optional<VinylDTO> vinylDTO = vinylService.getVinylById(id).map(vinylMapper::toVinylDTO);
+        Optional<VinylDTO> vinylDTO = vinylService.getVinylById(id);
         return vinylDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -61,9 +59,7 @@ public class VinylController {
      */
     @GetMapping("/artist/{artist}")
     public ResponseEntity<List<VinylDTO>> getVinylsByArtist(@PathVariable String artist) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByArtist(artist).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByArtist(artist);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -76,9 +72,7 @@ public class VinylController {
      */
     @GetMapping("/year-range")
     public ResponseEntity<List<VinylDTO>> getVinylsByYearRange(@RequestParam int startYear, @RequestParam int endYear) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByYearRange(startYear, endYear).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByYearRange(startYear, endYear);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -90,9 +84,7 @@ public class VinylController {
      */
     @GetMapping("/genre/{genre}")
     public ResponseEntity<List<VinylDTO>> getVinylsByGenre(@PathVariable ALBUM_GENRE genre) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByGenre(genre).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByGenre(genre);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -104,9 +96,7 @@ public class VinylController {
      */
     @GetMapping("/format/{format}")
     public ResponseEntity<List<VinylDTO>> getVinylsByFormat(@PathVariable ALBUM_FORMAT format) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByFormat(format).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByFormat(format);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -119,9 +109,7 @@ public class VinylController {
      */
     @GetMapping("/price-range")
     public ResponseEntity<List<VinylDTO>> getVinylsByPriceRange(@RequestParam Double minPrice, @RequestParam Double maxPrice) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByPriceRange(minPrice, maxPrice).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByPriceRange(minPrice, maxPrice);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -134,9 +122,7 @@ public class VinylController {
      */
     @GetMapping("/duration-range")
     public ResponseEntity<List<VinylDTO>> getVinylsByDuration(@RequestParam String minDuration, @RequestParam String maxDuration) {
-        List<VinylDTO> vinyls = vinylService.getVinylsByDuration(minDuration, maxDuration).stream()
-                .map(vinylMapper::toVinylDTO)
-                .collect(Collectors.toList());
+        List<VinylDTO> vinyls = vinylService.getVinylsByDuration(minDuration, maxDuration);
         return ResponseEntity.ok(vinyls);
     }
 
@@ -146,10 +132,10 @@ public class VinylController {
      * @param vinylDTO The vinyl data to be saved.
      * @return The saved vinyl in {@link VinylDTO} format.
      */
-    @PostMapping
+    @PostMapping ("/new")
     public ResponseEntity<VinylDTO> saveVinyl(@RequestBody VinylDTO vinylDTO) {
-        Vinyl savedVinyl = vinylService.saveVinyl(vinylMapper.toEntity(vinylDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(vinylMapper.toVinylDTO(savedVinyl));
+        Vinyl savedVinyl = vinylMapper.toEntity(vinylDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(vinylService.saveVinyl(savedVinyl));
     }
 
     /**
@@ -158,7 +144,7 @@ public class VinylController {
      * @param id The ID of the vinyl to delete.
      * @return No content response.
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteVinyl(@PathVariable Integer id) {
         vinylService.deleteVinyl(id);
         return ResponseEntity.noContent().build();
@@ -171,9 +157,8 @@ public class VinylController {
      * @param updatedVinylDTO The updated vinyl data.
      * @return The updated vinyl in {@link VinylDTO} format.
      */
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<VinylDTO> updateVinyl(@PathVariable Double id, @RequestBody VinylDTO updatedVinylDTO) {
-        Vinyl updatedVinyl = vinylService.updateVinyl(id, vinylMapper.toEntity(updatedVinylDTO));
-        return ResponseEntity.ok(vinylMapper.toVinylDTO(updatedVinyl));
+        return ResponseEntity.ok( vinylService.updateVinyl(id, vinylMapper.toEntity(updatedVinylDTO)));
     }
 }

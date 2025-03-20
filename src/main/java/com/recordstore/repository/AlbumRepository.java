@@ -89,7 +89,7 @@ public interface AlbumRepository extends JpaRepository<Album, Double> {
      * @param artist The name of the artist.
      * @return The number of albums by the specified artist.
      */
-    Double countByArtistIgnoreCase(String artist);
+    Integer countByArtistIgnoreCase(String artist);
 
     /**
      * Counts the number of albums by genre.
@@ -97,7 +97,7 @@ public interface AlbumRepository extends JpaRepository<Album, Double> {
      * @param genre The genre of the albums.
      * @return The number of albums of the specified genre.
      */
-    Double countByGenre(ALBUM_GENRE genre);
+    Integer countByGenre(ALBUM_GENRE genre);
 
     /**
      * Counts the number of albums by format.
@@ -105,7 +105,7 @@ public interface AlbumRepository extends JpaRepository<Album, Double> {
      * @param format The format of the albums.
      * @return The number of albums of the specified format.
      */
-    Double countByFormat(ALBUM_FORMAT format);
+    Integer countByFormat(ALBUM_FORMAT format);
 
     /**
      * Finds albums by name, allowing partial search (case-insensitive).
@@ -121,7 +121,7 @@ public interface AlbumRepository extends JpaRepository<Album, Double> {
      * @param artist The name of the artist.
      * @return The number of albums by the specified artist.
      */
-    Double countByArtist(String artist);
+    Integer countByArtist(String artist);
 
     /**
      * Finds all albums by artist, case-sensitive.

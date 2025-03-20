@@ -72,7 +72,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         Order order = orderMapper.toEntity(orderDTO);
-        Order createdOrder = orderService.createOrder(order.getUser(), order.getListOrderProducts());
+        Order createdOrder = orderService.saveOrder(order.getUser(), order.getListOrderProducts());
         return ResponseEntity.ok(orderMapper.toDTO(createdOrder));
     }
     
@@ -88,7 +88,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Delete an order", description = "Deletes an order by ID.")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Integer orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
@@ -122,7 +122,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Update an order", description = "Updates an existing order by ID.")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<OrderDTO> updateOrder(@PathVariable Integer orderId, @RequestBody OrderDTO orderDTO) {
         if (!orderService.getOrderById(orderId).isPresent()) {
             return ResponseEntity.notFound().build();
