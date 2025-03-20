@@ -14,10 +14,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents headphones, a type of audio equipment, in the record store. This class extends {@link AudioEquipment} 
- * and adds attributes specific to headphones, such as the type of headphones and noise cancellation feature.
+ * Represents headphones, a specific type of audio equipment, in the record store. This class extends from 
+ * {@link AudioEquipment} and adds additional attributes that are specific to headphones, such as the type 
+ * of headphones (e.g., over-ear, in-ear) and the noise cancellation feature.
  * 
- * The headphones are categorized under the {@link PRODUCT_CATEGORY.AE_HEADPHONES} product category.
+ * The headphones are categorized under the {@link PRODUCT_CATEGORY#AE_HEADPHONES} product category.
  * 
  * Example usage:
  * <pre>
@@ -38,21 +39,24 @@ import lombok.NoArgsConstructor;
 public class Headphone extends AudioEquipment {
 
     /**
-     * The type of headphones (e.g., over-ear, in-ear, on-ear). Represented by the {@link HEADPHONES_TYPE} enum.
+     * The type of headphones (e.g., over-ear, in-ear, on-ear).
+     * This attribute is represented by the {@link HEADPHONES_TYPE} enum.
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "headphones_type")
     private HEADPHONES_TYPE headphoneType;
 
     /**
-     * The noise cancellation feature of the headphones. Represented by the {@link NOISE_CANCELING} enum.
+     * The noise cancellation feature of the headphones.
+     * This attribute indicates whether the headphones support active noise cancellation (ANC).
+     * It is represented by the {@link NOISE_CANCELING} enum.
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "anc")
     private NOISE_CANCELING anc;
 
     /**
-     * Constructor to create a new Headphone instance with specified details.
+     * Constructor to create a new Headphone instance with the specified details.
      * 
      * @param name The model of the headphones.
      * @param price The price of the headphones.
@@ -66,7 +70,7 @@ public class Headphone extends AudioEquipment {
      * @param bluetooth Indicates if the headphones have Bluetooth connectivity.
      * @param usb Indicates if the headphones have a USB port.
      * @param aux Indicates if the headphones have an AUX input.
-     * @param headphonesType The type of headphones (e.g., over-ear, in-ear).
+     * @param headphoneType The type of headphones (e.g., over-ear, in-ear).
      * @param anc The noise cancellation feature of the headphones.
      */
     public Headphone(String name, Double price, Integer stock, String brand, String color, int batteryLife,

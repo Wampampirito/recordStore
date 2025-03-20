@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
  * Class representing a turntable in the system.
  * <p>
  * This class inherits from {@link Player} and adds specific properties for turntables,
- * such as the presence of built-in preamps, allowed vinyl rotation speeds (RPM), traction type,
+ * such as the presence of a built-in preamplifier, allowed vinyl rotation speeds (RPM), traction type,
  * and the mechanism used to spin the vinyl.
  * </p>
  * <p>
@@ -92,3 +92,4 @@ public class Turntable extends Player {
         this.mechanism = mechanism;
     }
 }
+

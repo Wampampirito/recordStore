@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
  * a one-to-one relationship with the {@link User} entity and a one-to-many relationship with
  * the {@link WishlistProduct} entity, which represents the specific products in the wishlist.
  * 
- * The unique identifier of the wishlist is an auto-incrementable value that serves as the primary key
+ * The unique identifier of the wishlist is an auto-incrementing value that serves as the primary key
  * for the `wishlist` table. The wishlist is associated with a user via the `user_id` relationship field.
  * The products in the wishlist are managed through the {@link WishlistProduct} entity, which is linked
  * to the wishlist through the `wishlist` relationship.
@@ -49,7 +49,7 @@ public class Wishlist {
     /**
      * Unique identifier for the wishlist.
      * <p>
-     * This value is auto-incrementable and serves as the primary key for the `wishlist` table.
+     * This value is auto-incrementing and serves as the primary key for the `wishlist` table.
      * </p>
      */
     @Id

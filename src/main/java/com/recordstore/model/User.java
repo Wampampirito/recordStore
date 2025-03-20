@@ -23,12 +23,12 @@ import lombok.NoArgsConstructor;
 /**
  * Represents a user in the system.
  * <p>
- * This class contains the basic information about a user, including personal details such as name, phone,
+ * This class contains basic information about a user, including personal details such as name, phone,
  * email, password, and address. It also maintains relationships with the user's orders and wishlist.
  * </p>
  * <p>
- * The user can have multiple orders and a single wishlist. Orders are managed in a one-to-many relationship,
- * and the wishlist is in a one-to-one relationship with the user.
+ * A user can have multiple orders and a single wishlist. Orders are managed in a one-to-many relationship,
+ * while the wishlist is in a one-to-one relationship with the user.
  * </p>
  * 
  * @see Order
@@ -89,11 +89,10 @@ public class User {
     /**
      * List of orders placed by the user.
      * <p>
-     * This represents a one-to-many relationship between a user and orders.
+     * This represents a one-to-many relationship between a user and their orders.
      * Orders are automatically removed if orphaned, and changes are cascaded.
      * </p>
      */
-    
     @OneToMany(mappedBy = "user", 
                cascade = CascadeType.ALL, 
                orphanRemoval = true)
@@ -129,4 +128,3 @@ public class User {
         this.address = address;
     }
 }
-

@@ -33,7 +33,7 @@ public class WishlistProduct {
     /**
      * Unique identifier for the wishlist product entry.
      * <p>
-     * This value is auto-incrementable and serves as the primary key for the `wishlist_product` table.
+     * This value is auto-incrementing and serves as the primary key for the `wishlist_product` table.
      * </p>
      */
     @Id
@@ -61,4 +61,3 @@ public class WishlistProduct {
     private Product product;
 
 }
-

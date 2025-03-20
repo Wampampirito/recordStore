@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents the intermediary entity that stores the quantity of each product in an order.
- * This class is used to link a specific product to an order, along with the quantity of the product.
+ * This class links a specific product to an order, along with the quantity of the product.
  * 
  * This class creates a many-to-one relationship with both the {@link Order} and {@link Product} entities,
  * allowing the tracking of multiple products within a single order, and the quantity of each product in the order.
- * 
  * 
  * @see Order
  * @see Product

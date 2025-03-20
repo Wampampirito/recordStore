@@ -10,14 +10,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents audio equipment products in the record store. This class is an abstract base class for different types of 
- * audio equipment, such as headphones, speakers, etc., and contains attributes common to all audio equipment.
+ * Represents a general audio equipment product in the record store. This class serves as an abstract base 
+ * for different types of audio equipment, such as headphones, speakers, etc. It contains attributes that are 
+ * common to all audio equipment, such as brand, color, battery life, warranty, and connectivity options.
  * 
- * This class extends the {@link Product} class, inheriting its properties such as model, price, and stock. In addition, 
- * it has specific attributes like brand, color, battery life, warranty, microphone availability, and connectivity options 
- * such as wireless, Bluetooth, USB, and AUX.
+ * This class extends from {@link Product}, inheriting its properties like model, price, and stock, and adds specific 
+ * attributes that define various features of audio equipment, such as microphone availability, wireless connectivity, 
+ * Bluetooth, USB, and AUX support. It serves as a foundation for more specific audio equipment classes.
  * 
- * The audio equipment is categorized under the {@link com.recordstore.enums.PRODUCT_CATEGORY#AUDIO_EQUIPMENT} product category.
+ * The audio equipment products are categorized under the {@link com.recordstore.enums.PRODUCT_CATEGORY#AUDIO_EQUIPMENT} 
+ * category.
  * 
  * Example usage:
  * <pre>
@@ -26,70 +28,81 @@ import lombok.NoArgsConstructor;
  * 
  * @see Product
  * @see PRODUCT_CATEGORY
+ * @see com.recordstore.model.Headphone
+ * @see com.recordstore.model.Speaker
  */
 @Entity
 @Table(name = "audio_equipment")
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public abstract class AudioEquipment extends Product {
 
     /**
      * The brand of the audio equipment.
+     * This field specifies the manufacturer or brand name of the audio equipment.
      */
     @Column(name = "brand")
     private String brand;
 
     /**
      * The color of the audio equipment.
+     * This field specifies the color of the audio equipment, which can be used for filtering or display purposes.
      */
     @Column(name = "color")
     private String color;
 
     /**
      * The battery life of the audio equipment in hours.
+     * This field specifies the duration (in hours) that the audio equipment can function on a full charge.
      */
     @Column(name = "battery_life")
     private Integer batteryLife;
 
     /**
      * The warranty period for the audio equipment in months.
+     * This field specifies the warranty period offered for the audio equipment, in months.
      */
     @Column(name = "warranty")
     private Integer warranty;
 
     /**
      * Indicates whether the audio equipment has a built-in microphone.
+     * This field is true if the equipment includes a microphone, and false otherwise.
      */
     @Column(name = "microphone_built_in")
     private Boolean microphoneBuiltIn;
 
     /**
      * Indicates whether the audio equipment is wireless.
+     * This field is true if the equipment operates without the need for a physical connection (e.g., Bluetooth), and false otherwise.
      */
     @Column(name = "wireless")
-    private Boolean  wireless;
+    private Boolean wireless;
 
     /**
      * Indicates whether the audio equipment has Bluetooth connectivity.
+     * This field is true if the equipment supports Bluetooth connectivity, and false otherwise.
      */
     @Column(name = "bluetooth")
     private Boolean bluetooth;
 
     /**
      * Indicates whether the audio equipment has a USB port.
+     * This field is true if the equipment is equipped with a USB port for connectivity, and false otherwise.
      */
     @Column(name = "usb")
     private Boolean usb;
 
     /**
      * Indicates whether the audio equipment has an AUX input.
+     * This field is true if the equipment supports an AUX input for wired connections, and false otherwise.
      */
     @Column(name = "aux")
     private Boolean aux;
 
     /**
-     * Constructor to create a new AudioEquipment instance with specified details.
+     * Constructs a new AudioEquipment instance with the specified details.
      * 
      * @param model The model of the audio equipment.
      * @param price The price of the audio equipment.
@@ -105,7 +118,7 @@ public abstract class AudioEquipment extends Product {
      * @param aux Indicates if the audio equipment has an AUX input.
      */
     public AudioEquipment(String model, Double price, Integer stock, String brand, String color, Integer batteryLife,
-    Integer warranty, Boolean microphoneBuiltIn, Boolean wireless, Boolean bluetooth, Boolean usb, Boolean aux) {
+                          Integer warranty, Boolean microphoneBuiltIn, Boolean wireless, Boolean bluetooth, Boolean usb, Boolean aux) {
         super(model, price, stock);
         super.setProductCategory(PRODUCT_CATEGORY.AUDIO_EQUIPMENT);
         this.brand = brand;

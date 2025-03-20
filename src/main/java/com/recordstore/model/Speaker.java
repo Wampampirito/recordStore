@@ -14,15 +14,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase que representa un altavoz (Speaker) en el sistema.
+ * Class representing a speaker in the system.
  * <p>
- * Esta clase hereda de {@link AudioEquipment} y agrega propiedades específicas para los altavoces,
- * como la radio, potencia, impedancia, frecuencia mínima y máxima, peso, tipo de alimentación y resistencia.
+ * This class inherits from {@link AudioEquipment} and adds specific properties for speakers,
+ * such as radio, power, impedance, minimum and maximum frequency, weight, power type, and resistance.
  * </p>
  * <p>
- * Un altavoz puede ser inalámbrico, tener un micrófono incorporado y ser compatible con tecnologías como
- * Bluetooth y USB. Además, su potencia se mide en vatios y tiene características específicas relacionadas con la 
- * calidad de sonido y su resistencia.
+ * A speaker can be wireless, have a built-in microphone, and be compatible with technologies such as
+ * Bluetooth and USB. Additionally, its power is measured in watts and it has specific characteristics related to 
+ * sound quality and resistance.
  * </p>
  *
  * @see AudioEquipment
@@ -35,78 +35,78 @@ import lombok.NoArgsConstructor;
 public class Speaker extends AudioEquipment {
 
     /**
-     * Indica si el altavoz tiene radio incorporado.
+     * Indicates if the speaker has a built-in radio.
      */
     @Column(name = "radio")
     private Boolean radio;
 
     /**
-     * Potencia del altavoz en vatios (W).
+     * Power of the speaker in watts (W).
      */
     @Column(name = "power")
     private Integer power;
 
     /**
-     * Impedancia del altavoz en ohmios (Ω).
+     * Impedance of the speaker in ohms (Ω).
      */
     @Column(name = "impedance")
     private Integer impedance;
 
     /**
-     * Frecuencia mínima del altavoz en hercios (Hz).
+     * Minimum frequency of the speaker in hertz (Hz).
      */
     @Column(name = "min_freq")
     private Integer minFrequency;
 
     /**
-     * Frecuencia máxima del altavoz en hercios (Hz).
+     * Maximum frequency of the speaker in hertz (Hz).
      */
     @Column(name = "max_freq")
     private Integer maxFrequency;
 
     /**
-     * Peso del altavoz en gramos (g).
+     * Weight of the speaker in grams (g).
      */
     @Column(name = "weight")
     private Integer weight;
 
     /**
-     * Tipo de alimentación del altavoz (por ejemplo, batería, corriente alterna).
+     * Power source type of the speaker (e.g., battery, AC).
      */
     @Column(name = "power_type")
     @Enumerated(EnumType.STRING)
     private POWER_TYPE powerType;
 
     /**
-     * Resistencia del altavoz (por ejemplo, resistencia al agua, polvo o golpes).
+     * Resistance of the speaker (e.g., resistance to water, dust, or impacts).
      */
     @Column(name = "resistance")
     @Enumerated(EnumType.STRING)
     private RESISTANCE resistance;
 
     /**
-     * Constructor parametrizado para inicializar un altavoz con sus atributos.
+     * Constructor to initialize a speaker with its attributes.
      *
-     * @param model           El modelo del altavoz.
-     * @param price           El precio del altavoz.
-     * @param stock           La cantidad disponible en stock.
-     * @param brand           La marca del altavoz.
-     * @param color           El color del altavoz.
-     * @param batteryLife     La duración de la batería en horas.
-     * @param warranty        La garantía del altavoz en meses.
-     * @param microphoneBuiltIn Indica si el altavoz tiene micrófono incorporado.
-     * @param wireless        Indica si el altavoz es inalámbrico.
-     * @param bluetooth       Indica si el altavoz tiene Bluetooth.
-     * @param usb             Indica si el altavoz tiene puerto USB.
-     * @param aux             Indica si el altavoz tiene entrada auxiliar (Aux).
-     * @param radio           Indica si el altavoz tiene radio incorporado.
-     * @param power           La potencia del altavoz en vatios (W).
-     * @param impedance       La impedancia del altavoz en ohmios (Ω).
-     * @param minFrequency    La frecuencia mínima del altavoz en hercios (Hz).
-     * @param maxFrequency    La frecuencia máxima del altavoz en hercios (Hz).
-     * @param weight          El peso del altavoz en gramos (g).
-     * @param powerType       El tipo de alimentación del altavoz.
-     * @param resistance      La resistencia del altavoz.
+     * @param model           The model of the speaker.
+     * @param price           The price of the speaker.
+     * @param stock           The available stock of the speaker.
+     * @param brand           The brand of the speaker.
+     * @param color           The color of the speaker.
+     * @param batteryLife     The battery life of the speaker in hours.
+     * @param warranty        The warranty period of the speaker in months.
+     * @param microphoneBuiltIn Indicates if the speaker has a built-in microphone.
+     * @param wireless        Indicates if the speaker is wireless.
+     * @param bluetooth       Indicates if the speaker has Bluetooth.
+     * @param usb             Indicates if the speaker has a USB port.
+     * @param aux             Indicates if the speaker has an aux port.
+     * @param radio           Indicates if the speaker has a built-in radio.
+     * @param power           The power of the speaker in watts (W).
+     * @param impedance       The impedance of the speaker in ohms (Ω).
+     * @param minFrequency    The minimum frequency of the speaker in hertz (Hz).
+     * @param maxFrequency    The maximum frequency of the speaker in hertz (Hz).
+     * @param weight          The weight of the speaker in grams (g).
+     * @param powerType       The power type of the speaker.
+     * @param resistance      The resistance of the speaker.
      */
     public Speaker(String model, Double price, Integer stock, String brand, String color, Integer batteryLife,
                    Integer warranty, Boolean microphoneBuiltIn, Boolean wireless, Boolean bluetooth, Boolean usb,

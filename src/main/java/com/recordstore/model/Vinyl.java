@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * Represents a vinyl record in the record store. A vinyl is a type of album that has additional specific attributes
- * like size, RPM (revolutions per minute), and color, which are unique to vinyl records.
+ * such as size, RPM (revolutions per minute), and color, which are unique to vinyl records.
  * 
- * This class extends the {@link Album} class, so it inherits the properties of an album such as the name, price, stock,
- * artist, release year, format, genre, and duration. In addition to these inherited properties, a vinyl also has specific
- * fields such as size, RPM, and color.
+ * This class extends the {@link Album} class, inheriting properties like name, price, stock, artist, release year, 
+ * format, genre, and duration. In addition to these inherited properties, a vinyl also has specific fields like size, 
+ * RPM, and color.
  * 
- * The size of the vinyl is represented using the {@link VINYL_SIZE} enum, the RPM using the {@link VINYL_RPM} enum,
+ * The size of the vinyl is represented using the {@link VINYL_SIZE} enum, the RPM is defined by the {@link VINYL_RPM} enum,
  * and the color is represented as a string.
  * 
  * Example usage:
