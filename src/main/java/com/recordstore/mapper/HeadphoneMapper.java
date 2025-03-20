@@ -5,11 +5,27 @@ import org.springframework.stereotype.Component;
 import com.recordstore.dto.HeadphonesDTO;
 import com.recordstore.model.Headphone;
 
+/**
+ * Mapper class responsible for converting {@link Headphone} entities to {@link HeadphonesDTO} and vice versa.
+ * This class handles the mapping of properties between the entity and the DTO, allowing smooth data transfer
+ * between the persistence layer (entity) and the presentation layer (DTO).
+ */
 @Component
 public class HeadphoneMapper {
 
+    /**
+     * Converts a {@link Headphone} entity to a {@link HeadphonesDTO}.
+     *
+     * @param headphone The {@link Headphone} entity to be converted.
+     * @return The {@link HeadphonesDTO} representation of the provided entity, or {@code null} if the input is {@code null}.
+     */
     public HeadphonesDTO toDTO (Headphone headphone) {
+        if (headphone == null) {
+            return null;
+        }
+        
         HeadphonesDTO headphonesDTO = new HeadphonesDTO();
+        // Mapping properties from Headphone entity to HeadphonesDTO
         headphonesDTO.setBrand(headphone.getBrand());
         headphonesDTO.setName(headphone.getName());
         headphonesDTO.setPrice(headphone.getPrice());
@@ -24,11 +40,23 @@ public class HeadphoneMapper {
         headphonesDTO.setAnc(headphone.getAnc());
         headphonesDTO.setStock(headphone.getStock());
         headphonesDTO.setId(headphone.getId());
+        
         return headphonesDTO;
     }
 
+    /**
+     * Converts a {@link HeadphonesDTO} to a {@link Headphone} entity.
+     *
+     * @param headphonesDTO The {@link HeadphonesDTO} to be converted.
+     * @return The {@link Headphone} entity representation of the provided DTO, or {@code null} if the input is {@code null}.
+     */
     public Headphone toEntity(HeadphonesDTO headphonesDTO) {
+        if (headphonesDTO == null) {
+            return null;
+        }
+        
         Headphone headphone = new Headphone();
+        // Mapping properties from HeadphonesDTO to Headphone entity
         headphone.setBrand(headphonesDTO.getBrand());
         headphone.setName(headphonesDTO.getName());
         headphone.setPrice(headphonesDTO.getPrice());
@@ -43,6 +71,7 @@ public class HeadphoneMapper {
         headphone.setAnc(headphonesDTO.getAnc());
         headphone.setStock(headphonesDTO.getStock());
         headphone.setId(headphonesDTO.getId());
+        
         return headphone;
     }
 }

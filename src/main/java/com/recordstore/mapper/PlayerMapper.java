@@ -5,16 +5,34 @@ import com.recordstore.dto.PlayerDTO;
 import org.springframework.stereotype.Component;
 
 /**
- * Mapper class to convert between Player entity and PlayerDTO.
+ * Mapper class responsible for converting between {@link com.recordstore.model.Player} entity and 
+ * {@link com.recordstore.dto.PlayerDTO}.
+ * <p>This class provides methods to convert a {@link com.recordstore.model.Player} entity to 
+ * a {@link com.recordstore.dto.PlayerDTO} and vice versa.</p>
+ * 
+ * <p>Main methods:</p>
+ * <ul>
+ *   <li><b>toDTO</b>: Converts a {@link com.recordstore.model.Player} entity into a {@link com.recordstore.dto.PlayerDTO} object.</li>
+ *   <li><b>toEntity</b>: Converts a {@link com.recordstore.dto.PlayerDTO} object into a {@link com.recordstore.model.Player} entity.</li>
+ * </ul>
+ * 
+ * <p>Usage example:</p>
+ * <pre>
+ * // Convert a Player entity to a PlayerDTO
+ * PlayerDTO playerDTO = playerMapper.toDTO(player);
+ * 
+ * // Convert a PlayerDTO to a Player entity
+ * Player playerEntity = playerMapper.toEntity(playerDTO);
+ * </pre>
  */
 @Component
 public class PlayerMapper {
 
     /**
-     * Converts a Player entity to a PlayerDTO.
+     * Converts a {@link com.recordstore.model.Player} entity to a {@link com.recordstore.dto.PlayerDTO}.
      * 
-     * @param player The Player entity to be converted.
-     * @return The PlayerDTO corresponding to the Player entity.
+     * @param player The {@link com.recordstore.model.Player} entity to be converted.
+     * @return The corresponding {@link com.recordstore.dto.PlayerDTO} object.
      */
     public PlayerDTO toDTO(Player player) {
         if (player == null) {
@@ -39,10 +57,10 @@ public class PlayerMapper {
     }
 
     /**
-     * Converts a PlayerDTO to a Player entity.
+     * Converts a {@link com.recordstore.dto.PlayerDTO} object to a {@link com.recordstore.model.Player} entity.
      * 
-     * @param playerDTO The PlayerDTO to be converted.
-     * @return The Player entity corresponding to the PlayerDTO.
+     * @param playerDTO The {@link com.recordstore.dto.PlayerDTO} to be converted.
+     * @return The corresponding {@link com.recordstore.model.Player} entity.
      */
     public Player toEntity(PlayerDTO playerDTO) {
         if (playerDTO == null) {
@@ -66,4 +84,3 @@ public class PlayerMapper {
         return player;
     }
 }
-

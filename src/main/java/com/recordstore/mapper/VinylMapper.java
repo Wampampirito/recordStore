@@ -17,6 +17,9 @@ public class VinylMapper {
     /**
      * Converts a {@link Vinyl} entity to a {@link VinylDTO}.
      *
+     * This method takes a {@link Vinyl} entity and converts it into a {@link VinylDTO},
+     * mapping all the relevant fields such as name, price, stock, and specific properties like size, rpm, and color.
+     * 
      * @param vinyl The {@link Vinyl} entity to be converted.
      * @return The {@link VinylDTO} representation of the provided entity.
      */
@@ -48,6 +51,9 @@ public class VinylMapper {
     /**
      * Converts a {@link VinylDTO} to a {@link Vinyl} entity.
      *
+     * This method takes a {@link VinylDTO} object and converts it into a {@link Vinyl} entity,
+     * mapping all relevant fields from the DTO back into the entity.
+     * 
      * @param vinylDTO The {@link VinylDTO} to be converted.
      * @return The {@link Vinyl} entity representation of the provided DTO.
      */

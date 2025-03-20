@@ -9,13 +9,29 @@ import com.recordstore.model.Turntable;
 /**
  * Mapper class for converting between {@link Turntable} entities and {@link TurntableDTO} objects.
  * <p>
- * This class is responsible for mapping the fields between the entity and the DTO,
+ * This class is responsible for mapping fields between the entity and the DTO,
  * ensuring proper data transformation when handling turntable-related operations.
  * </p>
  * <p>
- * It inherits fields from the {@link com.recordstore.model.Product} and {@link com.recordstore.model.Player} classes and also 
+ * It inherits fields from the {@link com.recordstore.model.Product} and {@link com.recordstore.model.Player} classes, and also 
  * includes specific attributes related to turntables.
  * </p>
+ * <p>
+ * Main methods:
+ * </p>
+ * <ul>
+ *   <li><b>toDTO</b>: Converts a {@link Turntable} entity into a {@link TurntableDTO} object.</li>
+ *   <li><b>toEntity</b>: Converts a {@link TurntableDTO} object into a {@link Turntable} entity.</li>
+ * </ul>
+ * 
+ * <p>Usage example:</p>
+ * <pre>
+ * // Convert a Turntable entity to a TurntableDTO
+ * TurntableDTO turntableDTO = turntableMapper.toDTO(turntable);
+ * 
+ * // Convert a TurntableDTO to a Turntable entity
+ * Turntable turntableEntity = turntableMapper.toEntity(turntableDTO);
+ * </pre>
  */
 @Component
 public class TurntableMapper {
@@ -23,8 +39,8 @@ public class TurntableMapper {
     /**
      * Converts a {@link Turntable} entity to a {@link TurntableDTO}.
      *
-     * @param turntable The turntable entity to convert.
-     * @return The corresponding DTO representation.
+     * @param turntable The {@link Turntable} entity to be converted.
+     * @return The corresponding {@link TurntableDTO} object.
      */
     public TurntableDTO toDTO(Turntable turntable) {
         TurntableDTO dto = new TurntableDTO();
@@ -59,8 +75,8 @@ public class TurntableMapper {
     /**
      * Converts a {@link TurntableDTO} to a {@link Turntable} entity.
      *
-     * @param dto The DTO to convert.
-     * @return The corresponding turntable entity.
+     * @param dto The {@link TurntableDTO} to be converted.
+     * @return The corresponding {@link Turntable} entity.
      */
     public Turntable toEntity(TurntableDTO dto) {
         Turntable turntable = new Turntable();

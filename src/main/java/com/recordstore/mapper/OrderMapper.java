@@ -7,54 +7,50 @@ import org.springframework.stereotype.Component;
 
 import com.recordstore.dto.OrderDTO;
 import com.recordstore.model.Order;
+
 /**
- * Componente que se encarga de mapear entre las entidades {@link com.recordstore.model.Order} y los objetos DTO {@link com.recordstore.dto.OrderDTO}.
- * Esta clase proporciona metodos para convertir una orden de tipo {@link com.recordstore.model.Order} a un {@link com.recordstore.dto.OrderDTO} y viceversa.
- * Ademas, ofrece un metodo para convertir una lista de ordenes a una lista de DTOs.
+ * Component responsible for mapping between {@link com.recordstore.model.Order} entities and 
+ * {@link com.recordstore.dto.OrderDTO} objects.
+ * This class provides methods to convert an {@link com.recordstore.model.Order} entity to an 
+ * {@link com.recordstore.dto.OrderDTO} and vice versa. Additionally, it offers a method to convert 
+ * a list of orders into a list of DTOs.
  * 
- * <p>Los metodos principales son:</p>
+ * <p>Main methods include:</p>
  * <ul>
- *   <li><b>toDTO</b>: Convierte una entidad {@link com.recordstore.model.Order} en un objeto {@link com.recordstore.dto.OrderDTO}.</li>
- *   <li><b>toEntity</b>: Convierte un objeto {@link com.recordstore.dto.OrderDTO} en una entidad {@link com.recordstore.model.Order}.</li>
- *   <li><b>toDTOList</b>: Convierte una lista de entidades {@link com.recordstore.model.Order} en una lista de objetos {@link com.recordstore.dto.OrderDTO}.</li>
+ *   <li><b>toDTO</b>: Converts an {@link com.recordstore.model.Order} entity to an {@link com.recordstore.dto.OrderDTO} object.</li>
+ *   <li><b>toEntity</b>: Converts an {@link com.recordstore.dto.OrderDTO} object to an {@link com.recordstore.model.Order} entity.</li>
+ *   <li><b>toDTOList</b>: Converts a list of {@link com.recordstore.model.Order} entities into a list of {@link com.recordstore.dto.OrderDTO} objects.</li>
  * </ul>
  * 
- * <p>Ejemplo de uso:</p>
+ * <p>Usage example:</p>
  * <pre>
- * / Convertir una orden a DTO
+ * // Convert an order to DTO
  * OrderDTO orderDTO = orderMapper.toDTO(order);
  * 
- * /Convertir un DTO a entidad
+ * // Convert a DTO to entity
  * Order orderEntity = orderMapper.toEntity(orderDTO);
  * </pre>
  */
-
 @Component
 public class OrderMapper {
     
     private final UserMapper userMapper;
     
     /**
-     * Constructor para inyectar el userMapper
+     * Constructor to inject the userMapper.
      * 
-     * @param userMapper El mapeador de usuarios que convierte entre {@link com.recordstore.dto.UserDTO} y {@link com.recordstore.model.User}.
+     * @param userMapper The user mapper that converts between {@link com.recordstore.dto.UserDTO} and {@link com.recordstore.model.User}.
      */
     public OrderMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
     /**
-     * Convierte una entidad {@link com.recordstore.order.Order} en un objeto {@link com.recordstore.order.OrderDTO}.
-     * @param order La entidad {@link com.recordstore.order.Order} a convertir.
-     * @return  El objeto {@link com.recordstore.order.OrderDTO} resultante.
+     * Converts an {@link com.recordstore.model.Order} entity to an {@link com.recordstore.dto.OrderDTO}.
+     * 
+     * @param order The {@link com.recordstore.model.Order} entity to be converted.
+     * @return The resulting {@link com.recordstore.dto.OrderDTO} object.
      */
-
-     /**
-      * Convierte una entidad {@link com.recordstore.model.Order} en un objeto {@link com.recordstore.dto.OrderDTO}.
-      * @param order La entidad {@link com.recordstore.model.Order} a convertir.
-      * @return El objeto {@link com.recordstore.dto.OrderDTO} resultante.
-      */
-    
     public OrderDTO toDTO(Order order) {
         if (order == null) {
             return null;
@@ -72,10 +68,11 @@ public class OrderMapper {
     }
 
     /**
-     * Convierte un objeto {@link com.recordstore.dto.OrderDTO} en una entidad {@link com.recordstore.model.Order}.
-     * @param dto El objeto {@link com.recordstore.dto.OrderDTO} a convertir.
-     * @return La entidad {@link com.recordstore.model.Order} resultante.
-     */    
+     * Converts an {@link com.recordstore.dto.OrderDTO} object to an {@link com.recordstore.model.Order} entity.
+     * 
+     * @param dto The {@link com.recordstore.dto.OrderDTO} object to be converted.
+     * @return The resulting {@link com.recordstore.model.Order} entity.
+     */
     public Order toEntity(OrderDTO dto) {
         if (dto == null) {
             return null;
@@ -92,10 +89,10 @@ public class OrderMapper {
     }
 
     /**
-     * Convierte una lista de entidades {@link com.recordstore.model.Order} en una lista de objetos {@link com.recordstore.dto.OrderDTO}.
+     * Converts a list of {@link com.recordstore.model.Order} entities to a list of {@link com.recordstore.dto.OrderDTO} objects.
      * 
-     * @param orders La lista de entidades {@link com.recordstore.model.Order} a convertir.
-     * @return La lista de objetos {@link com.recordstore.dto.OrderDTO} resultante.
+     * @param orders The list of {@link com.recordstore.model.Order} entities to be converted.
+     * @return The resulting list of {@link com.recordstore.dto.OrderDTO} objects.
      */
     public List<OrderDTO> toDTOList(List<Order> orders) {
         return orders.stream().map(this::toDTO).collect(Collectors.toList());

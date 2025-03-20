@@ -7,9 +7,12 @@ import com.recordstore.model.Album;
 import com.recordstore.enums.PRODUCT_CATEGORY;
 
 /**
- * Mapper class for converting {@link Album} entities to {@link AlbumDTO} and vice versa.
- * This class is responsible for mapping the properties from the entity to the DTO and
- * from the DTO back to the entity.
+ * Mapper class responsible for converting {@link Album} entities to {@link AlbumDTO} and vice versa.
+ * This class is in charge of mapping the properties from the entity to the DTO and from the DTO back to the entity.
+ * <p>
+ * This class facilitates data transfer between the persistence layer (entity) and the presentation layer (DTO),
+ * ensuring that the necessary data is transformed into a format suitable for the UI or external API consumption.
+ * </p>
  */
 @Component
 public class AlbumMapper {
@@ -35,7 +38,7 @@ public class AlbumMapper {
         albumDTO.setFormat(album.getFormat());
         albumDTO.setGenre(album.getGenre());
         albumDTO.setDuration(album.getDuration());
-        albumDTO.setProductCategory(PRODUCT_CATEGORY.ALBUM);
+        albumDTO.setProductCategory(PRODUCT_CATEGORY.ALBUM); // Setting a static category for this entity
         albumDTO.setId(album.getId());
         
         return albumDTO;

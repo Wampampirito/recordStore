@@ -5,16 +5,34 @@ import com.recordstore.dto.SpeakerDTO;
 import org.springframework.stereotype.Component;
 
 /**
- * Mapper class that converts between Speaker entity and SpeakerDTO.
+ * Mapper class responsible for converting between {@link com.recordstore.model.Speaker} entity and 
+ * {@link com.recordstore.dto.SpeakerDTO}.
+ * <p>This class provides methods to convert a {@link com.recordstore.model.Speaker} entity to 
+ * a {@link com.recordstore.dto.SpeakerDTO} and vice versa.</p>
+ * 
+ * <p>Main methods:</p>
+ * <ul>
+ *   <li><b>toDTO</b>: Converts a {@link com.recordstore.model.Speaker} entity into a {@link com.recordstore.dto.SpeakerDTO} object.</li>
+ *   <li><b>toEntity</b>: Converts a {@link com.recordstore.dto.SpeakerDTO} object into a {@link com.recordstore.model.Speaker} entity.</li>
+ * </ul>
+ * 
+ * <p>Usage example:</p>
+ * <pre>
+ * // Convert a Speaker entity to a SpeakerDTO
+ * SpeakerDTO speakerDTO = speakerMapper.toDTO(speaker);
+ * 
+ * // Convert a SpeakerDTO to a Speaker entity
+ * Speaker speakerEntity = speakerMapper.toEntity(speakerDTO);
+ * </pre>
  */
 @Component
 public class SpeakerMapper {
 
     /**
-     * Converts a Speaker entity to a SpeakerDTO.
+     * Converts a {@link com.recordstore.model.Speaker} entity to a {@link com.recordstore.dto.SpeakerDTO}.
      *
-     * @param speaker the Speaker entity to convert.
-     * @return the corresponding SpeakerDTO.
+     * @param speaker The {@link com.recordstore.model.Speaker} entity to be converted.
+     * @return The corresponding {@link com.recordstore.dto.SpeakerDTO} object.
      */
     public SpeakerDTO toDTO(Speaker speaker) {
         SpeakerDTO speakerDTO = new SpeakerDTO();
@@ -29,7 +47,7 @@ public class SpeakerMapper {
         speakerDTO.setWeight(speaker.getWeight());
         speakerDTO.setPowerType(speaker.getPowerType());
         speakerDTO.setResistance(speaker.getResistance());
-        
+
         // Set AudioEquipment properties
         speakerDTO.setColor(speaker.getColor());
         speakerDTO.setBatteryLife(speaker.getBatteryLife());
@@ -44,10 +62,10 @@ public class SpeakerMapper {
     }
 
     /**
-     * Converts a SpeakerDTO to a Speaker entity.
+     * Converts a {@link com.recordstore.dto.SpeakerDTO} object to a {@link com.recordstore.model.Speaker} entity.
      *
-     * @param speakerDTO the SpeakerDTO to convert.
-     * @return the corresponding Speaker entity.
+     * @param speakerDTO The {@link com.recordstore.dto.SpeakerDTO} to be converted.
+     * @return The corresponding {@link com.recordstore.model.Speaker} entity.
      */
     public Speaker toEntity(SpeakerDTO speakerDTO) {
         Speaker speaker = new Speaker();
