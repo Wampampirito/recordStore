@@ -1,50 +1,47 @@
 package com.recordstore.enums;
 
 /**
- * Enum que representa diferentes tipos de resistencias.
- * Este enum puede ser utilizado en las clases {@link com.recordstore.model.Portable} y {@link com.recordstore.model.Speaker}
- * para clasificar el tipo de resistencia que poseen.
+ * Enum that represents different types of resistance.
+ * This enum can be used in the classes {@link com.recordstore.model.Portable} and {@link com.recordstore.model.Speaker}
+ * to classify the type of resistance they possess.
  * 
- * Los tipos de resistencia disponibles incluyen:
+ * Available resistance types include:
  * <ul>
- *   <li>WATER - Resistencia al agua</li>
- *   <li>SHOCK - Resistencia a golpes</li>
- *   <li>DUST - Resistencia al polvo</li>
- *   <li>WS - Resistencia al agua y golpes</li>
- *   <li>WD - Resistencia al agua y polvo</li>
- *   <li>SD - Resistencia a golpes y polvo</li>
- *   <li>WSD - Resistencia al agua, golpes y polvo</li>
+ *   <li>WATER - Water resistance</li>
+ *   <li>SHOCK - Shock resistance</li>
+ *   <li>DUST - Dust resistance</li>
+ *   <li>WS - Water and shock resistance</li>
+ *   <li>WD - Water and dust resistance</li>
+ *   <li>SD - Shock and dust resistance</li>
+ *   <li>WSD - Water, shock, and dust resistance</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Portable portable = new Portable();
  * portable.setResistance(RESISTANCE.WATER);
  * </pre>
  */
-
- 
 public enum RESISTANCE {
 
-    /**Resistencia al agua */
+    /** Water resistance */
     WATER,
 
-    /**Resistencia a golpes */
+    /** Shock resistance */
     SHOCK,
 
-    /**Resistencia al polvo */
+    /** Dust resistance */
     DUST,
 
-    /**Resistencia al agua y golpes */
+    /** Water and shock resistance */
     WS,
 
-    /**Resistencia al agua y polvo */
+    /** Water and dust resistance */
     WD,
 
-    /**Resistencia a golpes y polvo */
+    /** Shock and dust resistance */
     SD,
 
-    /**Resistencia al agua, golpes y polvo */
+    /** Water, shock, and dust resistance */
     WSD
-
 }

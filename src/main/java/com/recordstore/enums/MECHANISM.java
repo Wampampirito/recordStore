@@ -1,32 +1,30 @@
 package com.recordstore.enums;
 
 /**
- * Enum que representa los diferentes mecanismos de posicionamiento de la aguja en una tornamesa.
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Turntable}. para definir el sistema de posicionamiento de la aguja.
- * El mecanismo determina como se mueve la aguja en relacion con los discos de vinilo.
+ * Enum that represents the different needle positioning mechanisms in a turntable.
+ * This enum is used in the {@link com.recordstore.model.Turntable} entity to define the needle positioning system.
+ * The mechanism determines how the needle moves in relation to the vinyl records.
  * 
- * Los mecanismos disponibles incluyen:
+ * Available mechanisms include:
  * <ul>
- *   <li>MANUAL - El usuario posiciona manualmente la aguja en el disco.</li>
- *   <li>AUTOMATIC - El sistema posiciona automaticamente la aguja en el disco.</li>
- *   <li>SEMI_AUTOMATIC - El sistema posiciona la aguja en el disco, pero requiere intervencion del usuario para ciertas acciones.</li>
+ *   <li>MANUAL - The user manually positions the needle on the record.</li>
+ *   <li>AUTOMATIC - The system automatically positions the needle on the record.</li>
+ *   <li>SEMI_AUTOMATIC - The system automatically positions the needle on the record but requires user intervention for certain actions.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Turntable turntable = new Turntable();
  * turntable.setMechanism(MECHANISM.MANUAL);
  * </pre>
  */
-
- 
 public enum MECHANISM {
-    /** El usuario posiciona manualmente la aguja en el disco */ 
+    /** The user manually positions the needle on the record */
     MANUAL,
 
-    /** El sistema posiciona automaticamente la aguja en el disco */
+    /** The system automatically positions the needle on the record */
     AUTOMATIC,
 
-    /** El sistema posiciona automaticamnente la aguja en el disco, pero tambien se puede posicionar manualmente */
+    /** The system automatically positions the needle on the record, but it can also be manually positioned */
     SEMI_AUTOMATIC
 }

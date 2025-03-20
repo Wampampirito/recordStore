@@ -1,104 +1,105 @@
 package com.recordstore.auxiliar;
+
 /**
- * Clase utilitaria que proporciona metodos para imprimir mensajes dentro de un rectangulo con bordes.
- * El metodo principal es {@link #flag(String)}, que muestra el mensaje dentro de un rectangulo con bordes 
- * y maneja el caso en el que el mensaje es demasiado largo para caber en una sola linea.
+ * Utility class that provides methods for printing messages inside a rectangle with borders.
+ * The main method is {@link #flag(String)}, which displays the message inside a bordered rectangle 
+ * and handles the case where the message is too long to fit in a single line.
  * 
- * <p>Esta clase es util para mostrar mensajes de manera destacada en la consola, especialmente cuando 
- * se necesita destacar mensajes importantes o de formato especial.</p>
+ * <p>This class is useful for displaying messages in a prominent way on the console, especially when 
+ * important or specially formatted messages need to be highlighted.</p>
  * 
- * <p><strong>Características:</strong></p>
+ * <p><strong>Features:</strong></p>
  * <ul>
- *   <li>Calcula automaticamente el ancho del rectangulo segun la longitud del mensaje.</li>
- *   <li>Asegura que el mensaje no se desborde, dividiendolo en varias lineas si es necesario.</li>
- *   <li>Permite personalizar el margen y el borde del rectangulo.</li>
+ *   <li>Automatically calculates the width of the rectangle based on the length of the message.</li>
+ *   <li>Ensures that the message does not overflow by splitting it into multiple lines if necessary.</li>
+ *   <li>Allows customization of the margin and the rectangle border.</li>
  * </ul>
  * 
- * <p><strong>Ejemplo de uso:</strong></p>
+ * <p><strong>Example usage:</strong></p>
  * <pre>
- * printMsg.flag("Este es un mensaje importante");
+ * printMsg.flag("This is an important message");
  * </pre>
  */
-public class printMsg {
+public class PrintFlag {
 
     /**
-     * Imprime un mensaje dentro de un rectangulo con bordes. Si el mensaje es demasiado largo, 
-     * se divide en varias lineas para que quepa dentro del rectangulo.
+     * Prints a message inside a rectangle with borders. If the message is too long, 
+     * it is split into multiple lines to fit inside the rectangle.
      * 
-     * @param mensaje El mensaje a imprimir dentro del rectangulo.
-     * @throws IllegalArgumentException Si el mensaje es nulo.
+     * @param message The message to be printed inside the rectangle.
+     * @throws IllegalArgumentException If the message is null.
      */
-    public static void flag(String mensaje) {
-        // Calcular el ancho del rectangulo
-        int ancho = Math.min(mensaje.length() + 10, 100); // Ancho = length + 10, maximo 100
-        int margen = 5; // Minimo 5 espacios de margen
+    public static void flag(String message) {
+        // Calculate the width of the rectangle
+        int width = Math.min(message.length() + 10, 100); // Width = length + 10, max 100
+        int margin = 5; // Minimum 5 spaces of margin
 
-        // Asegurarse de que el ancho sea suficiente para los margenes
-        if (ancho < margen * 2 + 2) { // 2 bordes + 2 espacios minimos
-            ancho = margen * 2 + 2;
+        // Ensure the width is sufficient for the margins
+        if (width < margin * 2 + 2) { // 2 borders + 2 minimum spaces
+            width = margin * 2 + 2;
         }
 
-        // Crear los bordes
-        String lineaSuperior = "╔" + repeatChar('═', ancho ) + "╗"; // Borde superior
-        String lineaInferior = "╚" + repeatChar('═', ancho ) + "╝"; // Borde inferior
-        String bordeLateral = "║"; // Borde lateral
+        // Create the borders
+        String topBorder = "╔" + repeatChar('═', width) + "╗"; // Top border
+        String bottomBorder = "╚" + repeatChar('═', width) + "╝"; // Bottom border
+        String sideBorder = "║"; // Side border
 
-        System.out.println(lineaSuperior); // Imprime borde superior
+        System.out.println(topBorder); // Print top border
 
-        // Calcular el espacio disponible para el texto (ancho - bordes - margenes)
-        int espacioTexto = ancho - margen * 2;
+        // Calculate the available space for the text (width - borders - margins)
+        int textSpace = width - margin * 2;
 
-        // Si el mensaje cabe en una linea, imprimelo sin dividir
-        if (mensaje.length() <= espacioTexto) {
-            String linea = bordeLateral + " ".repeat(margen) + mensaje + " ".repeat(espacioTexto - mensaje.length()) + " ".repeat(margen) + bordeLateral;
-            System.out.println(linea);
+        // If the message fits in one line, print it without splitting
+        if (message.length() <= textSpace) {
+            String line = sideBorder + " ".repeat(margin) + message + " ".repeat(textSpace - message.length()) + " ".repeat(margin) + sideBorder;
+            System.out.println(line);
         } else {
-            // Dividir el mensaje en lineas que no excedan el espacio disponible
-            for (String lineaMensaje : dividirMensaje(mensaje, espacioTexto)) {
-                String linea = bordeLateral + " ".repeat(margen) + lineaMensaje + " ".repeat(espacioTexto - lineaMensaje.length()) + " ".repeat(margen) + bordeLateral;
-                System.out.println(linea);
+            // Split the message into lines that do not exceed the available space
+            for (String lineMessage : splitMessage(message, textSpace)) {
+                String line = sideBorder + " ".repeat(margin) + lineMessage + " ".repeat(textSpace - lineMessage.length()) + " ".repeat(margin) + sideBorder;
+                System.out.println(line);
             }
         }
 
-        System.out.println(lineaInferior); // Imprime borde inferior
+        System.out.println(bottomBorder); // Print bottom border
     }
 
     /**
-     * Divide el mensaje en lineas que no excedan un ancho maximo.
+     * Splits the message into lines that do not exceed a maximum width.
      * 
-     * @param mensaje El mensaje a dividir.
-     * @param anchoMaximo El ancho maximo de cada linea.
-     * @return Un arreglo de cadenas de texto que representan las lineas divididas.
+     * @param message The message to be split.
+     * @param maxWidth The maximum width of each line.
+     * @return An array of strings representing the split lines.
      */
-    private static String[] dividirMensaje(String mensaje, int anchoMaximo) {
-        return mensaje.split("(?<=\\G.{" + anchoMaximo + "})");
+    private static String[] splitMessage(String message, int maxWidth) {
+        return message.split("(?<=\\G.{" + maxWidth + "})");
     }
 
     /**
-     * Repite un caracter especificado un numero dado de veces.
+     * Repeats a specified character a given number of times.
      * 
-     * @param c El caracter a repetir.
-     * @param n El numero de veces que se debe repetir el caracter.
-     * @return Una cadena con el caracter repetido.
+     * @param c The character to repeat.
+     * @param n The number of times the character should be repeated.
+     * @return A string with the repeated character.
      */
     private static String repeatChar(char c, int n) {
         return new String(new char[n]).replace('\0', c);
     }
 
     /**
-     * Metodo principal que realiza pruebas de la clase {@link printMsg}.
-     * Imprime un mensaje largo y uno corto dentro de un rectangulo con bordes.
+     * Main method that performs tests for the {@link PrintFlag} class.
+     * Prints a long and a short message inside a bordered rectangle.
      * 
-     * @param args Los argumentos de linea de comandos (no utilizados en este caso).
+     * @param args Command-line arguments (not used in this case).
      */
     public static void main(String[] args) {
-        String textoLargo = "Este es un mensaje de prueba muy largo que debe dividirse en varias lineas para que quepa dentro del rectangulo.";
-        String textoCorto = "Este es un mensaje corto.";
+        String longText = "This is a very long test message that should be split into multiple lines to fit inside the rectangle.";
+        String shortText = "This is a short message.";
 
-        // Prueba con un mensaje largo
-        flag(textoLargo);
+        // Test with a long message
+        flag(longText);
 
-        // Prueba con un mensaje corto
-        flag(textoCorto);
+        // Test with a short message
+        flag(shortText);
     }
 }

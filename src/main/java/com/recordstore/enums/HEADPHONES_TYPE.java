@@ -1,31 +1,30 @@
 package com.recordstore.enums;
+
 /**
- * Enum que representa los diferentes tipos de audifonos disponibles en la tienda de discos.
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Headphone} para definir el tipo de audifono.
- * El tipo de audifono ayuda a clasificar los productos segun su diseño y uso.
+ * Enum that represents the different types of headphones available in the record store.
+ * This enum is used in the {@link com.recordstore.model.Headphone} entity to define the type of headphone.
+ * The headphone type helps classify products based on their design and use.
  * 
- * Los tipos de audifonos disponibles incluyen:
+ * Available headphone types include:
  * <ul>
- *   <li>IN_EAR_HP - Audifonos intrauditivos (dentro del oido)</li>
- *   <li>ON_EAR_HP - Audifonos supraaurales (reposan sobre el oido)</li>
- *   <li>OVER_EAR_HP - Audifonos circumaurales (cubren el oido completamente)</li>
+ *   <li>IN_EAR_HP - In-ear headphones (inside the ear)</li>
+ *   <li>ON_EAR_HP - On-ear headphones (resting on the ear)</li>
+ *   <li>OVER_EAR_HP - Over-ear headphones (covering the entire ear)</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Headphone headphone = new Headphone();
  * headphone.setType(HEADPHONES_TYPE.IN_EAR_HP);
  * </pre>
  */
-
-
 public enum HEADPHONES_TYPE {
-    /** Audifonos intrauditivos  (dentro del oido) */
+    /** In-ear headphones (inside the ear) */
     IN_EAR,
 
-    /** Audifonos supraaurales (reposan sobre el oido) */
+    /** On-ear headphones (resting on the ear) */
     ON_EAR,
 
-    /** Audifonos circumaurales (cubren el oido completamente) */
+    /** Over-ear headphones (covering the entire ear) */
     OVER_EAR
 }

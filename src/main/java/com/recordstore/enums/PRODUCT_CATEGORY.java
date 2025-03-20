@@ -1,55 +1,55 @@
 package com.recordstore.enums;
 
-
-
 /**
- * Enum que representa las diferentes categorias de productos disponibles en la tienda de discos.
- * Este enum es utilizado en las entidades hijas de {@link com.recordstore.model.Product} ( {@link com.recordstore.model.Album}, {@link com.recordstore.model.Vinyl}, {@link com.recordstore.model.Headphone}, {@link com.recordstore.model.Speaker}, 
- * {@link com.recordstore.model.Player}, {@link com.recordstore.model.Portable}, {@link com.recordstore.model.Turntable}.)
- * para clasificar los productos en categorias especificas. La categoria ayuda a organizar y filtrar los productos dentro de la tienda.
- *  Se usan prefijos para denotar que la clase es hija. (P_ para las clases hijas de Player, A_ para las clases hijas de Album, 
- * y AE_ para las clases hijas de Audio Equipment.)
- * Las categorias disponibles incluyen:
+ * Enum that represents the different product categories available in the record store.
+ * This enum is used in the child entities of {@link com.recordstore.model.Product} 
+ * ({@link com.recordstore.model.Album}, {@link com.recordstore.model.Vinyl}, 
+ * {@link com.recordstore.model.Headphone}, {@link com.recordstore.model.Speaker}, 
+ * {@link com.recordstore.model.Player}, {@link com.recordstore.model.Portable}, 
+ * {@link com.recordstore.model.Turntable}) to classify products into specific categories.
+ * The category helps organize and filter products within the store.
+ * Prefixes are used to denote child classes: (P_ for Player child classes, A_ for Album child classes, 
+ * and AE_ for Audio Equipment child classes).
+ * 
+ * Available categories include:
  * <ul>
- *   <li>ALBUM - Albumes musicales.</li>
- *   <li>A_VINYL - Vinilos.</li>
- *   <li>AE_HEADPHONES - Auriculares.</li>
- *   <li>AE_SPEAKER - Altavoces.</li>
- *   <li>PLAYER - Reproductores.</li>
- *   <li>P_PORTABLE - Reproductores portatiles.</li>
- *   <li>P_TURNTABLE - Tornamesas.</li>
+ *   <li>ALBUM - Music albums.</li>
+ *   <li>A_VINYL - Vinyl records.</li>
+ *   <li>AE_HEADPHONES - Headphones.</li>
+ *   <li>AE_SPEAKER - Speakers.</li>
+ *   <li>PLAYER - Players.</li>
+ *   <li>P_PORTABLE - Portable players.</li>
+ *   <li>P_TURNTABLE - Turntables.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Product product = new Product();
  * product.setCategory(PRODUCT_CATEGORY.ALBUM);
  * </pre>
  */
-
 public enum PRODUCT_CATEGORY {
-    /** Albumes musicales */
+    /** Music albums */
     ALBUM,
 
-    /** Vinilos */
+    /** Vinyl records */
     A_VINYL,
 
-    /** Equipamiento de audio */
+    /** Audio equipment */
     AUDIO_EQUIPMENT,
 
-    /** Auriculares */
+    /** Headphones */
     AE_HEADPHONES,
 
-    /** Altavoces */
+    /** Speakers */
     AE_SPEAKER,
 
-    /**Reproductores */
+    /** Players */
     PLAYER,
 
-    /** Reproductores portatiles */
-    P_PORTABLE,   
+    /** Portable players */
+    P_PORTABLE,
 
-    /** Tornamesas */
+    /** Turntables */
     P_TURNTABLE
-    
 }

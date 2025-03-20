@@ -1,27 +1,27 @@
 package com.recordstore.enums;
 
-
 /**
- * Enum que representa los diferentes tipos de alimentacion electrica para dispositivos.
- * Este enum es utilizado en las entidades {@link com.recordstore.model.Portable} y {@link com.recordstore.model.Speaker} para definir el tipo de energia que utilizan.
- * Los tipos de alimentacion ayudan a categorizar los dispositivos segun la fuente de energia que requieren.
+ * Enum that represents the different types of power supply for devices.
+ * This enum is used in the {@link com.recordstore.model.Portable} and {@link com.recordstore.model.Speaker} entities 
+ * to define the type of energy they use.
+ * Power types help categorize devices based on the energy source they require.
  * 
- * Los tipos disponibles son:
+ * Available types include:
  * <ul>
- *   <li>DIRECT_CURRENT - Corriente continua, tipicamente usada en dispositivos portatiles.</li>
- *   <li>ALTERNATING_CURRENT - Corriente alterna, comunmente usada en dispositivos de mayor tamanio como altavoces.</li>
+ *   <li>DIRECT_CURRENT - Direct current, typically used in portable devices.</li>
+ *   <li>ALTERNATING_CURRENT - Alternating current, commonly used in larger devices such as speakers.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Portable portable = new Portable();
  * portable.setPowerType(POWER_TYPE.DIRECT_CURRENT);
  * </pre>
  */
-
 public enum POWER_TYPE {
-        /**Corriente continua, tipicamente usada en dispositivos portatiles. */
-        DC,
-        /**Corriente alterna, comunmente usada en dispositivos de mayor tamanio como altavoces. */
-        AC
+    /** Direct current, typically used in portable devices. */
+    DC,
+
+    /** Alternating current, commonly used in larger devices such as speakers. */
+    AC
 }

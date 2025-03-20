@@ -1,32 +1,30 @@
 package com.recordstore.enums;
 
 /**
- * Enum que representa los diferentes tipos de reproductores portatiles disponibles en la tienda de discos.
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Portable} para definir el tipo de reproductor portatil.
- * Los tipos de reproductores portatiles ayudan a clasificar y distinguir los diferentes dispositivos disponibles.
+ * Enum that represents the different types of portable players available in the record store.
+ * This enum is used in the {@link com.recordstore.model.Portable} entity to define the type of portable player.
+ * Portable player types help classify and distinguish the different devices available.
  * 
- * Los tipos disponibles son:
+ * Available types include:
  * <ul>
- *   <li>DIGITAL_P - Reproductor digital portatil (como reproductores MP3, etc.).</li>
- *   <li>CASSETTE_P - Reproductor de casetes portatil.</li>
- *   <li>CD_P - Reproductor de CD portatil.</li>
+ *   <li>DIGITAL_P - Portable digital player (e.g., MP3 players, etc.).</li>
+ *   <li>CASSETTE_P - Portable cassette player.</li>
+ *   <li>CD_P - Portable CD player.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Portable portable = new Portable();
  * portable.setType(PORTABLE_TYPE.CD_P);
  * </pre>
  */
-
-
 public enum PORTABLE_TYPE {
-    /** Reproductor digital portatil (como reproductores MP3, etc.) */
-DIGITAL,
+    /** Portable digital player (e.g., MP3 players, etc.) */
+    DIGITAL,
 
-/** Reproductor de casetes portatil */
-CASSETTE,
+    /** Portable cassette player */
+    CASSETTE,
 
-/** Reproductor de CD portatil */
-CD
+    /** Portable CD player */
+    CD
 }

@@ -1,27 +1,25 @@
 package com.recordstore.enums;
 
 /**
- * Enum que representa los diferentes tipos de traccion de una tornamesa.
- * Este enum se utiliza en la clase {@link com.recordstore.model.Turntable}para determinar el mecanismo de rotacion del plato.
+ * Enum that represents the different types of drive for a turntable.
+ * This enum is used in the {@link com.recordstore.model.Turntable} class to determine the platter rotation mechanism.
  * 
- * Los tipos de traccion disponibles incluyen:
+ * Available drive types include:
  * <ul>
- *   <li>BELT_DRIVE - Traccion por correa</li>
- *   <li>DIRECT_DRIVE - Traccion directa</li>
+ *   <li>BELT_DRIVE - Belt drive</li>
+ *   <li>DIRECT_DRIVE - Direct drive</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Turntable turntable = new Turntable();
  * turntable.setTraction(TRACTION.BELT_DRIVE);
  * </pre>
  */
-
-
 public enum TRACTION {
-    /**Traccion por correa */
+    /** Belt drive */
     BELT_DRIVE,
 
-    /**Traccion directa */
+    /** Direct drive */
     DIRECT_DRIVE
 }

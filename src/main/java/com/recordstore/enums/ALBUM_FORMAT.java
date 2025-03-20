@@ -1,22 +1,23 @@
 package com.recordstore.enums;
+
 /**
- * Enum que representa los diferentes formatos de album disponibles en la tienda de discos.
+ * Enum that represents the different album formats available in the record store.
  * <p>
- * Leyenda de los formatos de album:
+ * Album format legend:
  * <ul>
- *   <li>LP - Double Play (vinilo de larga duracion)</li>
- *   <li>EP - Extended Play (vinilo de duracion extendida)</li>
+ *   <li>LP - Long Play (vinyl with extended duration)</li>
+ *   <li>EP - Extended Play (vinyl with extended duration)</li>
  *   <li>CD - Compact Disc</li>
- *   <li>CASSETTE - Casete</li>
+ *   <li>CASSETTE - Cassette tape</li>
  *   <li>DVD - Digital Versatile Disc</li>
- *   <li>CD_DVD - Combo de CD y DVD</li>
- *   <li>BOXSET - Caja de coleccion. Albumes con mas de cuatro discos.</li>
+ *   <li>CD_DVD - Combo of CD and DVD</li>
+ *   <li>BOXSET - Collector's box set, albums with more than four discs</li>
  * </ul>
  * 
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Album} para definir el formato de un album en la tienda.
- * El formato influye en la disponibilidad del producto y su precio.
+ * This enum is used in the {@link com.recordstore.model.Album} entity to define the format of an album in the store.
+ * The format influences the product's availability and price.
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Album album = new Album();
  * album.setFormat(ALBUM_FORMAT.LP);
@@ -24,27 +25,26 @@ package com.recordstore.enums;
  * 
  * @see com.recordstore.model.Album
  */
-
 public enum ALBUM_FORMAT {
     
-    /** Vinilo de larga duracion */
+    /** Long Play vinyl */
     LP,
     
-    /** Vinilo de duracion extendida */
+    /** Extended Play vinyl */
     EP,
     
-    /** Para albumes con uno hasta 4 cds */
+    /** For albums with one to four CDs */
     CD,
     
-    /** Casete de cinta magnetica */
+    /** Cassette tape */
     CASSETTE,
     
     /** Digital Versatile Disc */
     DVD,
     
-    /** Combo de CD y DVD, hasta 4 discos */
+    /** Combo of CD and DVD, up to 4 discs */
     CD_DVD,
     
-    /** Caja de coleccion. Albumes con mas de cuatro discos */
+    /** Collector's box set. Albums with more than four discs */
     BOXSET;
 }

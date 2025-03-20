@@ -466,7 +466,7 @@ private void wishlistSeeder() {
  * </p>
  */
 private void orderSeeder() {
-    printMsg.flag("Printed from orderSeeder");
+    PrintFlag.flag("Printed from orderSeeder");
     List<User> users = userRepository.findAll();
     List<Product> products = productRepository.findAll();
     Random random = new Random();

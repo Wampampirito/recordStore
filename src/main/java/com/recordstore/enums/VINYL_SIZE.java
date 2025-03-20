@@ -1,34 +1,30 @@
-
 package com.recordstore.enums;
+
 /**
- * Enum que representa los diferentes tamanios de discos de vinilo disponibles.
+ * Enum that represents the different vinyl record sizes available.
  * <p>
- * Leyenda de los tamanios:
+ * Size legend:
  * <ul>
- *   <li>S_7: Disco de vinilo de 7 pulgadas</li>
- *   <li>S_10: Disco de vinilo de 10 pulgadas</li>
- *   <li>S_12: Disco de vinilo de 12 pulgadas</li>
+ *   <li>S_7: 7-inch vinyl record</li>
+ *   <li>S_10: 10-inch vinyl record</li>
+ *   <li>S_12: 12-inch vinyl record</li>
  * </ul>
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Vinyl} para definir el tamanio del disco de vinilo.
- * El tamanio del disco afecta la duracion y el tipo de reproduccion del vinilo.
+ * This enum is used in the {@link com.recordstore.model.Vinyl} entity to define the size of the vinyl record.
+ * The size of the record affects the duration and type of playback for the vinyl.
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Vinyl vinyl = new Vinyl();
  * vinyl.setSize(VINYL_SIZE.S_12);
  * </pre>
- * 
  */
-
-
 public enum VINYL_SIZE {
-    /**Disco de vinilo de 7 pulgadas */
+    /** 7-inch vinyl record */
     S_7,
 
-    /**Disco de vinilo de 10 pulgadas */
+    /** 10-inch vinyl record */
     S_10,
 
-    /**Disco de vinilo de 12 pulgadas */
+    /** 12-inch vinyl record */
     S_12
-
 }

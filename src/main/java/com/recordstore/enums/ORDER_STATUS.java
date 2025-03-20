@@ -1,44 +1,42 @@
 package com.recordstore.enums;
 
 /**
- * Enum que representa los diferentes estados de una orden en la tienda de discos.
- * Este enum es utilizado en la entidad {@link com.recordstore.model.Order} para definir el estado actual de una orden.
- * El estado de la orden refleja su progreso en el proceso de compra y envio.
+ * Enum that represents the different statuses of an order in the record store.
+ * This enum is used in the {@link com.recordstore.model.Order} entity to define the current status of an order.
+ * The status of the order reflects its progress in the purchasing and shipping process.
  * 
- * Los estados disponibles son:
+ * Available statuses include:
  * <ul>
- *   <li>PENDING - La orden ha sido creada pero aun no ha sido procesada.</li>
- *   <li>PAID - La orden ha sido pagada, pero aun no ha sido enviada.</li>
- *   <li>SHIPPED - La orden ha sido enviada y esta en transito.</li>
- *   <li>COMPLETED - La orden ha sido entregada y completada exitosamente.</li>
- *   <li>CANCELLED - La orden ha sido cancelada y no se procesara.</li>
- *   <li>REFUNDED - La orden ha sido reembolsada despues de ser cancelada o devuelta.</li>
+ *   <li>PENDING - The order has been created but has not been processed yet.</li>
+ *   <li>PAID - The order has been paid for but has not been shipped yet.</li>
+ *   <li>SHIPPED - The order has been shipped and is in transit.</li>
+ *   <li>COMPLETED - The order has been delivered and successfully completed.</li>
+ *   <li>CANCELLED - The order has been cancelled and will not be processed.</li>
+ *   <li>REFUNDED - The order has been refunded after being cancelled or returned.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * Order order = new Order();
  * order.setStatus(ORDER_STATUS.PAID);
  * </pre>
  */
-
- 
 public enum ORDER_STATUS  {
-    /** La orden ha sido creada pero aun no ha sido procesada */
+    /** The order has been created but has not been processed yet */
     PENDING,
 
-    /** La orden ha sido pagada, pero aun no ha sido enviada */
+    /** The order has been paid for but has not been shipped yet */
     PAID,
 
-    /** La orden ha sido enviada y esta en transito */
+    /** The order has been shipped and is in transit */
     SHIPPED,
 
-    /** La orden ha sido entregada y completada exitosamente */
+    /** The order has been delivered and successfully completed */
     COMPLETED,
 
-    /** La orden ha sido cancelada y no se procesara */
+    /** The order has been cancelled and will not be processed */
     CANCELLED,
 
-    /** La orden ha sido reembolsada despues de ser cancelada o devuelta */
+    /** The order has been refunded after being cancelled or returned */
     REFUNDED
-}        
+}

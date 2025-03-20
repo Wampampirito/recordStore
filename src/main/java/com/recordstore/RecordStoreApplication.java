@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.recordstore.auxiliar.printMsg;
+import com.recordstore.auxiliar.PrintFlag;
 
 
 @SpringBootApplication
@@ -18,7 +18,7 @@ public class RecordStoreApplication implements CommandLineRunner {
 	//*										MAIN										*/
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(RecordStoreApplication.class, args);
-		printMsg.flag("Impreso desde MAIN");
+		PrintFlag.flag("Impreso desde MAIN");
 
 		
 
@@ -33,7 +33,7 @@ public class RecordStoreApplication implements CommandLineRunner {
 	@Override
 	//*										RUN										*/
 	public void run(String... args) throws Exception {
-		printMsg.flag("Impreso desde RUN");
+		PrintFlag.flag("Impreso desde RUN");
 
 		// dbSeeder dbSeeder = new dbSeeder(userRepository, orderRepository, orderProductRepository, wishlistRepository,
 		// 		wishlistProductRepository, albumRepository, vinylRepository, headphonesRepository, speakerRepository,
