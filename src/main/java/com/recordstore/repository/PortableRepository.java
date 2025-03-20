@@ -143,15 +143,51 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      */
     Optional<Portable> findByNameContaining(String name);
 
+    /**
+     * Finds all portables with the specified portable type.
+     *
+     * @param portableType the portable type (e.g., speaker, headphone).
+     * @return a list of portables that match the given portable type.
+     */
     Optional<Portable> findByPortableType(PORTABLE_TYPE portableType);
 
+    /**
+     * Finds all portables with the specified power type.
+     *
+     * @param powerType the power type (e.g., battery, AC).
+     * @return a list of portables that match the given power type.
+     */
     Optional<Portable> findByPowerType(POWER_TYPE powerType);
 
+    /**
+     * Finds all portables with the specified battery life.
+     *
+     * @param batteryLife the battery life in hours.
+     * @return a list of portables that match the given battery life.
+     */
     Optional<Portable> findByBatteryLife(Integer batteryLife);
 
+    /**
+     * Finds all portables with the specified resistance.
+     *
+     * @param resistance the resistance (e.g., IPX7, IPX8).
+     * @return a list of portables that match the given resistance.
+     */
     Optional<Portable> findByResistance(RESISTANCE resistance);
 
+    /**
+     * Finds all portables with the specified warranty period.
+     *
+     * @param warranty the warranty period in months.
+     * @return a list of portables that match the given warranty period.
+     */
     Optional<Portable> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
 
+    /**
+     * Finds all portables with the specified warranty period.
+     *
+     * @param warranty the warranty period in months.
+     * @return a list of portables that match the given warranty period.
+     */
     Optional<Portable> findByWarrantyGreaterThanEqual(Integer warranty);
 }

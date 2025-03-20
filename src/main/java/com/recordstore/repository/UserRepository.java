@@ -7,33 +7,43 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.recordstore.model.User;
 
 /**
- * Repositorio para la entidad {@link User}, proporcionando acceso a las operaciones de base de datos.
+ * Repository for managing {@link User} entities, providing access to database operations.
+ * <p>
+ * The {@link UserRepository} interface extends {@link JpaRepository}, which allows performing basic CRUD 
+ * operations on the {@link User} entity without the need to write manual implementations.
+ * </p>
  * 
- * La interfaz {@link UserRepository} extiende {@link JpaRepository}, lo que permite realizar operaciones CRUD 
- * sobre la entidad {@link User} sin necesidad de escribir implementaciones manuales.
- * 
- * Métodos adicionales:
+ * Additional methods:
  * <ul>
- *   <li><b>existsByEmail(String email)</b>: Verifica si ya existe un usuario con un correo electrónico específico.</li>
+ *   <li><b>existsByEmail(String email)</b>: Checks if a user with a specific email already exists.</li>
  * </ul>
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
- * Boolean exists = userRepository.existsByEmail("correo@ejemplo.com");
+ * Boolean exists = userRepository.existsByEmail("email@example.com");
  * </pre>
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
-     * Verifica si existe un usuario con el correo electrónico proporcionado.
+     * Checks if a user with the provided email exists.
+     * <p>
+     * This method is used to prevent email duplication in the database when registering new users.
+     * </p>
      * 
-     * Este método se utiliza para evitar la duplicación de correos electrónicos en la base de datos al 
-     * registrar nuevos usuarios.
-     * 
-     * @param email El correo electrónico que se desea verificar.
-     * @return {@code true} si el correo ya está registrado, {@code false} en caso contrario.
+     * @param email The email address to check for existence.
+     * @return {@code true} if the email is already registered, {@code false} otherwise.
      */
     Boolean existsByEmail(String email);
 
+    /**
+     * Finds a user by their email.
+     * <p>
+     * This method retrieves a user based on the provided email.
+     * </p>
+     * 
+     * @param email The email address of the user to retrieve.
+     * @return An {@link Optional} containing the user if found, or empty if not found.
+     */
     Optional<User> findByEmail(String email);
 }

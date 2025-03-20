@@ -58,7 +58,7 @@ public class VinylController {
         @ApiResponse(responseCode = "200", description = "Vinyl found"),
         @ApiResponse(responseCode = "404", description = "Vinyl not found")
     })
-    public ResponseEntity<VinylDTO> getVinylById(@PathVariable Double id) {
+    public ResponseEntity<VinylDTO> getVinylById(@PathVariable Integer id) {
         Optional<VinylDTO> vinylDTO = vinylService.getVinylById(id);
         return vinylDTO.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -219,7 +219,7 @@ public class VinylController {
         @ApiResponse(responseCode = "200", description = "Vinyl updated successfully"),
         @ApiResponse(responseCode = "404", description = "Vinyl not found")
     })
-    public ResponseEntity<VinylDTO> updateVinyl(@PathVariable Double id, @RequestBody VinylDTO updatedVinylDTO) {
+    public ResponseEntity<VinylDTO> updateVinyl(@PathVariable Integer id, @RequestBody VinylDTO updatedVinylDTO) {
         return ResponseEntity.ok( vinylService.updateVinyl(id, vinylMapper.toEntity(updatedVinylDTO)));
     }
 }

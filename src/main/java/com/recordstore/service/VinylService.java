@@ -67,7 +67,7 @@ public class VinylService {
      * @return An {@link java.util.Optional Optional} with the vinyl found, or empty
      *         if not found.
      */
-    public Optional<VinylDTO> getVinylById(Double id) {
+    public Optional<VinylDTO> getVinylById(Integer id) {
         return vinylRepository.findById(id).map(vinylMapper::toDTO);
     }
 
@@ -198,7 +198,7 @@ public class VinylService {
      * @throws IllegalArgumentException If the vinyl with the given id is not
      *                                  found.
      */
-    public VinylDTO updateVinyl(Double id, Vinyl updatedVinyl) {
+    public VinylDTO updateVinyl(Integer id, Vinyl updatedVinyl) {
         Optional<Vinyl> existingVinylOpt = vinylRepository.findById(id);
         if (existingVinylOpt.isPresent()) {
             Vinyl existingVinyl = existingVinylOpt.get();

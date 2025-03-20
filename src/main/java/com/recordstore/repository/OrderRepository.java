@@ -93,6 +93,12 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
      */
     List<Order> findByUser(User user);
 
+    /**
+     * Checks if an order contains a specific product by the product's ID.
+     *
+     * @param id the ID of the product
+     * @return true if the product is found in an order, false otherwise
+     */
     boolean existsByListOrderProducts_Product_Id(Integer id);
     
 

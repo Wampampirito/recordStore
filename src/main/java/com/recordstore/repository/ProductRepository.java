@@ -8,77 +8,77 @@ import com.recordstore.enums.PRODUCT_CATEGORY;
 import com.recordstore.model.Product;
 
 /**
- * Repositorio para acceder a las entidades {@link com.recordstore.model.Product}.
+ * Repository for accessing {@link com.recordstore.model.Product} entities.
  * <p>
- * Este repositorio extiende de {@link org.springframework.data.jpa.repository.JpaRepository}, lo que proporciona operaciones CRUD basicas.
- * Ademas, se han implementado metodos adicionales para filtrar productos por diferentes criterios como categoria, nombre,
- * precio, stock y mas.
+ * This repository extends {@link org.springframework.data.jpa.repository.JpaRepository}, which provides basic CRUD operations.
+ * Additionally, extra methods have been implemented to filter products by various criteria such as category, name,
+ * price, stock, and more.
  * </p>
  */
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     /**
-     * Busca productos por categoria.
+     * Finds products by category.
      * 
-     * @param productCategory La categoria del producto por la cual filtrar.
-     * @return Lista de productos que coinciden con la categoria especificada.
+     * @param productCategory The category of the product to filter by.
+     * @return A list of products that match the specified category.
      */
     List<Product> findByProductCategory(PRODUCT_CATEGORY productCategory);
 
     /**
-     * Busca productos por nombre (de forma parcial).
+     * Finds products by name (partially).
      * 
-     * @param name El nombre del producto (puede ser parcial).
-     * @return Lista de productos cuyo nombre contenga la cadena proporcionada.
+     * @param name The name of the product (can be partial).
+     * @return A list of products whose name contains the provided string.
      */
     List<Product> findByNameContainingIgnoreCase(String name);
 
     /**
-     * Busca productos dentro de un rango de precios.
+     * Finds products within a price range.
      * 
-     * @param minPrice El precio minimo.
-     * @param maxPrice El precio maximo.
-     * @return Lista de productos cuyo precio este dentro del rango especificado.
+     * @param minPrice The minimum price.
+     * @param maxPrice The maximum price.
+     * @return A list of products whose price is within the specified range.
      */
     List<Product> findByPriceBetween(Double minPrice, Double maxPrice);
 
     /**
-     * Busca productos con una cantidad de stock mayor o igual a 1.
+     * Finds products with a stock quantity greater than or equal to 1.
      * 
-     * @param stock La cantidad minima de stock.
-     * @return Lista de productos que tienen al menos 1 unidad en stock.
+     * @param stock The minimum stock quantity.
+     * @return A list of products that have at least 1 unit in stock.
      */
     List<Product> findByStockGreaterThanEqual(Integer stock);
 
     /**
-     * Busca productos por nombre y categoria.
+     * Finds products by name and category.
      * 
-     * @param name El nombre del producto (puede ser parcial).
-     * @param productCategory La categoria del producto.
-     * @return Lista de productos que coinciden con ambos criterios.
+     * @param name The name of the product (can be partial).
+     * @param productCategory The category of the product.
+     * @return A list of products that match both criteria.
      */
     List<Product> findByNameContainingIgnoreCaseAndProductCategory(String name, PRODUCT_CATEGORY productCategory);
 
     /**
-     * Busca productos que pertenezcan a alguna de las categorias especificadas.
+     * Finds products that belong to any of the specified categories.
      * 
-     * @param productCategories Lista de categorias de productos.
-     * @return Lista de productos que pertenecen a alguna de las categorias proporcionadas.
+     * @param productCategories A list of product categories.
+     * @return A list of products that belong to any of the provided categories.
      */
     List<Product> findByProductCategoryIn(List<PRODUCT_CATEGORY> productCategories);
 
     /**
-     * Cuenta los productos que pertenecen a una categoria especifica.
+     * Counts the products that belong to a specific category.
      * 
-     * @param productCategory La categoria de los productos que se contaran.
-     * @return El numero de productos que pertenecen a la categoria especificada.
+     * @param productCategory The category of the products to count.
+     * @return The number of products that belong to the specified category.
      */
     Double countByProductCategory(PRODUCT_CATEGORY productCategory);
 
     /**
-     * Elimina todos los productos de una categoria especifica.
+     * Deletes all products from a specific category.
      * 
-     * @param productCategory La categoria de los productos que se eliminaran.
+     * @param productCategory The category of the products to delete.
      */
     void deleteByProductCategory(PRODUCT_CATEGORY productCategory);
 
