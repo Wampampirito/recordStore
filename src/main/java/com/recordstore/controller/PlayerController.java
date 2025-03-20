@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -145,11 +147,16 @@ public class PlayerController {
         @ApiResponse(responseCode = "204", description = "Player deleted successfully"),
         @ApiResponse(responseCode = "404", description = "Player not found")
     })
-    public ResponseEntity<Void> deletePlayer(@PathVariable Integer id) {
-        if (playerService.getPlayerById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<String> deletePlayer(@PathVariable Integer id) {
+        try {
+            playerService.deletePlayer(id);
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
         }
-        playerService.deletePlayerById(id);
-        return ResponseEntity.noContent().build();
+
     }
 }

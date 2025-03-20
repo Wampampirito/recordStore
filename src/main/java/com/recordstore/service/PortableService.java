@@ -12,9 +12,7 @@ import com.recordstore.enums.PORTABLE_TYPE;
 import com.recordstore.enums.POWER_TYPE;
 import com.recordstore.enums.RESISTANCE;
 import com.recordstore.mapper.PortableMapper;
-import com.recordstore.model.Order;
 import com.recordstore.model.Portable;
-import com.recordstore.model.Wishlist;
 import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.PortableRepository;
 import com.recordstore.repository.WishlistRepository;
@@ -142,20 +140,20 @@ public class PortableService {
      *                                  or a wishlist.
      */
     @Transactional
-    public void deletePortableById(Integer id) {
-        // Check if the product is associated with any order
-        Optional<Order> ordersWithProduct = orderRepository.findById(id);
-        if (ordersWithProduct.isPresent()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
-        }
-
-        // Check if the product is associated with any wishlist
-        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
-        if (!wishlistsWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
-        }
-
-        // If it is not in any order or wishlist, delete the product
+    public void deletePortable(Integer id) {
+            // Check if the product is associated with any order
+            boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+            if (isInOrders) {
+                throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
+            }
+        
+            // Check if the product is in any wishlist
+            boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+            if (isInWishlists) {
+                throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
+            }
+        
+            // If not in use, delete the product
         portableRepository.deleteById(id);
     }
 

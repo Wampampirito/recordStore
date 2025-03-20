@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,8 +84,16 @@ public class PortableController {
             @ApiResponse(responseCode = "400", description = "Portable is associated with orders or wishlists")
     })
     @DeleteMapping("/{id}")
-    public void deletePortableById(@PathVariable Integer id) {
-        portableService.deletePortableById(id);
+    public ResponseEntity<String> deletePortableById(@PathVariable Integer id) {
+                try {
+            portableService.deletePortable(id);
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
+        }
     }
 
     /**

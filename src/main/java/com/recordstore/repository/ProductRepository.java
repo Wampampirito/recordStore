@@ -1,7 +1,6 @@
 package com.recordstore.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,7 +15,7 @@ import com.recordstore.model.Product;
  * precio, stock y mas.
  * </p>
  */
-public interface ProductRepository extends JpaRepository<Product, Double> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     /**
      * Busca productos por categoria.
@@ -83,6 +82,4 @@ public interface ProductRepository extends JpaRepository<Product, Double> {
      */
     void deleteByProductCategory(PRODUCT_CATEGORY productCategory);
 
-    Optional<Product> findById(Integer id);
-   // Optional<Wishlist> findWishlistById(Integer productId);
 }

@@ -58,7 +58,7 @@ public class ProductController {
     @GetMapping("/{id}")
     @Operation(summary = "Get product by ID", description = "Retrieves a product by its unique ID")
     @ApiResponse(responseCode = "200", description = "Product found")
-    public Optional<Product> getProductById(@PathVariable Double id) {
+    public Optional<Product> getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
 
@@ -83,7 +83,7 @@ public class ProductController {
     @DeleteMapping("delete/{id}")
     @Operation(summary = "Delete a product", description = "Removes a product from the store.")
     @ApiResponse(responseCode = "204", description = "Product deleted successfully")
-    public void deleteProduct(@PathVariable Double id) {
+    public void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }
 }

@@ -49,4 +49,6 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Double> {
     "WHERE p.id = :id")
     List<Wishlist> findWishlistsByProductId(@Param("id") Integer id);
 
+    boolean existsByListWishlistProducts_Product_Id(Integer id);
+
 }

@@ -1,8 +1,6 @@
 package com.recordstore.service;
 
 import com.recordstore.model.Album;
-import com.recordstore.model.Order;
-import com.recordstore.model.Wishlist;
 import com.recordstore.dto.AlbumDTO;
 import com.recordstore.enums.ALBUM_FORMAT;
 import com.recordstore.enums.ALBUM_GENRE;
@@ -170,17 +168,19 @@ public class AlbumService {
     @Transactional
     public void deleteAlbum(Integer id) {
 
-        // Check if the product is associated with any order
-        Optional<Order> ordersWithProduct = orderRepository.findById(id);
-        if (!ordersWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
-        }
+      // Check if the turntable is associated with any order
+      boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+      if (isInOrders) {
+          throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
+      }
+  
+      // Check if the turntable is in any wishlist
+      boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+      if (isInWishlists) {
+          throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
+      }
 
-        // Check if the product is associated with any wishlist
-        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
-        if (!wishlistsWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
-        }
+      // If not in use, delete the album
         albumRepository.deleteById(id);
     }
 

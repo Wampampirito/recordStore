@@ -76,7 +76,7 @@ public class HeadphoneController {
             @ApiResponse(responseCode = "400", description = "Invalid input provided."),
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
-    @PostMapping ("/new")
+    @PostMapping("/new")
     public ResponseEntity<HeadphonesDTO> createHeadphone(@RequestBody HeadphonesDTO headphonesDTO) {
         HeadphonesDTO createdHeadphone = headphoneService.saveHeadphone(headphonesDTO);
         return new ResponseEntity<>(createdHeadphone, HttpStatus.CREATED);
@@ -85,7 +85,7 @@ public class HeadphoneController {
     /**
      * Update an existing headphone.
      *
-     * @param id The id of the headphone to update.
+     * @param id            The id of the headphone to update.
      * @param headphonesDTO The new details of the headphone.
      * @return The updated headphone.
      */
@@ -97,7 +97,8 @@ public class HeadphoneController {
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
     @PutMapping("/update/{id}")
-    public ResponseEntity<HeadphonesDTO> updateHeadphone(@PathVariable Integer id, @RequestBody HeadphonesDTO headphonesDTO) {
+    public ResponseEntity<HeadphonesDTO> updateHeadphone(@PathVariable Integer id,
+            @RequestBody HeadphonesDTO headphonesDTO) {
         try {
             HeadphonesDTO updatedHeadphone = headphoneService.updateHeadphone(id, headphonesDTO);
             return new ResponseEntity<>(updatedHeadphone, HttpStatus.OK);
@@ -119,13 +120,18 @@ public class HeadphoneController {
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteHeadphone(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteHeadphone(@PathVariable Integer id) {
+
         try {
             headphoneService.deleteHeadphone(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
         }
+
     }
 
     /**
@@ -165,7 +171,7 @@ public class HeadphoneController {
     /**
      * Filter headphones by wireless support.
      *
-         * @param wireless The wireless status to filter by.
+     * @param wireless The wireless status to filter by.
      * @return List of wireless headphones.
      */
     @Operation(summary = "Get wireless headphones", description = "Retrieve a list of wireless headphones.")
@@ -230,6 +236,3 @@ public class HeadphoneController {
         return new ResponseEntity<>(headphones, HttpStatus.OK);
     }
 }
-
-
-

@@ -1,6 +1,5 @@
 package com.recordstore.repository;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,11 +7,10 @@ import com.recordstore.enums.HEADPHONES_TYPE;
 import com.recordstore.enums.NOISE_CANCELING;
 import com.recordstore.model.Headphone;
 
-public interface HeadphoneRepository extends JpaRepository <Headphone, Double> {
+public interface HeadphoneRepository extends JpaRepository <Headphone, Integer> {
 
     Headphone getHeadphoneById(Integer id);
 
-    Optional<Headphone> findById(Integer id);
 
     List<Headphone> findByAnc(NOISE_CANCELING anc);
 

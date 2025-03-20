@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.recordstore.enums.PRODUCT_CATEGORY;
 import com.recordstore.model.Product;
+import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.ProductRepository;
+import com.recordstore.repository.WishlistRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,15 +22,22 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private OrderRepository orderRepository;
+    private WishlistRepository wishlistRepository;
 
     /**
      * Constructor for the service that injects the product repository.
      * 
      * @param productRepository The product repository to inject.
+     * @param orderRepository   The order repository to inject.
+     * @param wishlistRepository The wishlist repository to inject.
      */
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, OrderRepository orderRepository,
+            WishlistRepository wishlistRepository) {
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+        this.wishlistRepository = wishlistRepository;
     }
 
     /**
@@ -48,7 +57,7 @@ public class ProductService {
      * @return An {@link java.util.Optional Optional} containing the found product,
      *         or empty if not found.
      */
-    public Optional<Product> getProductById(Double id) {
+    public Optional<Product> getProductById(Integer id) {
         return productRepository.findById(id);
     }
 
@@ -68,7 +77,20 @@ public class ProductService {
      * 
      * @param id The ID of the product to delete.
      */
-    public void deleteProduct(Double id) {
+    public void deleteProduct(Integer id) {
+        // Check if the product is associated with any order
+        boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+        if (isInOrders) {
+            throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
+        }
+
+        // Check if the product is in any wishlist
+        boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+        if (isInWishlists) {
+            throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
+        }
+
+        // If not in use, delete the product
         productRepository.deleteById(id);
     }
 

@@ -107,12 +107,15 @@ public class SpeakerController {
         @ApiResponse(responseCode = "404", description = "Speaker not found")
     })
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteSpeaker(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteSpeaker(@PathVariable Integer id) {
         try {
             speakerService.deleteSpeaker(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.recordstore.service;
 
-import com.recordstore.model.Order;
 import com.recordstore.model.Vinyl;
-import com.recordstore.model.Wishlist;
 import com.recordstore.dto.VinylDTO;
 import com.recordstore.enums.ALBUM_FORMAT;
 import com.recordstore.enums.ALBUM_GENRE;
@@ -175,18 +173,18 @@ public class VinylService {
     @Transactional
     public void deleteVinyl(Integer id) {
         // Check if the product is associated with any order
-        Optional<Order> ordersWithProduct = orderRepository.findById(id);
-        if (!ordersWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
+        boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+        if (isInOrders) {
+            throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
         }
 
-        // Check if the product is associated with any wishlist
-        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
-        if (!wishlistsWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
+        // Check if the product is in any wishlist
+        boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+        if (isInWishlists) {
+            throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
         }
 
-        // If it is not in any order or wishlist, delete the product
+        // If not in use, delete the product
         vinylRepository.deleteById(id);
     }
 

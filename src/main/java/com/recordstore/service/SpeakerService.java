@@ -1,8 +1,6 @@
 package com.recordstore.service;
 
-import com.recordstore.model.Order;
 import com.recordstore.model.Speaker;
-import com.recordstore.model.Wishlist;
 import com.recordstore.dto.SpeakerDTO;
 import com.recordstore.mapper.SpeakerMapper;
 import com.recordstore.repository.OrderRepository;
@@ -97,16 +95,18 @@ public class SpeakerService {
      */
     public void deleteSpeaker(Integer id) {
         // Check if the product is associated with any order
-        Optional<Order> ordersWithProduct = orderRepository.findById(id);
-        if (!ordersWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
+        boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+        if (isInOrders) {
+            throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
         }
 
-        // Check if the product is associated with any wishlist
-        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
-        if (!wishlistsWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
+        // Check if the product is in any wishlist
+        boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+        if (isInWishlists) {
+            throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
         }
+
+        // If not in use, delete the product
         speakerRepository.deleteById(id);
     }
 }

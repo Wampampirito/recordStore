@@ -194,9 +194,16 @@ public class VinylController {
         @ApiResponse(responseCode = "204", description = "Vinyl deleted successfully"),
         @ApiResponse(responseCode = "404", description = "Vinyl not found")
     })
-    public ResponseEntity<Void> deleteVinyl(@PathVariable Integer id) {
-        vinylService.deleteVinyl(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteVinyl(@PathVariable Integer id) {
+        try {
+            vinylService.deleteVinyl(id);
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
+        }
     }
 
     /**

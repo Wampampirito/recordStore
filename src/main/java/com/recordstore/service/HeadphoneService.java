@@ -5,8 +5,6 @@ import com.recordstore.enums.HEADPHONES_TYPE;
 import com.recordstore.enums.NOISE_CANCELING;
 import com.recordstore.mapper.HeadphoneMapper;
 import com.recordstore.model.Headphone;
-import com.recordstore.model.Order;
-import com.recordstore.model.Wishlist;
 import com.recordstore.repository.HeadphoneRepository;
 import com.recordstore.repository.OrderRepository;
 import com.recordstore.repository.WishlistRepository;
@@ -139,26 +137,21 @@ public class HeadphoneService {
      * @param id The id of the headphone to delete.
      */
     public void deleteHeadphone(Integer id) {
-        Optional<Headphone> optionalHeadphone = headphoneRepository.findById(id);
-        if (optionalHeadphone.isPresent()) {
-            headphoneRepository.delete(optionalHeadphone.get());
-        } else {
-            throw new IllegalArgumentException("Headphone not found for id " + id);
+            // Check if the product is associated with any order
+            boolean isInOrders = orderRepository.existsByListOrderProducts_Product_Id(id);
+            if (isInOrders) {
+                throw new IllegalStateException("Cannot delete the product because it is associated with an order.");
+            }
+        
+            // Check if the product is in any wishlist
+            boolean isInWishlists = wishlistRepository.existsByListWishlistProducts_Product_Id(id);
+            if (isInWishlists) {
+                throw new IllegalStateException("Cannot delete the product because it is in a wishlist.");
+            }
+        
+            // If not in use, delete the product
+            headphoneRepository.deleteById(id);
         }
-
-        // Check if the product is associated with any order
-        Optional<Order> ordersWithProduct = orderRepository.findById(id);
-        if (!ordersWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is associated with an order.");
-        }
-
-        // Check if the product is associated with any wishlist
-        List<Wishlist> wishlistsWithProduct = wishlistRepository.findWishlistsByProductId(id);
-        if (!wishlistsWithProduct.isEmpty()) {
-            throw new IllegalArgumentException("Cannot delete the product because it is in a wishlist.");
-        }
-
-    }
 
     /**
      * Get headphones that have active noise cancellation.
