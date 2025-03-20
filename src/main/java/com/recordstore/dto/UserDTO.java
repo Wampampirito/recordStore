@@ -12,12 +12,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * Data Transfer Object (DTO) for {@link User}.
- * 
- * This DTO is used to transfer user data between layers (e.g., from controller to service).
- * It contains basic user information such as name, email, phone, address, password,
- * and related orders and wishlist.
- * 
  * <p>
+ * This DTO is used to transfer user data between different layers of the application,
+ * such as from the controller to the service. It contains basic user information,
+ * including name, email, phone number, address, password, as well as associated orders 
+ * and wishlist.
+ * </p>
+ * 
+ * 
  * Example of usage:
  * <pre>
  * UserDTO userDTO = new UserDTO();
@@ -28,8 +30,10 @@ import lombok.NoArgsConstructor;
  * userDTO.setPassword("mySecurePassword123");
  * </pre>
  * 
- * The {@link UserDTO} also allows creating a user from an existing {@link User} entity.
  * 
+ * <p>
+ * The {@link UserDTO} can also be created from an existing {@link User} entity.
+ * </p>
  * 
  * @see User
  */

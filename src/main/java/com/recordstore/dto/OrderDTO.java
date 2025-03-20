@@ -8,31 +8,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Data Transfer Object (DTO) que representa una orden en el sistema.
- * Este DTO se utiliza para transferir datos relacionados con una orden entre las capas de la aplicacion.
- * Contiene la informacion relevante de la orden, incluyendo el usuario asociado, los productos de la orden, 
- * el estado de la orden y el monto total.
+ * Data Transfer Object (DTO) that represents an order in the system.
+ * This DTO is used to transfer data related to an order between the layers of the application.
+ * It contains relevant information about the order, including the associated user, the order's products, 
+ * the order's status, and the total amount.
  * 
- * <p>Los campos de la orden incluyen:</p>
+ * <p>The order fields include:</p>
  * <ul>
- *   <li><b>id</b>: El ID unico de la orden.</li>
- *   <li><b>trackingNumber</b>: El numero de seguimiento de la orden.</li>
- *   <li><b>user</b>: El usuario asociado con la orden, representado como un {@link com.recordstore.dto.UserDTO}.</li>
- *   <li><b>listOrderProducts</b>: La lista de productos de la orden, representada como una lista de {@link com.recordstore.model.OrderProduct}.</li>
- *   <li><b>status</b>: El estado actual de la orden (por ejemplo, "pendiente", "enviado", "entregado").</li>
- *   <li><b>totalAmount</b>: El monto total de la orden.</li>
+ *   <li><b>id</b>: The unique ID of the order.</li>
+ *   <li><b>trackingNumber</b>: The tracking number of the order.</li>
+ *   <li><b>user</b>: The user associated with the order, represented as a {@link com.recordstore.dto.UserDTO}.</li>
+ *   <li><b>listOrderProducts</b>: The list of order products, represented as a list of {@link com.recordstore.model.OrderProduct}.</li>
+ *   <li><b>status</b>: The current status of the order (e.g., "pending", "shipped", "delivered").</li>
+ *   <li><b>totalAmount</b>: The total amount of the order.</li>
  * </ul>
  * 
- * <p>Ejemplo de uso:</p>
+ * <p>Example usage:</p>
  * <pre>
  * OrderDTO orderDTO = new OrderDTO();
  * orderDTO.setId(1L);
  * orderDTO.setTrackingNumber("ABC123");
- * orderDTO.setStatus("Pendiente");
+ * orderDTO.setStatus("Pending");
  * orderDTO.setTotalAmount(150.50);
  * </pre>
  */
- 
 @Data
 @NoArgsConstructor
 public class OrderDTO {

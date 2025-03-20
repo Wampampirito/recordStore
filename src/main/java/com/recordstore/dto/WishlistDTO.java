@@ -8,17 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO (Data Transfer Object) que representa la lista de deseos de un usuario para la transferencia de datos.
+ * Data Transfer Object (DTO) representing a user's wishlist for data transfer.
  * 
- * La clase {@link WishlistDTO} es utilizada para enviar los datos de la lista de deseos de un usuario a través de la 
- * capa de presentación. Incluye el identificador de la lista de deseos, la información del usuario asociada (representada 
- * por un {@link UserDTO}) y la lista de productos (representada por una lista de {@link BasicProductDTO}) que se encuentran 
- * en la lista de deseos.
+ * The {@link WishlistDTO} class is used to send a user's wishlist data across the 
+ * presentation layer. It includes the wishlist identifier, user information (represented 
+ * by a {@link UserDTO}), and a list of products (represented by a list of 
+ * {@link BasicProductDTO}) that are in the wishlist.
  * 
- * Esta clase es útil para evitar la exposición directa de la entidad {@link Wishlist} en la API, promoviendo una arquitectura 
- * limpia y eficiente. Los datos que se envían en el cuerpo de las respuestas REST se organizan utilizando este DTO.
+ * This class is useful to avoid direct exposure of the {@link Wishlist} entity in the 
+ * API, promoting a clean and efficient architecture. The data sent in the REST response body 
+ * is organized using this DTO.
  * 
- * Ejemplo de uso:
+ * Example usage:
  * <pre>
  * WishlistDTO wishlistDTO = new WishlistDTO(wishlistId, userDTO, productDTOs);
  * </pre>
@@ -32,14 +33,14 @@ public class WishlistDTO {
     private List<BasicProductDTO> products;
 
     /**
-     * Constructor para crear un nuevo DTO de lista de deseos con los datos proporcionados.
+     * Constructor to create a new wishlist DTO with the provided data.
      * 
-     * Este constructor inicializa un objeto {@link WishlistDTO} con el identificador de la lista de deseos, la informacion 
-     * del usuario y los productos correspondientes.
+     * This constructor initializes a {@link WishlistDTO} object with the wishlist 
+     * identifier, user information, and corresponding products.
      * 
-     * @param wishlistId El identificador unico de la lista de deseos.
-     * @param userDTO El DTO del usuario asociado a la lista de deseos.
-     * @param productDTOs La lista de productos en la lista de deseos.
+     * @param wishlistId The unique identifier of the wishlist.
+     * @param userDTO The {@link UserDTO} of the user associated with the wishlist.
+     * @param productDTOs The list of products in the wishlist.
      */
     public WishlistDTO(int wishlistId, UserDTO userDTO, List<BasicProductDTO> productDTOs) {
         this.wishlistId = wishlistId;

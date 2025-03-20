@@ -11,20 +11,24 @@ import com.recordstore.model.Headphone;
 /**
  * Repository interface for {@link Headphone} entity.
  * <p>
- * This interface extends {@link JpaRepository} and provides methods to perform CRUD operations 
+ * This interface extends {@link JpaRepository} and provides methods to perform
+ * CRUD operations
  * and custom queries for the {@link Headphone} entity.
  * </p>
  * <p>
- * The repository allows filtering headsets based on various attributes like 
- * active noise cancellation (ANC), wireless connectivity, Bluetooth support, 
+ * The repository allows filtering headsets based on various attributes like
+ * active noise cancellation (ANC), wireless connectivity, Bluetooth support,
  * warranty period, battery life, and headphone type.
  * </p>
  * 
  * Example usage:
+ * 
+ * 
  * <pre>
  * Headphone headphone = headphoneRepository.getHeadphoneById(1);
- * List<Headphone> wirelessHeadphones = headphoneRepository.findByWireless(true);
+ * List&lt;Headphone&gt; wirelessHeadphones = headphoneRepository.findByWireless(true);
  * </pre>
+ * 
  */
 public interface HeadphoneRepository extends JpaRepository<Headphone, Integer> {
 
@@ -55,7 +59,8 @@ public interface HeadphoneRepository extends JpaRepository<Headphone, Integer> {
     /**
      * Finds all headphones with Bluetooth support.
      * 
-     * @param bluetooth the Bluetooth status (true for Bluetooth-enabled headphones).
+     * @param bluetooth the Bluetooth status (true for Bluetooth-enabled
+     *                  headphones).
      * @return a list of headphones that support Bluetooth.
      */
     List<Headphone> findByBluetooth(Boolean bluetooth);
@@ -77,7 +82,8 @@ public interface HeadphoneRepository extends JpaRepository<Headphone, Integer> {
     List<Headphone> findByHeadphoneType(HEADPHONES_TYPE headphoneType);
 
     /**
-     * Finds all headphones with a battery life greater than or equal to the specified value.
+     * Finds all headphones with a battery life greater than or equal to the
+     * specified value.
      * 
      * @param batteryLife the battery life in hours.
      * @return a list of headphones with at least the specified battery life.
@@ -85,7 +91,8 @@ public interface HeadphoneRepository extends JpaRepository<Headphone, Integer> {
     List<Headphone> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
 
     /**
-     * Finds all headphones with a warranty period greater than or equal to the specified value.
+     * Finds all headphones with a warranty period greater than or equal to the
+     * specified value.
      * 
      * @param warranty the warranty period in months.
      * @return a list of headphones with at least the specified warranty period.

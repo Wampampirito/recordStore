@@ -13,7 +13,7 @@ import com.recordstore.model.Turntable;
  * ensuring proper data transformation when handling turntable-related operations.
  * </p>
  * <p>
- * It inherits fields from the {@link Product} and {@link Player} classes and also 
+ * It inherits fields from the {@link com.recordstore.model.Product} and {@link com.recordstore.model.Player} classes and also 
  * includes specific attributes related to turntables.
  * </p>
  */

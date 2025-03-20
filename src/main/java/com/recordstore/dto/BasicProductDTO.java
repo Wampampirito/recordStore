@@ -3,24 +3,21 @@ package com.recordstore.dto;
 import com.recordstore.model.Product;
 
 /**
- * Implementacion concreta de {@link com.recordstore.dto.ProductDTO} para representar un producto
- * basico.
+ * Concrete implementation of {@link com.recordstore.dto.ProductDTO} to represent a basic product.
  * <p>
- * Dado que {@link com.recordstore.dto.ProductDTO} es abstracta, esta clase proporciona una
- * implementacion
- * concreta basada en la entidad {@link com.recordstore.model.Product}.
+ * Since {@link com.recordstore.dto.ProductDTO} is abstract, this class provides a
+ * concrete implementation based on the entity {@link com.recordstore.model.Product}.
  * </p>
  *
  * @author Ivan Egued
  */
-
 public class BasicProductDTO extends ProductDTO {
 
     /**
-     * Constructor que inicializa un {@code BasicProductDTO} a partir de un
+     * Constructor that initializes a {@code BasicProductDTO} from a
      * {@link com.recordstore.model.Product}.
      *
-     * @param product el producto del cual se genera el DTO.
+     * @param product the product from which the DTO is generated.
      */
     public BasicProductDTO(Product product) {
         super(product);

@@ -7,49 +7,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Abstract DTO (Data Transfer Object) class to represent products.
+ * Abstract Data Transfer Object (DTO) class to represent products.
  * <p>
- * Provides a common structure for transferring product data,
- * avoiding direct exposure of the {@link com.recordstore.model.Product} entity.
+ * Provides a common structure for transferring product data, ensuring that the {@link com.recordstore.model.Product} 
+ * entity is not directly exposed to other layers of the application.
  * </p>
- *
+ * 
+ * This class serves as a base for other product-related DTOs, providing common fields like the product's
+ * ID, name, price, stock, and category.
+ * 
+ * Example of use:
+ * <pre>
+ * ProductDTO productDTO = new ProductDTO(product);
+ * </pre>
+ * 
  * @author Ivan Egued
  */
-
 @Data
 @NoArgsConstructor
 public abstract class ProductDTO {
 
-    /**
-     * Identificador unico del producto (id).
-     */
     private Integer id;
-
-    /**
-     * Nombre del producto.
-     */
     private String name;
-
-    /**
-     * Precio del producto.
-     */
     private Double price;
-
-    /**
-     * Cantidad disponible en stock.
-     */
     private Integer stock;
-
-    /**
-     * Categoria del producto.
-     */
     private PRODUCT_CATEGORY productCategory;
 
     /**
-     * Constructor que inicializa un {@code ProductDTO} a partir de un
-     * {@link com.recordstore.model.Product}.
+     * Constructor that initializes a {@code ProductDTO} from a {@link com.recordstore.model.Product} entity.
      *
-     * @param product la entidad {@code Product} de la cual se obtienen los datos.
+     * @param product the {@code Product} entity from which the data is extracted.
      */
     public ProductDTO(Product product) {
         this.id = product.getId();
@@ -58,5 +45,4 @@ public abstract class ProductDTO {
         this.stock = product.getStock();
         this.productCategory = product.getProductCategory();
     }
-
 }

@@ -178,7 +178,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
     /**
      * Finds all portables with the specified warranty period.
      *
-     * @param warranty the warranty period in months.
+     * @param batteryLife the warranty period in months.
      * @return a list of portables that match the given warranty period.
      */
     Optional<Portable> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
