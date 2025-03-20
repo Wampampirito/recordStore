@@ -35,6 +35,9 @@ public class AlbumService {
      * Constructor for the service that injects the album repository.
      * 
      * @param albumRepository The album repository to inject.
+     * @param albumMapper     The album mapper to inject.
+     * @param orderRepository The order repository to inject.
+     * @param wishlistRepository The wishlist repository to inject.
      */
     @Autowired
     public AlbumService(AlbumRepository albumRepository, AlbumMapper albumMapper, OrderRepository orderRepository,

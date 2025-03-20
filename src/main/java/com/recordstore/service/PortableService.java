@@ -34,12 +34,22 @@ import jakarta.transaction.Transactional;
  */
 @Service
 public class PortableService {
-
+    /**
+     * Dependencies needed for the PortableService.
+     */
     private final PortableRepository portableRepository;
     private final PortableMapper portableMapper;
     private final OrderRepository orderRepository;
     private final WishlistRepository wishlistRepository;
 
+    /**
+     * Constructor to initialize the PortableService with dependencies.
+     * 
+     * @param portableRepository The repository for accessing Portable entities.
+     * @param portableMapper   The mapper for converting between Portable and
+     * @param orderRepository   The repository for accessing Order entities.
+     * @param wishlistRepository The repository for accessing Wishlist entities.
+     */
     @Autowired
     public PortableService(PortableRepository portableRepository, PortableMapper portableMapper,
             OrderRepository orderRepository, WishlistRepository wishlistRepository) {

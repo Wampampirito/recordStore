@@ -23,9 +23,15 @@ import java.util.Optional;
 @RequestMapping("/turntable")
 @Tag(name = "Turntables", description = "API for managing turntables")
 public class TurntableController {
-
+    /**
+     * The TurntableService instance to handle business logic operations related to turntables.
+     */
     private final TurntableService turntableService;
 
+    /**
+     * Constructor to initialize the TurntableController with the TurntableService.
+     * @param turntableService
+     */
     @Autowired
     public TurntableController(TurntableService turntableService) {
         this.turntableService = turntableService;

@@ -14,6 +14,12 @@ import com.recordstore.service.PlayerService;
 
 import java.util.List;
 
+/**
+ * REST Controller that manages operations related to music players in the
+ * record store.
+ * It provides endpoints for retrieving players by various criteria, such as
+ * model name, Bluetooth capability, and USB support.
+ */
 @RestController
 @RequestMapping("/player")
 @Tag(name = "Player Controller", description = "Manages player-related operations")
@@ -21,6 +27,12 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
+    /**
+     * Constructor to initialize the PlayerController with the PlayerService.
+     * 
+     * @param playerService The PlayerService instance to handle business logic
+     *                      operations
+     */
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
@@ -30,7 +42,7 @@ public class PlayerController {
      *
      * @return List of all players.
      */
-    @GetMapping ("/all")
+    @GetMapping("/all")
     @Operation(summary = "Get all players", description = "Retrieves a list of all players")
     @ApiResponse(responseCode = "200", description = "List of players retrieved successfully")
     public List<PlayerDTO> getAllPlayers() {
@@ -46,8 +58,8 @@ public class PlayerController {
     @GetMapping("/{id}")
     @Operation(summary = "Get player by id", description = "Retrieves a player by its unique id")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player found"),
-        @ApiResponse(responseCode = "404", description = "Player not found")
+            @ApiResponse(responseCode = "200", description = "Player found"),
+            @ApiResponse(responseCode = "404", description = "Player not found")
     })
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Integer id) {
         return playerService.getPlayerById(id)
@@ -64,8 +76,8 @@ public class PlayerController {
     @GetMapping("/model/{model}")
     @Operation(summary = "Get players by model", description = "Finds players based on their model name")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player(s) found"),
-        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+            @ApiResponse(responseCode = "200", description = "Player(s) found"),
+            @ApiResponse(responseCode = "404", description = "Player(s) not found")
     })
     public List<PlayerDTO> getPlayersByName(@PathVariable String model) {
         return playerService.findByName(model);
@@ -80,8 +92,8 @@ public class PlayerController {
     @GetMapping("/bluetooth")
     @Operation(summary = "Get players by Bluetooth capability", description = "Finds players that support Bluetooth connectivity")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player(s) found"),
-        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+            @ApiResponse(responseCode = "200", description = "Player(s) found"),
+            @ApiResponse(responseCode = "404", description = "Player(s) not found")
     })
     public List<PlayerDTO> getPlayersByBluetooth(@RequestParam Boolean bluetooth) {
         return playerService.findByBluetooth(bluetooth);
@@ -96,8 +108,8 @@ public class PlayerController {
     @GetMapping("/usb")
     @Operation(summary = "Get players by USB support", description = "Finds players that have USB functionality")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player(s) found"),
-        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+            @ApiResponse(responseCode = "200", description = "Player(s) found"),
+            @ApiResponse(responseCode = "404", description = "Player(s) not found")
     })
     public List<PlayerDTO> getPlayersByUsb(@RequestParam Boolean usb) {
         return playerService.findByUsb(usb);
@@ -112,8 +124,8 @@ public class PlayerController {
     @GetMapping("/radio")
     @Operation(summary = "Get players by radio functionality", description = "Finds players that include a radio feature")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player(s) found"),
-        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+            @ApiResponse(responseCode = "200", description = "Player(s) found"),
+            @ApiResponse(responseCode = "404", description = "Player(s) not found")
     })
     public List<PlayerDTO> getPlayersByRadio(@RequestParam Boolean radio) {
         return playerService.findByRadio(radio);
@@ -128,8 +140,8 @@ public class PlayerController {
     @GetMapping("/aux")
     @Operation(summary = "Get players by AUX input", description = "Finds players that support AUX input")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Player(s) found"),
-        @ApiResponse(responseCode = "404", description = "Player(s) not found")
+            @ApiResponse(responseCode = "200", description = "Player(s) found"),
+            @ApiResponse(responseCode = "404", description = "Player(s) not found")
     })
     public List<PlayerDTO> getPlayersByAux(@RequestParam Boolean aux) {
         return playerService.findByAux(aux);
@@ -139,13 +151,14 @@ public class PlayerController {
      * Deletes a player by its id.
      *
      * @param id The id of the player to be deleted.
-     * @return 204 No Content if deleted successfully, 404 Not Found if the player does not exist.
+     * @return 204 No Content if deleted successfully, 404 Not Found if the player
+     *         does not exist.
      */
     @DeleteMapping("delete/{id}")
     @Operation(summary = "Delete player by id", description = "Removes a player from the system using its id")
     @ApiResponses({
-        @ApiResponse(responseCode = "204", description = "Player deleted successfully"),
-        @ApiResponse(responseCode = "404", description = "Player not found")
+            @ApiResponse(responseCode = "204", description = "Player deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Player not found")
     })
     public ResponseEntity<String> deletePlayer(@PathVariable Integer id) {
         try {

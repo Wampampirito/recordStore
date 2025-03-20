@@ -76,6 +76,7 @@ public class PortableController {
      * wishlists.
      *
      * @param id The ID of the Portable to delete.
+     * @return A ResponseEntity with a message indicating the result of the operation.
      */
     @Operation(summary = "Delete a Portable by its ID")
     @ApiResponses(value = {

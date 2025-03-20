@@ -20,11 +20,22 @@ import java.util.Optional;
 @Service
 public class SpeakerService {
 
+    /**
+     * Dependencies needed for the SpeakerService.
+     */
     private final SpeakerRepository speakerRepository;
     private final SpeakerMapper speakerMapper;
     private OrderRepository orderRepository;
     private WishlistRepository wishlistRepository;
 
+    /**
+     * Constructor to initialize the SpeakerService with dependencies.
+     * 
+     * @param speakerRepository The repository for accessing Speaker entities.
+     * @param speakerMapper    The mapper for converting between Speaker and SpeakerDTO.
+     * @param orderRepository   The repository for accessing Order entities.
+     * @param wishlistRepository The repository for accessing Wishlist entities.
+     */
     @Autowired
     public SpeakerService(SpeakerRepository speakerRepository, SpeakerMapper speakerMapper,
             OrderRepository orderRepository, WishlistRepository wishlistRepository) {
@@ -62,7 +73,7 @@ public class SpeakerService {
      * Add a new speaker to the store.
      *
      * @param speakerDTO the speaker to be added in DTO format.
-     * @return the saved speaker in DTO format.
+     * @return the added speaker in DTO format.
      */
     public SpeakerDTO addSpeaker(SpeakerDTO speakerDTO) {
         Speaker speaker = speakerMapper.toEntity(speakerDTO);

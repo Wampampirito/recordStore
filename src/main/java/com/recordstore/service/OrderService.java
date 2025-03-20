@@ -39,6 +39,7 @@ public class OrderService {
      *
      * @param orderRepository Order repository.
      * @param userMapper      User mapper for converting User entities to DTOs.
+     * @param userRepository   User repository for fetching user data.
      */
     @Autowired
     public OrderService(OrderRepository orderRepository, UserMapper userMapper, UserRepository userRepository) {

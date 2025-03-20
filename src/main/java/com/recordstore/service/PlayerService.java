@@ -23,12 +23,22 @@ import com.recordstore.repository.WishlistRepository;
 
 @Service
 public class PlayerService {
-
+    /**
+     * Dependencies needed for the PlayerService.
+     */
     private final PlayerRepository playerRepository;
     private final PlayerMapper playerMapper;
     private final OrderRepository orderRepository;
     private final WishlistRepository wishlistRepository;
 
+    /**
+     * Constructor to initialize the PlayerService with dependencies.
+     * 
+     * @param playerRepository The repository for accessing Player entities.
+     * @param playerMapper The mapper for converting between Player and PlayerDTO.
+     * @param orderRepository The repository for accessing Order entities.
+     * @param wishlistRepository The repository for accessing Wishlist entities.
+     */
     @Autowired
     public PlayerService(PlayerRepository playerRepository, PlayerMapper playerMapper, OrderRepository orderRepository,
             WishlistRepository wishlistRepository) {

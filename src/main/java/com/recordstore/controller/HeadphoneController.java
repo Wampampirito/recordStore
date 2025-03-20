@@ -14,13 +14,22 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * Controller class that handles HTTP requests related to the Headphone entity.
+ * Provides endpoints for adding, updating, deleting, and retrieving headphones.
+ */
 @RestController
 @RequestMapping("/headphone")
 public class HeadphoneController {
-
+    /**
+     * The service class for managing headphones.
+     */
     private final HeadphoneService headphoneService;
 
+    /**
+     * Constructor to initialize the HeadphoneController with the HeadphoneService.
+     * @param headphoneService The HeadphoneService instance to handle business logic operations
+     */
     @Autowired
     public HeadphoneController(HeadphoneService headphoneService) {
         this.headphoneService = headphoneService;

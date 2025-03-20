@@ -153,8 +153,8 @@ public class TurntableService {
     /**
      * Creates a new Turntable in the database.
      * 
-     * @param turntable
-     * @return
+     * @param turntable The Turntable object to be saved.
+     * @return The saved Turntable as a DTO.
      */
     public TurntableDTO saveTurntable (Turntable turntable) {
         return  turntableMapper.toDTO(turntableRepository.save(turntable));

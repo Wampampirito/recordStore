@@ -11,7 +11,10 @@ import com.recordstore.enums.POWER_TYPE;
 import com.recordstore.enums.RESISTANCE;
 import com.recordstore.model.Portable;
 
-
+/**
+ * Repository for managing {@link Portable} entities.
+ * It provides methods for CRUD operations on the {@link Portable} entity.
+ */
 public interface PortableRepository extends JpaRepository<Portable, Integer> {
 
     /**

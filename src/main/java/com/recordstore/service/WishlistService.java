@@ -13,85 +13,83 @@ import com.recordstore.repository.WishlistRepository;
 import jakarta.transaction.Transactional;
 
 /**
- * Servicio para gestionar wishlists en el sistema.
- * 
- * Este servicio proporciona metodos para obtener, guardar y eliminar wishlists.
- * 
+ * Service for managing wishlists in the system.
+ * <p>
+ * This service provides methods to retrieve, add, and remove products from wishlists.
+ * </p>
  */
-@Service // Asegúrate de que la clase es reconocida como un servicio
+@Service
 public class WishlistService {
-
-    // Inyección de dependencias para los repositorios necesarios
-    @Autowired
-    private WishlistRepository wishlistRepository; // Para acceder a la entidad Wishlist
-    @Autowired
-    private ProductRepository productRepository; // Para acceder a la entidad Product
+    /**
+     * Dependencies needed for the WishlistService.
+     */
+    private WishlistRepository wishlistRepository; // Repository for accessing Wishlist entities
+    private ProductRepository productRepository; // Repository for accessing Product entities
 
     /**
-     * Metodo para obtener una wishlist por su id de usuario
-     * 
-     * @param userId
-     * 
+     * Constructor to initialize the WishlistService with dependencies.
+     * @param wishlistRepository Repository for accessing Wishlist entities
+     * @param productRepository Repository for accessing Product entities
      */
-
+    @Autowired
+    public WishlistService(WishlistRepository wishlistRepository, ProductRepository productRepository) {
+        this.wishlistRepository = wishlistRepository;
+        this.productRepository = productRepository;
+    }
+    /**
+     * Retrieves a wishlist by the user's ID.
+     *
+     * @param userId The ID of the user whose wishlist is to be retrieved.
+     * @return A {@link WishlistDTO} representing the user's wishlist.
+     */
     public WishlistDTO getWishlistByUserId(Integer userId) {
-
         return wishlistRepository.getWishlistByUserId(userId);
-
     }
 
-    // TODO Revisar funcionamiento de addProductToWishlist y
-    // removeProductFromWishlist
 
     /**
-     * Método para agregar un producto a una wishlist.
-     * 
-     * @param wishlistId El id de la wishlist a la que se agregará el producto.
-     * @param productId  El id del producto que se agregará a la wishlist.
+     * Adds a product to a wishlist.
+     * <p>
+     * This method retrieves the specified wishlist and product from the database, 
+     * creates an association between them, and updates the wishlist.
+     * </p>
+     *
+     * @param wishlistId The ID of the wishlist to which the product will be added.
+     * @param productId  The ID of the product to be added to the wishlist.
      */
     @Transactional
     public void addProductToWishlist(Integer wishlistId, Integer productId) {
-
-        // Obtener la wishlist y el producto de la base de datos mediante sus IDs
         Wishlist wishlist = wishlistRepository.findById(wishlistId)
-                .orElseThrow(() -> new RuntimeException("Wishlist no encontrada")); // Lanzar una excepción si no se
-                                                                                    // encuentra la wishlist
+                .orElseThrow(() -> new RuntimeException("Wishlist not found"));
 
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado")); // Lanzar una excepción si no se
-                                                                                    // encuentra el producto
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        // Crear un nuevo objeto de la clase intermedia WishlistProduct
         WishlistProduct wishlistProduct = new WishlistProduct();
-
-        // Asignar la wishlist y el producto a la clase intermedia WishlistProduct
         wishlistProduct.setWishlist(wishlist);
         wishlistProduct.setProduct(product);
 
-        // Agregar el nuevo producto a la lista de productos de la wishlist
         wishlist.getListWishlistProducts().add(wishlistProduct);
-
-        // Guardar la wishlist actualizada con el nuevo producto en la base de datos
         wishlistRepository.save(wishlist);
     }
 
     /**
-     * Método para eliminar un producto de una wishlist.
-     * 
-     * @param wishlistId El id de la wishlist a la que se elimina el producto.
-     * @param productId  El id del producto que se elimina de la wishlist.
+     * Removes a product from a wishlist.
+     * <p>
+     * This method retrieves the specified wishlist and removes the product 
+     * from the wishlist if it exists.
+     * </p>
+     *
+     * @param wishlistId The ID of the wishlist from which the product will be removed.
+     * @param productId  The ID of the product to be removed from the wishlist.
      */
     public void removeProductFromWishlist(Double wishlistId, Double productId) {
-        // Obtener la wishlist de la base de datos mediante su ID
         Wishlist wishlist = wishlistRepository.findById(wishlistId)
-                .orElseThrow(() -> new RuntimeException("Wishlist no encontrada")); // Lanzar una excepción si no se
-                                                                                    // encuentra la wishlist
+                .orElseThrow(() -> new RuntimeException("Wishlist not found"));
 
-        // Eliminar el producto de la wishlist mediante su ID
         wishlist.getListWishlistProducts()
                 .removeIf(wishlistProduct -> wishlistProduct.getProduct().getId().equals(productId.intValue()));
 
-        // Guardar la wishlist actualizada en la base de datos
         wishlistRepository.save(wishlist);
     }
 }

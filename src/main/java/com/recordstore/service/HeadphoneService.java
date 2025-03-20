@@ -24,11 +24,22 @@ import java.util.stream.Collectors;
 @Service
 public class HeadphoneService {
 
+    /**
+     * Dependencies needed for the HeadphoneService.
+     */
     private final HeadphoneRepository headphoneRepository;
     private final HeadphoneMapper headphoneMapper;
     private OrderRepository orderRepository;
     private WishlistRepository wishlistRepository;
 
+    /**
+     * Constructor to initialize the HeadphoneService with dependencies.
+     * 
+     * @param headphoneRepository The repository for accessing Headphone entities.
+     * @param headphoneMapper    The mapper for converting between Headphone and
+     * @param orderRepository    The repository for accessing Order entities.
+     * @param wishlistRepository The repository for accessing Wishlist entities.
+     */
     @Autowired
     public HeadphoneService(HeadphoneRepository headphoneRepository, HeadphoneMapper headphoneMapper,
             OrderRepository orderRepository, WishlistRepository wishlistRepository) {
@@ -89,7 +100,7 @@ public class HeadphoneService {
         Optional<Headphone> optionalHeadphone = headphoneRepository.findById(id);
         if (optionalHeadphone.isPresent()) {
             Headphone headphone = optionalHeadphone.get();
-
+    
             // Update only the non-null or valid fields
             if (headphonesDTO.getBrand() != null) {
                 headphone.setBrand(headphonesDTO.getBrand());
@@ -121,14 +132,12 @@ public class HeadphoneService {
             if (headphonesDTO.getAux() != null) {
                 headphone.setAux(headphonesDTO.getAux());
             }
-
-            // Apply other fields as necessary...
-
+    
             Headphone updatedHeadphone = headphoneRepository.save(headphone);
             return headphoneMapper.toDTO(updatedHeadphone);
-        } else {
-            throw new IllegalArgumentException("Headphone not found for id " + id);
-        }
+        } 
+    
+        throw new IllegalArgumentException("Headphone not found for id " + id);
     }
 
     /**

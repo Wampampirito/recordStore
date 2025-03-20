@@ -21,8 +21,15 @@ import java.util.Optional;
 @RequestMapping("/speaker")
 public class SpeakerController {
 
+    /**
+     * The SpeakerService instance to handle business logic operations related to speakers.
+     */
     private final SpeakerService speakerService;
 
+    /**
+     * Constructor to initialize the SpeakerController with the SpeakerService.
+     * @param speakerService The SpeakerService instance to handle business logic operations
+     */
     @Autowired
     public SpeakerController(SpeakerService speakerService) {
         this.speakerService = speakerService;
