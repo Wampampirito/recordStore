@@ -72,6 +72,10 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already registered");
         }
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be null or empty");
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypt password
         return userMapper.toDTO(userRepository.save(user));
     }

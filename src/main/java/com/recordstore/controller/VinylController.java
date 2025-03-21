@@ -19,7 +19,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * REST controller for managing vinyls in the record store.
+ * Provides endpoints to retrieve, create, update, and delete vinyls.
+ * 
+ * <p>
+ * This controller interacts with the {@link VinylService} and
+ * {@link VinylMapper}
+ * to manage the business logic and data transformation.
+ * </p>
+ * 
+ * <p>
+ * <b>Available endpoints:</b>
+ * </p>
+ * <ul>
+ * <li><b>GET /vinyl/all</b>: Retrieves all vinyls.</li>
+ * <li><b>GET /vinyl/{id}</b>: Retrieves a vinyl by its ID.</li>
+ * <li><b>GET /vinyl/artist/{artist}</b>: Retrieves vinyls by a specific artist.</li>
+ * <li><b>GET /vinyl/genre/{genre}</b>: Retrieves vinyls by a specific genre.</li>
+ * <li><b>GET /vinyl/format/{format}</b>: Retrieves vinyls by a specific format.</li>
+ * <li><b>GET /vinyl/year-range</b>: Retrieves vinyls within a specified year range.</li>
+ * <li><b>GET /vinyl/price-range</b>: Retrieves vinyls within a specified price range.</li>
+ * <li><b>GET /vinyl/duration-range</b>: Retrieves vinyls within a specified duration range.</li>
+ * <li><b>POST /vinyl/new</b>: Creates a new vinyl.</li>
+ * <li><b>PUT /vinyl/update/{id}</b>: Updates an existing vinyl.</li>
+ * <li><b>DELETE /vinyl/delete/{id}</b>: Deletes a vinyl by its ID.</li>
+ * </ul>
+ */
 @RestController
 @RequestMapping("/vinyl")
 public class VinylController {

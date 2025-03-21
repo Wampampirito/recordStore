@@ -1,6 +1,8 @@
 package com.recordstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.recordstore.model.Product;
@@ -14,12 +16,16 @@ import java.util.Optional;
 
 /**
  * REST controller for managing products in the record store.
- * <p>
+ * 
  * Provides endpoints for CRUD operations on products.
- * </p>
+ * 
+ * Endpoints:
+ *  GET /products/all - Get all products
+ *  GET /products/{id} - Get product by ID
+ *  DELETE /products/{id} - Delete a product
  */
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -41,7 +47,7 @@ public class ProductController {
      *
      * @return a list containing all products in the store.
      */
-    @GetMapping
+    @GetMapping ("/all")
     @Operation(summary = "Get all products", description = "Retrieves a list of all products available in the store.")
     @ApiResponse(responseCode = "200", description = "List of products retrieved successfully")
     public List<Product> getAllProducts() {
@@ -63,27 +69,22 @@ public class ProductController {
     }
 
     /**
-     * Saves a new product in the database.
-     *
-     * @param product the product to be saved.
-     * @return the saved product.
-     */
-    @PostMapping
-    @Operation(summary = "Add a new product", description = "Create a new product in the store.")
-    @ApiResponse(responseCode = "201", description = "Product created successfully")
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
-    }
-
-    /**
      * Deletes a product by its identifier.
      *
      * @param id the ID of the product to be deleted.
      */
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete a product", description = "Removes a product from the store.")
     @ApiResponse(responseCode = "204", description = "Product deleted successfully")
-    public void deleteProduct(@PathVariable Integer id) {
-        productService.deleteProduct(id);
+    public ResponseEntity <String>  deleteProduct(@PathVariable Integer id) {
+                try {
+            productService.deleteProduct(id);
+            return ResponseEntity.ok("Product successfully deleted with ID: " + id);
+        } catch (IllegalStateException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the product.");
+        }
     }
 }

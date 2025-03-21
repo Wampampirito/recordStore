@@ -3,7 +3,9 @@ package com.recordstore.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.recordstore.enums.ORDER_STATUS;
 
 import jakarta.persistence.CascadeType;
@@ -42,6 +44,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "orderId")
 public class Order {
 
     /**
@@ -72,7 +75,6 @@ public class Order {
      */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private User user; // User who placed the order
 
     /**
@@ -86,6 +88,7 @@ public class Order {
      * @see com.recordstore.model.OrderProduct
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<OrderProduct> listOrderProducts = new ArrayList<>(); // Products in the order
 
     /**

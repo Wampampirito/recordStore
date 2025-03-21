@@ -45,6 +45,8 @@ public class UserMapper {
         userDTO.setPhone(user.getPhone());
         userDTO.setAddress(user.getAddress());
         userDTO.setPassword(user.getPassword()); // Mapping password
+        userDTO.setListOrder(user.getListOrder());
+        userDTO.setListWishlist(user.getListWishlist());
 
         return userDTO;
     }
@@ -66,6 +68,8 @@ public class UserMapper {
         user.setPhone(userDTO.getPhone());
         user.setAddress(userDTO.getAddress());
         user.setPassword(userDTO.getPassword()); // Setting password from DTO
+        user.setListOrder(userDTO.getListOrder());
+        user.setListWishlist(userDTO.getListWishlist());
 
         return user;
     }

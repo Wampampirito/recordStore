@@ -16,6 +16,12 @@ import java.util.Optional;
 /**
  * Controller class that handles HTTP requests related to the Speaker entity.
  * Provides endpoints for adding, updating, deleting, and retrieving speakers.
+ * Endpoints:
+ *  GET /speaker/all: Retrieve a list of all speakers.
+ *  GET /speaker/{id}: Retrieve a specific speaker by its id.
+ *  POST /speaker/new: Add a new speaker.
+ *  PUT /speaker/{id}: Update an existing speaker's information.
+ *  DELETE /speaker/{id}: Delete a speaker by its id.
  */
 @RestController
 @RequestMapping("/speaker")
@@ -92,7 +98,7 @@ public class SpeakerController {
         @ApiResponse(responseCode = "200", description = "Speaker updated successfully"),
         @ApiResponse(responseCode = "404", description = "Speaker not found")
     })
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<SpeakerDTO> updateSpeaker(@PathVariable Integer id, @RequestBody SpeakerDTO speakerDTO) {
         try {
             SpeakerDTO updatedSpeaker = speakerService.updateSpeaker(id, speakerDTO);
@@ -113,7 +119,7 @@ public class SpeakerController {
         @ApiResponse(responseCode = "200", description = "Speaker deleted successfully"),
         @ApiResponse(responseCode = "404", description = "Speaker not found")
     })
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/update/{id}")
     public ResponseEntity<String> deleteSpeaker(@PathVariable Integer id) {
         try {
             speakerService.deleteSpeaker(id);

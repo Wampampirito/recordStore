@@ -18,6 +18,14 @@ import java.util.Optional;
 
 /**
  * REST Controller for managing turntables.
+ * 
+ * Endpoints:
+ *  GET /turntable/all: Retrieves all turntables.
+ *  GET /turntable/{id}: Retrieves a turntable by its ID.
+ *  POST /turntable/new: Saves a new turntable.
+ *  DELETE /turntable/{id}: Deletes a turntable by its ID.
+ *  GET /turntable/brand/{brand}: Retrieves turntables by brand.
+ *  PUT /turntable/{id}: Updates an existing turntable.
  */
 @RestController
 @RequestMapping("/turntable")
@@ -112,7 +120,6 @@ public class TurntableController {
         return ResponseEntity.ok(turntableService.getTurntablesByBrand(brand));
     }
 
-    // Other endpoints with similar annotations
 
     /**
      * Updates an existing turntable.

@@ -140,9 +140,9 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
      * Finds players containing the given name in their model.
      *
      * @param name the name fragment to search for.
-     * @return an Optional containing the matching player if found, otherwise empty.
+     * @return a list containing the matching player if found, otherwise empty.
      */
-    Optional<Player> findByNameContaining(String name);
+    List<Player> findByNameContaining(String name);
 
   
 }

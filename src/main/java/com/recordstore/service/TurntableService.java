@@ -105,7 +105,10 @@ public class TurntableService {
      * @return List of turntables matching the brand.
      */
     public List<TurntableDTO> getTurntablesByBrand(String brand) {
-        return turntableRepository.findByBrand(brand);
+        return turntableRepository.findByBrand(brand)
+                .stream()
+                .map(turntableMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -115,7 +118,10 @@ public class TurntableService {
      * @return List of turntables matching the color.
      */
     public List<TurntableDTO> getTurntablesByColor(String color) {
-        return turntableRepository.findByColor(color);
+        return turntableRepository.findByColor(color)
+        .stream()
+        .map(turntableMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -125,7 +131,10 @@ public class TurntableService {
      * @return List of turntables matching the warranty criteria.
      */
     public List<TurntableDTO> getTurntablesByWarrantyGreaterThanEqual(Integer warranty) {
-        return turntableRepository.findByWarrantyGreaterThanEqual(warranty);
+        return turntableRepository.findByWarrantyGreaterThanEqual(warranty)
+        .stream()
+        .map(turntableMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**
@@ -135,7 +144,10 @@ public class TurntableService {
      * @return List of turntables matching the Bluetooth criteria.
      */
     public List<TurntableDTO> getTurntablesByBluetooth(boolean bluetooth) {
-        return turntableRepository.findByBluetooth(bluetooth);
+        return turntableRepository.findByBluetooth(bluetooth)
+        .stream()
+        .map(turntableMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
     /**

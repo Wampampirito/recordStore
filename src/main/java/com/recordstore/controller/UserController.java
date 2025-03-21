@@ -27,9 +27,21 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
  * REST controller for managing users in the system.
- * <p>
+ * 
  * Provides endpoints for CRUD operations, password management, and user details updates.
- * </p>
+ * 
+ * Endpoints:
+ * GET /user/all - Retrieve a list of all users
+ * GET /user/{id} - Retrieve a user by their unique ID
+ * GET /user/email/{email} - Retrieve a user by their email address
+ * POST /user/new - Create a new user in the system
+ * PUT /user/update/{id} - Update the details of an existing user
+ * PATCH /user/{id}/password - Update the password of an existing user
+ * DELETE /user/delete/{id} - Delete an existing user from the system
+ * PATCH /user/{id}/address - Update the address of an existing user
+ * POST /user/{id}/verify-password - Verify the current password of a user
+ * PATCH /user/{id}/reset-password - Reset the password of a user to a new one
+ * PATCH /user/{id}/phone - Update the phone number of an existing user
  */
 @RestController
 @RequestMapping("/user")
@@ -116,10 +128,13 @@ public class UserController {
     @PostMapping("/new")
     public ResponseEntity<UserDTO> createUser(
             @Parameter(description = "User data", required = true) @RequestBody UserDTO userDTO) {
+                userDTO.toString();
         User user = userMapper.toEntity(userDTO);
         User savedUser = userMapper.toEntity(userService.saveUser(user));
         return ResponseEntity.ok(userMapper.toDTO(savedUser));
     }
+
+
 
     /**
      * Updates the details of an existing user.
@@ -176,7 +191,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "User deleted successfully"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(
             @Parameter(description = "User ID", required = true) @PathVariable Integer id) {
         userService.deleteUser(id);

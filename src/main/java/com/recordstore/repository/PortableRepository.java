@@ -144,7 +144,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param name the name fragment to search for.
      * @return an Optional containing the matching portable if found, otherwise empty.
      */
-    Optional<Portable> findByNameContaining(String name);
+    List <Portable> findByNameContaining(String name);
 
     /**
      * Finds all portables with the specified portable type.
@@ -152,7 +152,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param portableType the portable type (e.g., speaker, headphone).
      * @return a list of portables that match the given portable type.
      */
-    Optional<Portable> findByPortableType(PORTABLE_TYPE portableType);
+    List <Portable> findByPortableType(PORTABLE_TYPE portableType);
 
     /**
      * Finds all portables with the specified power type.
@@ -160,7 +160,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param powerType the power type (e.g., battery, AC).
      * @return a list of portables that match the given power type.
      */
-    Optional<Portable> findByPowerType(POWER_TYPE powerType);
+    List <Portable> findByPowerType(POWER_TYPE powerType);
 
     /**
      * Finds all portables with the specified battery life.
@@ -168,7 +168,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param batteryLife the battery life in hours.
      * @return a list of portables that match the given battery life.
      */
-    Optional<Portable> findByBatteryLife(Integer batteryLife);
+    List <Portable> findByBatteryLife(Integer batteryLife);
 
     /**
      * Finds all portables with the specified resistance.
@@ -176,7 +176,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param resistance the resistance (e.g., IPX7, IPX8).
      * @return a list of portables that match the given resistance.
      */
-    Optional<Portable> findByResistance(RESISTANCE resistance);
+    List <Portable> findByResistance(RESISTANCE resistance);
 
     /**
      * Finds all portables with the specified warranty period.
@@ -184,7 +184,7 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param batteryLife the warranty period in months.
      * @return a list of portables that match the given warranty period.
      */
-    Optional<Portable> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
+    List <Portable> findByBatteryLifeGreaterThanEqual(Integer batteryLife);
 
     /**
      * Finds all portables with the specified warranty period.
@@ -192,5 +192,5 @@ public interface PortableRepository extends JpaRepository<Portable, Integer> {
      * @param warranty the warranty period in months.
      * @return a list of portables that match the given warranty period.
      */
-    Optional<Portable> findByWarrantyGreaterThanEqual(Integer warranty);
+    List <Portable> findByWarrantyGreaterThanEqual(Integer warranty);
 }

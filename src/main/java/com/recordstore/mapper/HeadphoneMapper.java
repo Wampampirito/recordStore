@@ -2,11 +2,11 @@ package com.recordstore.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.recordstore.dto.HeadphonesDTO;
+import com.recordstore.dto.HeadphoneDTO;
 import com.recordstore.model.Headphone;
 
 /**
- * Mapper class responsible for converting {@link Headphone} entities to {@link HeadphonesDTO} and vice versa.
+ * Mapper class responsible for converting {@link Headphone} entities to {@link HeadphoneDTO} and vice versa.
  * This class handles the mapping of properties between the entity and the DTO, allowing smooth data transfer
  * between the persistence layer (entity) and the presentation layer (DTO).
  */
@@ -14,17 +14,17 @@ import com.recordstore.model.Headphone;
 public class HeadphoneMapper {
 
     /**
-     * Converts a {@link Headphone} entity to a {@link HeadphonesDTO}.
+     * Converts a {@link Headphone} entity to a {@link HeadphoneDTO}.
      *
      * @param headphone The {@link Headphone} entity to be converted.
-     * @return The {@link HeadphonesDTO} representation of the provided entity, or {@code null} if the input is {@code null}.
+     * @return The {@link HeadphoneDTO} representation of the provided entity, or {@code null} if the input is {@code null}.
      */
-    public HeadphonesDTO toDTO (Headphone headphone) {
+    public HeadphoneDTO toDTO (Headphone headphone) {
         if (headphone == null) {
             return null;
         }
         
-        HeadphonesDTO headphonesDTO = new HeadphonesDTO();
+        HeadphoneDTO headphonesDTO = new HeadphoneDTO();
         // Mapping properties from Headphone entity to HeadphonesDTO
         headphonesDTO.setBrand(headphone.getBrand());
         headphonesDTO.setName(headphone.getName());
@@ -45,12 +45,12 @@ public class HeadphoneMapper {
     }
 
     /**
-     * Converts a {@link HeadphonesDTO} to a {@link Headphone} entity.
+     * Converts a {@link HeadphoneDTO} to a {@link Headphone} entity.
      *
-     * @param headphonesDTO The {@link HeadphonesDTO} to be converted.
+     * @param headphonesDTO The {@link HeadphoneDTO} to be converted.
      * @return The {@link Headphone} entity representation of the provided DTO, or {@code null} if the input is {@code null}.
      */
-    public Headphone toEntity(HeadphonesDTO headphonesDTO) {
+    public Headphone toEntity(HeadphoneDTO headphonesDTO) {
         if (headphonesDTO == null) {
             return null;
         }

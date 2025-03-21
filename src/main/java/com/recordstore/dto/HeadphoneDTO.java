@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
  * headphonesDTO.setBrand("Sony");
  * headphonesDTO.setPrice(199.99);
  * headphonesDTO.setWireless(true);
- * headphonesDTO.setHeadphonesType(HEADPHONES_TYPE.OVER_EAR);
+ * headphonesDTO.setHeadphoneType(HEADPHONES_TYPE.OVER_EAR);
  * headphonesDTO.setAnc(NOISE_CANCELING.ACTIVE);
  * </pre>
  * 
@@ -36,7 +36,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class HeadphonesDTO extends AudioEquipmentDTO {
+public class HeadphoneDTO extends AudioEquipmentDTO {
     private String brand;
     private Double price;
     private Boolean wireless;

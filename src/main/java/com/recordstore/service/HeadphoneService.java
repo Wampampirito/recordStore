@@ -1,6 +1,6 @@
 package com.recordstore.service;
 
-import com.recordstore.dto.HeadphonesDTO;
+import com.recordstore.dto.HeadphoneDTO;
 import com.recordstore.enums.HEADPHONES_TYPE;
 import com.recordstore.enums.NOISE_CANCELING;
 import com.recordstore.mapper.HeadphoneMapper;
@@ -54,7 +54,7 @@ public class HeadphoneService {
      * 
      * @return List of all headphones as DTOs.
      */
-    public List<HeadphonesDTO> getAllHeadphones() {
+    public List<HeadphoneDTO> getAllHeadphones() {
         List<Headphone> headphones = headphoneRepository.findAll();
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -67,7 +67,7 @@ public class HeadphoneService {
      * @param id The id of the headphone.
      * @return The headphone DTO.
      */
-    public HeadphonesDTO getHeadphoneById(Integer id) {
+    public HeadphoneDTO getHeadphoneById(Integer id) {
         Optional<Headphone> headphone = headphoneRepository.findById(id);
         if (headphone.isPresent()) {
             return headphoneMapper.toDTO(headphone.get());
@@ -82,7 +82,7 @@ public class HeadphoneService {
      * @param headphonesDTO The headphone DTO to be created.
      * @return The created headphone DTO.
      */
-    public HeadphonesDTO saveHeadphone(HeadphonesDTO headphonesDTO) {
+    public HeadphoneDTO saveHeadphone(HeadphoneDTO headphonesDTO) {
         Headphone headphone = headphoneMapper.toEntity(headphonesDTO);
         Headphone createdHeadphone = headphoneRepository.save(headphone);
         return headphoneMapper.toDTO(createdHeadphone);
@@ -96,7 +96,7 @@ public class HeadphoneService {
      * @param headphonesDTO The new details of the headphone.
      * @return The updated headphone DTO.
      */
-    public HeadphonesDTO updateHeadphone(Integer id, HeadphonesDTO headphonesDTO) {
+    public HeadphoneDTO updateHeadphone(Integer id, HeadphoneDTO headphonesDTO) {
         Optional<Headphone> optionalHeadphone = headphoneRepository.findById(id);
         if (optionalHeadphone.isPresent()) {
             Headphone headphone = optionalHeadphone.get();
@@ -168,7 +168,7 @@ public class HeadphoneService {
      * @param anc True to find headphones with active noise cancellation.
      * @return A list of headphones with ANC.
      */
-    public List<HeadphonesDTO> getHeadphonesWithANC(NOISE_CANCELING anc) {
+    public List<HeadphoneDTO> getHeadphonesWithANC(NOISE_CANCELING anc) {
         List<Headphone> headphones = headphoneRepository.findByAnc(anc);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -181,7 +181,7 @@ public class HeadphoneService {
      * @param bluetooth True to find headphones with Bluetooth.
      * @return A list of headphones with Bluetooth.
      */
-    public List<HeadphonesDTO> getHeadphonesWithBluetooth(Boolean bluetooth) {
+    public List<HeadphoneDTO> getHeadphonesWithBluetooth(Boolean bluetooth) {
         List<Headphone> headphones = headphoneRepository.findByBluetooth(bluetooth);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -194,7 +194,7 @@ public class HeadphoneService {
      * @param wireless True to find wireless headphones.
      * @return A list of wireless headphones.
      */
-    public List<HeadphonesDTO> getHeadphonesWireless(Boolean wireless) {
+    public List<HeadphoneDTO> getHeadphonesWireless(Boolean wireless) {
         List<Headphone> headphones = headphoneRepository.findByWireless(wireless);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -209,7 +209,7 @@ public class HeadphoneService {
      * @return A list of headphones with the specified warranty period greater than
      *         or equal to the specified value..
      */
-    public List<HeadphonesDTO> getHeadphonesByWarranty(Integer warranty) {
+    public List<HeadphoneDTO> getHeadphonesByWarranty(Integer warranty) {
         List<Headphone> headphones = headphoneRepository.findByWarrantyGreaterThanEqual(warranty);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -224,7 +224,7 @@ public class HeadphoneService {
      * @return A list of headphones with a battery life greater than or equal to the
      *         specified value.
      */
-    public List<HeadphonesDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
+    public List<HeadphoneDTO> getHeadphonesByBatteryLife(Integer batteryLife) {
         List<Headphone> headphones = headphoneRepository.findByBatteryLifeGreaterThanEqual(batteryLife);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)
@@ -237,7 +237,7 @@ public class HeadphoneService {
      * @param headphoneType The type of headphones (e.g., over-ear, in-ear).
      * @return A list of headphones of the specified type.
      */
-    public List<HeadphonesDTO> getHeadphonesByType(HEADPHONES_TYPE headphoneType) {
+    public List<HeadphoneDTO> getHeadphonesByType(HEADPHONES_TYPE headphoneType) {
         List<Headphone> headphones = headphoneRepository.findByHeadphoneType(headphoneType);
         return headphones.stream()
                 .map(headphoneMapper::toDTO)

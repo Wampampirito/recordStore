@@ -30,6 +30,27 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * REST controller for managing Portable devices.
  * Provides methods for saving, updating, deleting, and searching Portables.
+ * List of all endpoints:
+ * 
+ * POST /portable/new - Save a new Portable
+ * PUT /portable/{id} - Update an existing Portable
+ * DELETE /portable/{id} - Delete a Portable by its ID
+ * GET /portable/{id} - Get a Portable by its ID
+ * GET /portable/all - Get all Portables
+ * GET /portable/aux/{aux} - Find Portables with AUX port
+ * GET /portable/usb/{usb} - Find Portables with USB port
+ * GET /portable/bluetooth/{bluetooth} - Find Portables with Bluetooth
+ * GET /portable/warranty/{warranty} - Find Portables by warranty
+ * GET /portable/brand/{brand} - Find Portables by brand
+ * GET /portable/color/{color} - Find Portables by color
+ * GET /portable/stock/{stock} - Find Portables by stock
+ * GET /portable/price-range - Find Portables by price range
+ * GET /portable/name/{name} - Find Portables by name
+ * GET /portable/radio/{radio} - Find Portables with built-in radio
+ * GET /portable/type/{portableType} - Find Portables by type
+ * GET /portable/power/{powerType} - Find Portables by power type
+ * GET /portable/battery/{batteryLife} - Find Portables by battery life
+ * GET /portable/resistance/{resistance} - Find Portables by resistance type
  */
 @RestController
 @RequestMapping("/portable")
@@ -76,7 +97,8 @@ public class PortableController {
      * wishlists.
      *
      * @param id The ID of the Portable to delete.
-     * @return A ResponseEntity with a message indicating the result of the operation.
+     * @return A ResponseEntity with a message indicating the result of the
+     *         operation.
      */
     @Operation(summary = "Delete a Portable by its ID")
     @ApiResponses(value = {
@@ -86,7 +108,7 @@ public class PortableController {
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePortableById(@PathVariable Integer id) {
-                try {
+        try {
             portableService.deletePortable(id);
             return ResponseEntity.ok("Product successfully deleted with ID: " + id);
         } catch (IllegalStateException ex) {
@@ -129,7 +151,7 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping
+    @GetMapping ("/all")
     public List<PortableDTO> getAllPortables() {
         return portableService.getAllPortables();
     }
@@ -144,8 +166,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/aux")
-    public List<PortableDTO> findByAux(@RequestParam Boolean aux) {
+    @GetMapping("/aux/{aux}")
+    public List<PortableDTO> findByAux(@PathVariable Boolean aux) {
         return portableService.findByAux(aux);
     }
 
@@ -159,8 +181,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/usb")
-    public List<PortableDTO> findByUsb(@RequestParam Boolean usb) {
+    @GetMapping("/usb/{usb}")
+    public List<PortableDTO> findByUsb(@PathVariable Boolean usb) {
         return portableService.findByUsb(usb);
     }
 
@@ -175,8 +197,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/bluetooth")
-    public List<PortableDTO> findByBluetooth(@RequestParam Boolean bluetooth) {
+    @GetMapping("/bluetooth/{bluetooth}")
+    public List<PortableDTO> findByBluetooth(@PathVariable Boolean bluetooth) {
         return portableService.findByBluetooth(bluetooth);
     }
 
@@ -191,8 +213,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/warranty")
-    public List<PortableDTO> findByWarranty(@RequestParam Integer warranty) {
+    @GetMapping("/warranty/{warranty}")
+    public List<PortableDTO> findByWarranty(@PathVariable Integer warranty) {
         return portableService.findByWarranty(warranty);
     }
 
@@ -206,8 +228,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/brand")
-    public List<PortableDTO> findByBrand(@RequestParam String brand) {
+    @GetMapping("/brand/{brand}")
+    public List<PortableDTO> findByBrand(@PathVariable String brand) {
         return portableService.findByBrand(brand);
     }
 
@@ -221,8 +243,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/color")
-    public List<PortableDTO> findByColor(@RequestParam String color) {
+    @GetMapping("/color/{color}")
+    public List<PortableDTO> findByColor(@PathVariable String color) {
         return portableService.findByColor(color);
     }
 
@@ -236,8 +258,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/stock")
-    public List<PortableDTO> findByStock(@RequestParam Integer stock) {
+    @GetMapping("/stock/{stock}")
+    public List<PortableDTO> findByStock(@PathVariable Integer stock) {
         return portableService.findByStock(stock);
     }
 
@@ -252,7 +274,7 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/price")
+    @GetMapping("/price-range")
     public List<PortableDTO> findByPriceRange(@RequestParam Double minPrice, @RequestParam Double maxPrice) {
         return portableService.findByPriceRange(minPrice, maxPrice);
     }
@@ -267,8 +289,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/name")
-    public List<PortableDTO> findByName(@RequestParam String name) {
+    @GetMapping("/name/{name}")
+    public List<PortableDTO> findByName(@PathVariable String name) {
         return portableService.findByName(name);
     }
 
@@ -283,8 +305,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/radio")
-    public List<PortableDTO> findByRadio(@RequestParam Boolean radio) {
+    @GetMapping("/radio/{radio}")
+    public List<PortableDTO> findByRadio(@PathVariable Boolean radio) {
         return portableService.findByRadio(radio);
     }
 
@@ -298,8 +320,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/type")
-    public List<PortableDTO> findByPortableType(@RequestParam PORTABLE_TYPE portableType) {
+    @GetMapping("/type/{portableType}")
+    public List<PortableDTO> findByPortableType(@PathVariable PORTABLE_TYPE portableType) {
         return portableService.findByPortableType(portableType);
     }
 
@@ -313,8 +335,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/power")
-    public List<PortableDTO> findByPowerType(@RequestParam POWER_TYPE powerType) {
+    @GetMapping("/power/{powerType}")
+    public List<PortableDTO> findByPowerType(@PathVariable POWER_TYPE powerType) {
         return portableService.findByPowerType(powerType);
     }
 
@@ -329,8 +351,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/battery")
-    public List<PortableDTO> findByBatteryLife(@RequestParam Integer batteryLife) {
+    @GetMapping("/battery/{batteryLife}")
+    public List<PortableDTO> findByBatteryLife(@PathVariable Integer batteryLife) {
         return portableService.findByBatteryLife(batteryLife);
     }
 
@@ -344,8 +366,8 @@ public class PortableController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Portables retrieved successfully")
     })
-    @GetMapping("/resistance")
-    public List<PortableDTO> findByResistance(@RequestParam RESISTANCE resistance) {
+    @GetMapping("/resistance/{resistance}")
+    public List<PortableDTO> findByResistance(@PathVariable RESISTANCE resistance) {
         return portableService.findByResistance(resistance);
     }
 }

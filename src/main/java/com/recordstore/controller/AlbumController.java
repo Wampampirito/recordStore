@@ -33,23 +33,24 @@ import java.util.Optional;
  * <b>Available endpoints:</b>
  * </p>
  * <ul>
- * <li><b>GET /albums</b>: Retrieves all albums.</li>
- * <li><b>GET /albums/{id}</b>: Retrieves an album by its ID.</li>
- * <li><b>GET /albums/artist/{artist}</b>: Retrieves albums by a specific
+ * <li><b>GET /album/all</b>: Retrieves all albums.</li>
+ * <li><b>GET /album/{id}</b>: Retrieves an album by its ID.</li>
+ * <li><b>GET /album/artist/{artist}</b>: Retrieves albums by a specific
  * artist.</li>
- * <li><b>GET /albums/genre/{genre}</b>: Retrieves albums by a specific
+ * <li><b>GET /album/genre/{genre}</b>: Retrieves albums by a specific
  * genre.</li>
- * <li><b>GET /albums/format/{format}</b>: Retrieves albums by a specific
+ * <li><b>GET /album/format/{format}</b>: Retrieves albums by a specific
  * format.</li>
- * <li><b>GET /albums/year-range</b>: Retrieves albums within a specified year
- * range.</li>
- * <li><b>POST /albums/new</b>: Creates a new album.</li>
- * <li><b>PUT /albums/update/{id}</b>: Updates an existing album.</li>
- * <li><b>DELETE /albums/delete/{id}</b>: Deletes an album by its ID.</li>
+ * <li><b>GET /album/year-range</b>: Retrieves albums within a specified year range.</li>
+ * <li><b>GET /album/year-range</b>: Retrieves albums within a specified year range.</li>
+ * <li><b>GET /album/price-range</b>: Retrieves albums within a specified price range.</li>
+ * <li><b>POST /album/new</b>: Creates a new album.</li>
+ * <li><b>PUT /album/update/{id}</b>: Updates an existing album.</li>
+ * <li><b>DELETE /album/delete/{id}</b>: Deletes an album by its ID.</li>
  * </ul>
  */
 @RestController
-@RequestMapping("/albums")
+@RequestMapping("/album")
 @Tag(name = "Albums", description = "Endpoints for managing album records")
 public class AlbumController {
 
@@ -75,7 +76,7 @@ public class AlbumController {
      */
     @Operation(summary = "Retrieve all albums", description = "Returns a list of all albums.")
     @ApiResponse(responseCode = "200", description = "List of albums retrieved successfully")
-    @GetMapping
+    @GetMapping ("/all")
     public ResponseEntity<List<AlbumDTO>> getAllAlbums() {
         List<AlbumDTO> albums = albumService.getAllAlbums();
         return ResponseEntity.ok(albums);
@@ -136,10 +137,10 @@ public class AlbumController {
     /**
      * Retrieves albums by a specific format.
      *
-     * @param format the format of the albums (e.g., CD, Vinyl)
+     * @param format the format of the albums (e.g., CD, Album)
      * @return a list of albums within the given format
      */
-    @Operation(summary = "Retrieve albums by format", description = "Returns albums filtered by format (CD, Vinyl, etc.).")
+    @Operation(summary = "Retrieve albums by format", description = "Returns albums filtered by format (CD, Album, etc.).")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Albums found"),
             @ApiResponse(responseCode = "404", description = "Albums not found")
@@ -167,6 +168,41 @@ public class AlbumController {
             @RequestParam int startYear,
             @RequestParam int endYear) {
         List<AlbumDTO> albums = albumService.getAlbumsByYearRange(startYear, endYear);
+        return ResponseEntity.ok(albums);
+    }
+        /**
+     * Endpoint to get albums within a specific price range.
+     *
+     * @param minPrice The minimum price of the albums.
+     * @param maxPrice The maximum price of the albums.
+     * @return List of albums within the price range in {@link AlbumDTO} format.
+     */
+    @GetMapping("/price-range")
+    @Operation(summary = "Get albums by price range", description = "Returns albums within the specified price range")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
+    public ResponseEntity<List<AlbumDTO>> getAlbumsByPriceRange(@RequestParam Double minPrice, @RequestParam Double maxPrice) {
+        List<AlbumDTO> albums = albumService.getAlbumsByPriceRange(minPrice, maxPrice);
+        return ResponseEntity.ok(albums);
+    }
+
+    /**
+     * Endpoint to get albums within a specific duration range.
+     *
+     * @param minDuration The minimum duration.
+     * @param maxDuration The maximum duration.
+     * @return List of albums within the specified duration range in {@link AlbumDTO} format.
+     */
+    @GetMapping("/duration-range")
+    @Operation(summary = "Get albums by duration range", description = "Returns albums within the specified duration range")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Albums found"),
+        @ApiResponse(responseCode = "404", description = "Albums not found")
+    })
+    public ResponseEntity<List<AlbumDTO>> getAlbumsByDuration(@RequestParam String minDuration, @RequestParam String maxDuration) {
+        List<AlbumDTO> albums = albumService.getAlbumsByDuration(minDuration, maxDuration);
         return ResponseEntity.ok(albums);
     }
 
