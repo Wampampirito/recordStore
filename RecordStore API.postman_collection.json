@@ -1,0 +1,2091 @@
+{
+	"info": {
+		"_postman_id": "7f43ebc5-4f89-4545-9b2e-e902acb365b2",
+		"name": "RecordStore API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42635676"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "All User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/email/{{email}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"email",
+								"{{email}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by Id Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"address\": \"{{address}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"address\": \"{{address}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/update/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "All Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "All Albums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Album by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/artist/{{artist}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"artist",
+								"{{artist}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Format",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/format/{{format}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"format",
+								"{{format}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/genre/{{genre}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"genre",
+								"{{genre}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Price Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/price-range?minPrice={{minPrice}}&maxPrice={{maxPrice}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"price-range"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "{{minPrice}}"
+								},
+								{
+									"key": "maxPrice",
+									"value": "{{maxPrice}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Year Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/year-range?startYear={{startYear}}&endYear={{endYear}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"year-range"
+							],
+							"query": [
+								{
+									"key": "startYear",
+									"value": "{{startYear}}"
+								},
+								{
+									"key": "endYear",
+									"value": "{{endYear}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Albums by Duration Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/duration-range?minDuration={{minDuration}}&maxDuration={{maxDuration}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"duration-range"
+							],
+							"query": [
+								{
+									"key": "minDuration",
+									"value": "{{minDuration}}"
+								},
+								{
+									"key": "maxDuration",
+									"value": "{{maxDuration}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Album by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/album/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"artist\": \"{{artist}}\",\r\n  \"year\": {{year}},\r\n  \"format\": \"{{format}}\",\r\n  \"genre\": \"{{genre}}\",\r\n  \"duration\": \"{{duration}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/album/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Album by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"artist\": \"{{artist}}\",\r\n  \"year\": {{year}},\r\n  \"format\": \"{{format}}\",\r\n  \"genre\": \"{{genre}}\",\r\n  \"duration\": \"{{duration}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/album/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"album",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vinyl",
+			"item": [
+				{
+					"name": "All Vinyl",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyl by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyl by Artist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/artist/{{artist}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"artist",
+								"{{artist}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyls by Format",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/format/{{format}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"format",
+								"{{format}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyls by Genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/genre/{{genre}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"genre",
+								"{{genre}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyls by Year Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/year-range?startYear={{startYear}}&endYear={{endYear}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"year-range"
+							],
+							"query": [
+								{
+									"key": "startYear",
+									"value": "{{startYear}}"
+								},
+								{
+									"key": "endYear",
+									"value": "{{endYear}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyls by Price Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/price-range?minPrice={{minPrice}}&maxPrice={{maxPrice}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"price-range"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "{{minPrice}}"
+								},
+								{
+									"key": "maxPrice",
+									"value": "{{maxPrice}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyls by Duration Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/duration-range?minDuration={{minDuration}}&maxDuration={{maxDuration}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"duration-range"
+							],
+							"query": [
+								{
+									"key": "minDuration",
+									"value": "{{minDuration}}"
+								},
+								{
+									"key": "maxDuration",
+									"value": "{{maxDuration}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Vinyl by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Vinyl",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"artist\": \"{{artist}}\",\r\n  \"year\": {{year}},\r\n  \"format\": \"{{format}}\",\r\n  \"genre\": \"{{genre}}\",\r\n  \"duration\": \"{{duration}}\",\r\n  \"size\": \"{{size}}\", \r\n  \"rpm\": \"{{rpm}}\",  \r\n  \"color\": \"{{color}}\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Vinyl by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"artist\": \"{{artist}}\",\r\n  \"year\": {{year}},\r\n  \"format\": \"{{format}}\",\r\n  \"genre\": \"{{genre}}\",\r\n  \"duration\": \"{{duration}}\",\r\n  \"size\": \"{{size}}\", \r\n  \"rpm\": \"{{rpm}}\",  \r\n  \"color\": \"{{color}}\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/vinyl/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vinyl",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Headphone",
+			"item": [
+				{
+					"name": "All Headphones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphone by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by ANC",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/anc/{{anc}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"anc",
+								"{{anc}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by Bluethoot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/bluetooth/{{bluetooth}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"bluetooth",
+								"{{bluetooth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by Wireless",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/wireless/{{wireless}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"wireless",
+								"{{wireless}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/type/{{headphonetype}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"type",
+								"{{headphonetype}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by Warranty",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/warranty/{{warranty}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"warranty",
+								"{{warranty}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphones by Battery Life",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/batteryLife/{{batteryLife}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"batteryLife",
+								"{{batteryLife}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Headphone by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/headphone/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Headphone",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"batteryLife\": {{batteryLife}},\r\n  \"warranty\": {{warranty}},\r\n  \"microphoneBuiltIn\": {{microphoneBuiltIn}},\r\n  \"wireless\": {{wireless}},\r\n  \"bluetooth\": {{bluetooth}},\r\n  \"usb\": {{usb}},\r\n  \"aux\": {{aux}},\r\n  \"headphonesType\": \"{{headphonesType}}\",\r\n  \"anc\": \"{{anc}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/headphone/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Headphone by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": {{price}},\r\n  \"stock\": {{stock}},\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"batteryLife\": {{batteryLife}},\r\n  \"warranty\": {{warranty}},\r\n  \"microphoneBuiltIn\": {{microphoneBuiltIn}},\r\n  \"wireless\": {{wireless}},\r\n  \"bluetooth\": {{bluetooth}},\r\n  \"usb\": {{usb}},\r\n  \"aux\": {{aux}},\r\n  \"headphonesType\": \"{{headphonesType}}\",\r\n  \"anc\": \"{{anc}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/headphone/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"headphone",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Speaker",
+			"item": [
+				{
+					"name": "All Speaker",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/speaker/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"speaker",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Speaker by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/speaker/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"speaker",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Speaker by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/speaker/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"speaker",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Speaker",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"{{brand}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"price\": \"{{price}}\",\r\n    \"power\": \"{{power}}\",\r\n    \"impedance\": \"{{impedance}}\",\r\n    \"minFrequency\": \"{{minFrequency}}\",\r\n    \"maxFrequency\": \"{{maxFrequency}}\",\r\n    \"weight\": \"{{weight}}\",\r\n    \"powerType\": \"{{powerType}}\",\r\n    \"resistance\": \"{{resistance}}\",\r\n    \"color\": \"{{color}}\",\r\n    \"batteryLife\": \"{{batteryLife}}\",\r\n    \"warranty\": \"{{warranty}}\",\r\n    \"microphoneBuiltIn\": \"{{microphoneBuiltIn}}\",\r\n    \"wireless\": \"{{wireless}}\",\r\n    \"bluetooth\": \"{{bluetooth}}\",\r\n    \"usb\": \"{{usb}}\",\r\n    \"aux\": \"{{aux}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/speaker/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"speaker",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Speaker by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"{{brand}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"price\": \"{{price}}\",\r\n    \"power\": \"{{power}}\",\r\n    \"impedance\": \"{{impedance}}\",\r\n    \"minFrequency\": \"{{minFrequency}}\",\r\n    \"maxFrequency\": \"{{maxFrequency}}\",\r\n    \"weight\": \"{{weight}}\",\r\n    \"powerType\": \"{{powerType}}\",\r\n    \"resistance\": \"{{resistance}}\",\r\n    \"color\": \"{{color}}\",\r\n    \"batteryLife\": \"{{batteryLife}}\",\r\n    \"warranty\": \"{{warranty}}\",\r\n    \"microphoneBuiltIn\": \"{{microphoneBuiltIn}}\",\r\n    \"wireless\": \"{{wireless}}\",\r\n    \"bluetooth\": \"{{bluetooth}}\",\r\n    \"usb\": \"{{usb}}\",\r\n    \"aux\": \"{{aux}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/speaker/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"speaker",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Player",
+			"item": [
+				{
+					"name": "All Player",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player by Model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/model/{{model}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"model",
+								"{{model}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players by Bluethoot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/bluetooth/{{bluetooth}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"bluetooth",
+								"{{bluetooth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players by USB",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/usb/{{usb}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"usb",
+								"{{usb}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players by Radio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/radio/{{radio}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"radio",
+								"{{radio}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Players by AUX",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/player/aux/{{aux}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"aux",
+								"{{aux}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": \"{{price}}\",\r\n  \"stock\": \"{{stock}}\",\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"warranty\": \"{{warranty}}\",\r\n  \"bluetooth\": \"{{bluetooth}}\",\r\n  \"usb\": \"{{usb}}\",\r\n  \"radio\": \"{{radio}}\",\r\n  \"aux\": \"{{aux}}\",\r\n  \"rca\": \"{{rca}}\",\r\n  \"builtInSpeaker\": \"{{builtInSpeaker}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Player by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": \"{{price}}\",\r\n  \"stock\": \"{{stock}}\",\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"warranty\": \"{{warranty}}\",\r\n  \"bluetooth\": \"{{bluetooth}}\",\r\n  \"usb\": \"{{usb}}\",\r\n  \"radio\": \"{{radio}}\",\r\n  \"aux\": \"{{aux}}\",\r\n  \"rca\": \"{{rca}}\",\r\n  \"builtInSpeaker\": \"{{builtInSpeaker}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turntable",
+			"item": [
+				{
+					"name": "All Turntables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turntable/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turntable by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turntable/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turntable by Brand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turntable/brand/{{brand}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"brand",
+								"{{brand}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turntable by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turntable/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Turntable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"price\": \"{{price}}\",\r\n    \"stock\": \"{{stock}}\",\r\n    \"brand\": \"{{brand}}\",\r\n    \"color\": \"{{color}}\",\r\n    \"warranty\": \"{{warranty}}\",\r\n    \"bluetooth\": \"{{bluetooth}}\",\r\n    \"usb\": \"{{usb}}\",\r\n    \"radio\": \"{{radio}}\",\r\n    \"aux\": \"{{aux}}\",\r\n    \"rca\": \"{{rca}}\",\r\n    \"builtInSpeaker\": \"{{builtInSpeaker}}\",\r\n    \"hasBuiltInPreAmp\": \"{{hasBuiltInPreAmp}}\",\r\n    \"rpm\": \"{{rpm}}\",\r\n    \"traction\": \"{{traction}}\",\r\n    \"mechanism\": \"{{mechanism}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turntable/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Turntable by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"price\": \"{{price}}\",\r\n    \"stock\": \"{{stock}}\",\r\n    \"brand\": \"{{brand}}\",\r\n    \"color\": \"{{color}}\",\r\n    \"warranty\": \"{{warranty}}\",\r\n    \"bluetooth\": \"{{bluetooth}}\",\r\n    \"usb\": \"{{usb}}\",\r\n    \"radio\": \"{{radio}}\",\r\n    \"aux\": \"{{aux}}\",\r\n    \"rca\": \"{{rca}}\",\r\n    \"builtInSpeaker\": \"{{builtInSpeaker}}\",\r\n    \"hasBuiltInPreAmp\": \"{{hasBuiltInPreAmp}}\",\r\n    \"rpm\": \"{{rpm}}\",\r\n    \"traction\": \"{{traction}}\",\r\n    \"mechanism\": \"{{mechanism}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turntable/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turntable",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portable",
+			"item": [
+				{
+					"name": "All Portable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portable by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Bluethoot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/bluetooth/{{bluetooth}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"bluetooth",
+								"{{bluetooth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by USB",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/usb/{{usb}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"usb",
+								"{{usb}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Warranty",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/warranty/{{warranty}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"warranty",
+								"{{warranty}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Radio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/radio/{{radio}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"radio",
+								"{{radio}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by AUX",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/aux/{{aux}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"aux",
+								"{{aux}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Brand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/brand/{{brand}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"brand",
+								"{{brand}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Color",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/color/{{color}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"color",
+								"{{color}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/stock/{{stock}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"stock",
+								"{{stock}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/name/{{name}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"name",
+								"{{name}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/type/{{portabletype}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"type",
+								"{{portabletype}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Price Range Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/price-range?minPrice={{minPrice}}&maxPrice={{maxPrice}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"price-range"
+							],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "{{minPrice}}"
+								},
+								{
+									"key": "maxPrice",
+									"value": "{{maxPrice}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Battery Life",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/battery/{{batteryLife}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"battery",
+								"{{batteryLife}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Power Type Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/power/{{powerType}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"power",
+								"{{powerType}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portables by Power Type Copy 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/portable/resistance/{{resistance}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"portable",
+								"resistance",
+								"{{resistance}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Portable by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Portable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": \"{{price}}\",\r\n  \"stock\": \"{{stock}}\",\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"warranty\": \"{{warranty}}\",\r\n  \"bluetooth\": \"{{bluetooth}}\",\r\n  \"usb\": \"{{usb}}\",\r\n  \"radio\": \"{{radio}}\",\r\n  \"aux\": \"{{aux}}\",\r\n  \"rca\": \"{{rca}}\",\r\n  \"builtInSpeaker\": \"{{builtInSpeaker}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/new",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Portable by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"price\": \"{{price}}\",\r\n  \"stock\": \"{{stock}}\",\r\n  \"brand\": \"{{brand}}\",\r\n  \"color\": \"{{color}}\",\r\n  \"warranty\": \"{{warranty}}\",\r\n  \"bluetooth\": \"{{bluetooth}}\",\r\n  \"usb\": \"{{usb}}\",\r\n  \"radio\": \"{{radio}}\",\r\n  \"aux\": \"{{aux}}\",\r\n  \"rca\": \"{{rca}}\",\r\n  \"builtInSpeaker\": \"{{builtInSpeaker}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/player/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"player",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "artist",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "genre",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "startYear",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "endYear",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "name",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "stock",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "price",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "year",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "format",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "duration",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "size",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "rpm",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "color",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "minPrice",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "maxPrice",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "minDuration",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "maxDuration",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "brand",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "batteryLife",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "warranty",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "microphoneBuiltIn",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "wireless",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "bluetooth",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "aux",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "headphonesType",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "anc",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "usb",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "type",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "power",
+			"value": "AC",
+			"type": "default"
+		},
+		{
+			"key": "impedance",
+			"value": "60",
+			"type": "default"
+		},
+		{
+			"key": "minFrequency",
+			"value": "60",
+			"type": "default"
+		},
+		{
+			"key": "maxFrequency",
+			"value": "15",
+			"type": "default"
+		},
+		{
+			"key": "weight",
+			"value": "280",
+			"type": "default"
+		},
+		{
+			"key": "powerType",
+			"value": "AC",
+			"type": "default"
+		},
+		{
+			"key": "resistance",
+			"value": "WS",
+			"type": "default"
+		},
+		{
+			"key": "radio",
+			"value": "true",
+			"type": "default"
+		},
+		{
+			"key": "rca",
+			"value": "false",
+			"type": "default"
+		},
+		{
+			"key": "builtInSpeaker",
+			"value": "true",
+			"type": "default"
+		},
+		{
+			"key": "model",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "portabletype",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "headphonetype",
+			"value": "OVER_EAR",
+			"type": "default"
+		},
+		{
+			"key": "hasBuiltInPreAmp",
+			"value": "true",
+			"type": "default"
+		},
+		{
+			"key": "traction",
+			"value": "BELT_DRIVE",
+			"type": "default"
+		},
+		{
+			"key": "mechanism",
+			"value": "SEMI_AUTOMATIC",
+			"type": "default"
+		},
+		{
+			"key": "email",
+			"value": "marialopez@gmail.com",
+			"type": "default"
+		},
+		{
+			"key": "userName",
+			"value": "Ivan Egued",
+			"type": "default"
+		},
+		{
+			"key": "phone",
+			"value": "5513197179",
+			"type": "default"
+		},
+		{
+			"key": "address",
+			"value": "Gutenberg 60",
+			"type": "default"
+		},
+		{
+			"key": "password",
+			"value": "coderhous",
+			"type": "default"
+		}
+	]
+}
